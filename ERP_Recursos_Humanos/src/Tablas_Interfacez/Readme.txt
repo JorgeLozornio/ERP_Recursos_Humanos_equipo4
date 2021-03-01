@@ -1,0 +1,1 @@
+En esta carpeta se crearan las interfaces de las tablas del proyecto.
