@@ -54,6 +54,7 @@ public class Turnos extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,78 +131,100 @@ public class Turnos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Hora Inicio:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 119, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11" }));
-        getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+        cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText(":");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, -1));
 
         cbMin1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50", " " }));
-        getContentPane().add(cbMin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        getContentPane().add(cbMin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hora Fin: ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 157, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11" }));
-        getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 154, -1, -1));
+        cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText(":");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 157, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
 
         cbMin2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50", " " }));
-        getContentPane().add(cbMin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 154, -1, -1));
+        getContentPane().add(cbMin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Dias:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 192, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
 
+        chbLunes.setBackground(new java.awt.Color(0, 0, 0));
+        chbLunes.setForeground(new java.awt.Color(255, 255, 255));
         chbLunes.setText("Lunes");
-        getContentPane().add(chbLunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 192, -1, -1));
+        getContentPane().add(chbLunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
+        chbMartes.setBackground(new java.awt.Color(0, 0, 0));
+        chbMartes.setForeground(new java.awt.Color(255, 255, 255));
         chbMartes.setText("Martes");
-        getContentPane().add(chbMartes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 218, -1, -1));
+        getContentPane().add(chbMartes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
 
+        chbMiercoles.setBackground(new java.awt.Color(0, 0, 0));
+        chbMiercoles.setForeground(new java.awt.Color(255, 255, 255));
         chbMiercoles.setText("Miercoles");
-        getContentPane().add(chbMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 241, -1, -1));
+        getContentPane().add(chbMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
 
+        chbJueves.setBackground(new java.awt.Color(0, 0, 0));
+        chbJueves.setForeground(new java.awt.Color(255, 255, 255));
         chbJueves.setText("Jueves");
-        getContentPane().add(chbJueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 192, -1, -1));
+        getContentPane().add(chbJueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
 
+        chbViernes.setBackground(new java.awt.Color(0, 0, 0));
+        chbViernes.setForeground(new java.awt.Color(255, 255, 255));
         chbViernes.setText("Viernes");
-        getContentPane().add(chbViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 218, -1, -1));
+        getContentPane().add(chbViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
 
+        chbSabado.setBackground(new java.awt.Color(0, 0, 0));
+        chbSabado.setForeground(new java.awt.Color(255, 255, 255));
         chbSabado.setText("Sabado");
-        getContentPane().add(chbSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 241, -1, -1));
+        getContentPane().add(chbSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
 
+        chbDomingo.setBackground(new java.awt.Color(0, 0, 0));
+        chbDomingo.setForeground(new java.awt.Color(255, 255, 255));
         chbDomingo.setText("Domingo");
-        getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 192, -1, -1));
+        getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
         jButton1.setText("Crear");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         jButton2.setText("Eliminar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
         jButton3.setText("Editar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
         jButton4.setText("Buscar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 70, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 110, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Nombre: ");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 350, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 290, -1));
+
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/blueOffice.png"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 510));
@@ -212,6 +235,12 @@ public class Turnos extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        MenuTablas m = new MenuTablas();
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +278,7 @@ public class Turnos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbHora1;
     private javax.swing.JComboBox<String> cbHora2;
     private javax.swing.JComboBox<String> cbMin1;
