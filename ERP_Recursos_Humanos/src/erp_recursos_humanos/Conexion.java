@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 public class Conexion {
     
     Connection con;
+    private static final String driver = "com.mysql.jdbc.Driver";
+    private static final String user = "root";
+    private static final String pass = "";
+    
     
     public Conexion(){
         try{
