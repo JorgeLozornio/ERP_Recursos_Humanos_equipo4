@@ -5,15 +5,21 @@
  */
 package Tablas_Interfacez;
 
+import erp_recursos_humanos.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lozy
  */
 public class Turnos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Turnos
-     */
+    
+    Conexion c = new Conexion();
+    Connection con = c.conexion();
+    
     public Turnos() {
         initComponents();
     }
@@ -53,8 +59,8 @@ public class Turnos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,33 +68,6 @@ public class Turnos extends javax.swing.JFrame {
 
         tbTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
@@ -107,7 +86,7 @@ public class Turnos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbTurnos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, 390));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, 80));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,6 +180,11 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
         jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         jButton2.setText("Eliminar");
@@ -216,7 +200,6 @@ public class Turnos extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Nombre: ");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 290, -1));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +208,7 @@ public class Turnos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 290, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/blueOffice.png"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 510));
@@ -241,6 +225,10 @@ public class Turnos extends javax.swing.JFrame {
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       insertar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,6 +263,49 @@ public class Turnos extends javax.swing.JFrame {
                 new Turnos().setVisible(true);
             }
         });
+    }
+    
+    public void insertar(){
+        try{
+            
+            String sql = "insert into RHTurnos (nombre, horaInicio, horaFin, dias) values (?,?,?,?)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            String ca="";
+            
+            pst.setString(1, txtNombre.getText());
+            pst.setString(2, cbHora1.getSelectedIndex()+":"+cbMin1.getSelectedIndex());
+            pst.setString(3, cbHora2.getSelectedIndex()+":"+cbMin2.getSelectedItem());
+            
+            if(chbLunes.isSelected()){
+                ca = "L ";
+            }
+            if(chbMartes.isSelected()){
+                ca = ca + "M ";
+            }
+            if(chbMiercoles.isSelected()){
+                ca = ca + "Mi ";
+            }
+            if(chbJueves.isSelected()){
+                ca = ca + "J ";
+            }
+            if(chbViernes.isSelected()){
+                ca = ca + "V ";
+            }
+            if(chbSabado.isSelected()){
+                ca = ca + "S ";
+            }
+            if(chbDomingo.isSelected()){
+                ca = ca + "D ";
+            }
+            System.out.println(ca);
+            pst.setString(4, ca);
+            pst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
