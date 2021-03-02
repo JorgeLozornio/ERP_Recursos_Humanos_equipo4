@@ -181,6 +181,11 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
         jButton3.setText("Editar");
@@ -272,6 +277,15 @@ public class Turnos extends javax.swing.JFrame {
             Logger.getLogger(Turnos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        eliminar();
+        try {
+            mostrarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Turnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -447,6 +461,22 @@ public class Turnos extends javax.swing.JFrame {
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }      
+        
+    }
+    
+    public void eliminar(){
+        
+        int fila = tbTurnos.getSelectedRow();
+        
+        try{
+            String sql = "delete from RHTurnos where idTurno = "+tbTurnos.getValueAt(fila, 0);
+            Statement st = con.createStatement();
+            st.execute(sql);
+            JOptionPane.showMessageDialog(null, "Registro eliminado");
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
         
     }
 
