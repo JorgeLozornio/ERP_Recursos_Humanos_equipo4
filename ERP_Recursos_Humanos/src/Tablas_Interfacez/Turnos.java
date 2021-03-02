@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -47,12 +48,8 @@ public class Turnos extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbHora1 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        cbMin1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         cbHora2 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        cbMin2 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         chbLunes = new javax.swing.JCheckBox();
         chbMartes = new javax.swing.JCheckBox();
@@ -91,6 +88,11 @@ public class Turnos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbTurnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTurnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbTurnos);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, 80));
@@ -119,32 +121,16 @@ public class Turnos extends javax.swing.JFrame {
         jLabel3.setText("Hora Inicio:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText(":");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, -1));
-
-        cbMin1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50", " " }));
-        getContentPane().add(cbMin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
+        cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
+        getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 70, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hora Fin: ");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText(":");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
-
-        cbMin2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50", " " }));
-        getContentPane().add(cbMin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
+        cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
+        getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 70, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,6 +184,11 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
         jButton3.setText("Editar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
         jButton4.setText("Buscar");
@@ -235,7 +226,52 @@ public class Turnos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        insertar();
+       limpiar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbTurnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTurnosMouseClicked
+        
+        limpiar();
+        int fila = tbTurnos.rowAtPoint(evt.getPoint());
+        String ca;
+        
+        txtNombre.setText(tbTurnos.getValueAt(fila,1).toString());
+        cbHora1.setSelectedItem(tbTurnos.getValueAt(fila,2));
+        cbHora2.setSelectedItem(tbTurnos.getValueAt(fila,3));
+        ca = tbTurnos.getValueAt(fila,4).toString();
+        if(ca.contains("L")){
+            chbLunes.setSelected(true);
+        }
+        if(ca.contains("M")){
+            chbMartes.setSelected(true);
+        }
+        if(ca.contains("W")){
+            chbMiercoles.setSelected(true);
+        }
+        if(ca.contains("J")){
+            chbJueves.setSelected(true);
+        }
+        if(ca.contains("V")){
+            chbViernes.setSelected(true);
+        }
+        if(ca.contains("S")){
+            chbSabado.setSelected(true);
+        }
+        if(ca.contains("D")){
+            chbDomingo.setSelected(true);
+        }
+        
+    }//GEN-LAST:event_tbTurnosMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        actualizar();
+        limpiar();
+        try {
+            mostrarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Turnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,8 +321,8 @@ public class Turnos extends javax.swing.JFrame {
             String ca="";
             
             pst.setString(1, txtNombre.getText());
-            pst.setString(2, cbHora1.getSelectedIndex()+":"+cbMin1.getSelectedIndex());
-            pst.setString(3, cbHora2.getSelectedIndex()+":"+cbMin2.getSelectedItem());
+            pst.setString(2, cbHora1.getSelectedIndex()+":00");
+            pst.setString(3, cbHora2.getSelectedIndex()+":00");
             
             if(chbLunes.isSelected()){
                 ca = "L ";
@@ -295,7 +331,7 @@ public class Turnos extends javax.swing.JFrame {
                 ca = ca + "M ";
             }
             if(chbMiercoles.isSelected()){
-                ca = ca + "Mi ";
+                ca = ca + "W ";
             }
             if(chbJueves.isSelected()){
                 ca = ca + "J ";
@@ -350,13 +386,74 @@ public class Turnos extends javax.swing.JFrame {
         }
         
     }
+    
+    public void limpiar(){
+        txtNombre.setText(null);
+        cbHora1.setSelectedIndex(0);
+        cbHora2.setSelectedIndex(0);
+        chbLunes.setSelected(false);        
+        chbMartes.setSelected(false);        
+        chbMiercoles.setSelected(false);       
+        chbJueves.setSelected(false);      
+        chbViernes.setSelected(false);       
+        chbSabado.setSelected(false);       
+        chbDomingo.setSelected(false);
+        
+    }
+    
+    public void actualizar(){
+        
+        try{
+            String sql = "update RHTurnos set nombre = ?, horaInicio = ?, horaFin = ?, dias = ? where idTurno = ?";
+            int fila = tbTurnos.getSelectedRow();
+            String m = (String)tbTurnos.getValueAt(fila, 0);
+        
+            PreparedStatement pst = con.prepareStatement(sql);
+            String ca="";
+        
+            pst.setString(1, txtNombre.getText());
+            pst.setString(2, cbHora1.getSelectedIndex()+":00");
+            pst.setString(3, cbHora2.getSelectedIndex()+":00");
+            
+            if(chbLunes.isSelected()){
+                ca = "L ";
+            }
+            if(chbMartes.isSelected()){
+                ca = ca + "M ";
+            }
+            if(chbMiercoles.isSelected()){
+                ca = ca + "W ";
+            }
+            if(chbJueves.isSelected()){
+                ca = ca + "J ";
+            }
+            if(chbViernes.isSelected()){
+                ca = ca + "V ";
+            }
+            if(chbSabado.isSelected()){
+                ca = ca + "S ";
+            }
+            if(chbDomingo.isSelected()){
+                ca = ca + "D ";
+            }
+            System.out.println(ca);
+            pst.setString(4, ca);
+            pst.setString(5, m);
+            pst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Registro modificado");
+            
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }      
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbHora1;
     private javax.swing.JComboBox<String> cbHora2;
-    private javax.swing.JComboBox<String> cbMin1;
-    private javax.swing.JComboBox<String> cbMin2;
     private javax.swing.JCheckBox chbDomingo;
     private javax.swing.JCheckBox chbJueves;
     private javax.swing.JCheckBox chbLunes;
@@ -371,9 +468,7 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

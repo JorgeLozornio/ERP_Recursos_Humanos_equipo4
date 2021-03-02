@@ -5,6 +5,10 @@
  */
 package Tablas_Interfacez;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Lozy
@@ -84,7 +88,12 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCiudadesActionPerformed
 
     private void btnTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnosActionPerformed
-        Turnos t = new Turnos();
+        Turnos t = null;
+        try {
+            t = new Turnos();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         t.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnTurnosActionPerformed
