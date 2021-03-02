@@ -8,7 +8,13 @@ package Tablas_Interfacez;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +26,9 @@ public class Turnos extends javax.swing.JFrame {
     Conexion c = new Conexion();
     Connection con = c.conexion();
     
-    public Turnos() {
+    public Turnos() throws SQLException {
         initComponents();
+        mostrarDatos();
     }
 
     /**
@@ -260,7 +267,12 @@ public class Turnos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Turnos().setVisible(true);
+                try {
+                    new Turnos().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Turnos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         });
     }
@@ -302,10 +314,41 @@ public class Turnos extends javax.swing.JFrame {
             pst.execute();
             
             JOptionPane.showMessageDialog(null, "Registro exitoso");
-            
+            mostrarDatos();
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
         }
+    }
+    
+    public void mostrarDatos() throws SQLException{
+        
+        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias"};
+        String [] registros = new String [6];
+        
+        DefaultTableModel modelo = new DefaultTableModel (null,titulos);
+        String sql = "select * from RHTurnos";
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){
+                registros[0] = rs.getString("idTurno");
+                registros[1] = rs.getString("nombre");
+                registros[2] = rs.getString("horaInicio");
+                registros[3] = rs.getString("horaFin");
+                registros[4] = rs.getString("dias");
+                
+                modelo.addRow(registros);
+                
+            }
+            
+            tbTurnos.setModel(modelo);
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
