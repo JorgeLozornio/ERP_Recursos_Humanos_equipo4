@@ -34,6 +34,7 @@ public class MenuTablas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnCiudades = new javax.swing.JButton();
         btnTurnos = new javax.swing.JButton();
+        btnestados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +55,13 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
 
+        btnestados.setText("Estados");
+        btnestados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnestadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,7 +71,8 @@ public class MenuTablas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCiudades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addComponent(btnTurnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTurnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnestados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(157, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -71,11 +80,13 @@ public class MenuTablas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
+                .addComponent(btnestados)
+                .addGap(9, 9, 9)
                 .addComponent(btnCiudades)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTurnos)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,6 +108,12 @@ public class MenuTablas extends javax.swing.JFrame {
         t.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnTurnosActionPerformed
+
+    private void btnestadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadosActionPerformed
+   Estados e = new Estados();
+        e.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnestadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +153,7 @@ public class MenuTablas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnTurnos;
+    private javax.swing.JButton btnestados;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
