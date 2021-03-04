@@ -83,6 +83,12 @@ public class Ciudades extends javax.swing.JFrame {
 
         jButtonEliminar.setText("Eliminar");
 
+        jTextFieldCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCiudadActionPerformed(evt);
+            }
+        });
+
         jComboBoxEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,6 +166,10 @@ public class Ciudades extends javax.swing.JFrame {
         // Manda a llamar el metodo: insertarDatos()
         insertarDatos();
     }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jTextFieldCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCiudadActionPerformed
 
     public void insertarDatos(){
      try{

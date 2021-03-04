@@ -19,3 +19,28 @@ FOREIGN KEY(idEstado) REFERENCES Estados(idEstado);
 /* CHECKS */
 ALTER TABLE Ciudades
 ADD CHECK (estatus = 'A' or estatus = 'I');
+
+/*Tabla Estados*/
+USE recursosHumanos;
+create table estados(
+idEstados int not null primary key auto_increment,
+nombre varchar(60),
+siglas varchar(50),
+estatus char);
+
+ALTER TABLE estados
+ADD CHECK (estatus = 'A' or estatus = 'I');
+select*from estados; 
+
+/*Tabla Puestos*/
+USE recursosHumanos;
+create table puestos(
+idPuesto int not null primary key auto_increment,
+nombre varchar(60),
+salarioMinimo float,
+salarioMaximo float,
+estatus char);
+
+ALTER TABLE puestos
+ADD CHECK (estatus = 'A' or estatus = 'I');
+select*from estados;
