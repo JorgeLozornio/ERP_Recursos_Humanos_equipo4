@@ -128,10 +128,26 @@ public class Ciudades extends javax.swing.JFrame {
         consultaDatos();
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
+<<<<<<< Updated upstream
     private void jTextFieldCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCiudadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCiudadActionPerformed
-       
+
+    public void insertarDatos(){
+     try{
+         String SQL = "INSERT INTO RHCiudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
+         
+         PreparedStatement pst = con.prepareStatement(SQL);
+         
+         pst.setString(1, jTextFieldCiudad.getText());
+         
+         pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
+         
+         int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+         pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
+         
+         pst.execute();
+=======
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // Manda llamar al metodo: actalizar();
         actualizar();
@@ -206,6 +222,7 @@ public class Ciudades extends javax.swing.JFrame {
     public void actualizar() {
         try {
             String SQL = "UPDATE RHCiudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
+>>>>>>> Stashed changes
             
             int fila = jTable.getSelectedRow();
             
