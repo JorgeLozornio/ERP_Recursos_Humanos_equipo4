@@ -5,6 +5,7 @@
  */
 package Tablas_Interfacez;
 
+import TablasDAO.TurnosDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,12 +25,11 @@ import javax.swing.table.DefaultTableModel;
 public class Turnos extends javax.swing.JFrame {
 
     
-    Conexion c = new Conexion();
-    Connection con = c.conexion();
+    TurnosDAO t = new TurnosDAO();
     
     public Turnos() throws SQLException {
         initComponents();
-        mostrarDatos();
+        tbTurnos.setModel(t.mostrarDatos());
     }
 
     /**
@@ -58,9 +58,9 @@ public class Turnos extends javax.swing.JFrame {
         chbViernes = new javax.swing.JCheckBox();
         chbSabado = new javax.swing.JCheckBox();
         chbDomingo = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
@@ -172,29 +172,29 @@ public class Turnos extends javax.swing.JFrame {
         chbDomingo.setText("Domingo");
         getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
-        jButton1.setText("Crear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCrearActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setText("Editar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
         jButton4.setText("Buscar");
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 110, -1));
@@ -229,10 +229,11 @@ public class Turnos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       insertar();
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch());
+        tbTurnos.setModel(t.mostrarDatos());
        limpiar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCrearActionPerformed
 
     private void tbTurnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTurnosMouseClicked
         
@@ -268,24 +269,22 @@ public class Turnos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tbTurnosMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        actualizar();
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int fila = tbTurnos.getSelectedRow();
+        String m = (String)tbTurnos.getValueAt(fila, 0);
+        t.actualizar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), m);
+        tbTurnos.setModel(t.mostrarDatos());
         limpiar();
-        try {
-            mostrarDatos();
-        } catch (SQLException ex) {
-            Logger.getLogger(Turnos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        eliminar();
-        try {
-            mostrarDatos();
-        } catch (SQLException ex) {
-            Logger.getLogger(Turnos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int fila = tbTurnos.getSelectedRow();
+        String id = ""+tbTurnos.getValueAt(fila, 0);
+        t.eliminar(id);
+        limpiar();
+        tbTurnos.setModel(t.mostrarDatos());
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,80 +326,6 @@ public class Turnos extends javax.swing.JFrame {
         });
     }
     
-    public void insertar(){
-        try{
-            
-            String sql = "insert into RHTurnos (nombre, horaInicio, horaFin, dias) values (?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            String ca="";
-            
-            pst.setString(1, txtNombre.getText());
-            pst.setString(2, cbHora1.getSelectedIndex()+":00");
-            pst.setString(3, cbHora2.getSelectedIndex()+":00");
-            
-            if(chbLunes.isSelected()){
-                ca = "L ";
-            }
-            if(chbMartes.isSelected()){
-                ca = ca + "M ";
-            }
-            if(chbMiercoles.isSelected()){
-                ca = ca + "W ";
-            }
-            if(chbJueves.isSelected()){
-                ca = ca + "J ";
-            }
-            if(chbViernes.isSelected()){
-                ca = ca + "V ";
-            }
-            if(chbSabado.isSelected()){
-                ca = ca + "S ";
-            }
-            if(chbDomingo.isSelected()){
-                ca = ca + "D ";
-            }
-            System.out.println(ca);
-            pst.setString(4, ca);
-            pst.execute();
-            
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
-            mostrarDatos();
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
-        }
-    }
-    
-    public void mostrarDatos() throws SQLException{
-        
-        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias"};
-        String [] registros = new String [6];
-        
-        DefaultTableModel modelo = new DefaultTableModel (null,titulos);
-        String sql = "select * from RHTurnos";
-        
-        try{
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            
-            while( rs.next()){
-                registros[0] = rs.getString("idTurno");
-                registros[1] = rs.getString("nombre");
-                registros[2] = rs.getString("horaInicio");
-                registros[3] = rs.getString("horaFin");
-                registros[4] = rs.getString("dias");
-                
-                modelo.addRow(registros);
-                
-            }
-            
-            tbTurnos.setModel(modelo);
-            
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-    }
-    
     public void limpiar(){
         txtNombre.setText(null);
         cbHora1.setSelectedIndex(0);
@@ -415,19 +340,8 @@ public class Turnos extends javax.swing.JFrame {
         
     }
     
-    public void actualizar(){
-        
-        try{
-            String sql = "update RHTurnos set nombre = ?, horaInicio = ?, horaFin = ?, dias = ? where idTurno = ?";
-            int fila = tbTurnos.getSelectedRow();
-            String m = (String)tbTurnos.getValueAt(fila, 0);
-        
-            PreparedStatement pst = con.prepareStatement(sql);
-            String ca="";
-        
-            pst.setString(1, txtNombre.getText());
-            pst.setString(2, cbHora1.getSelectedIndex()+":00");
-            pst.setString(3, cbHora2.getSelectedIndex()+":00");
+    public String ch(){
+        String ca="";
             
             if(chbLunes.isSelected()){
                 ca = "L ";
@@ -450,37 +364,16 @@ public class Turnos extends javax.swing.JFrame {
             if(chbDomingo.isSelected()){
                 ca = ca + "D ";
             }
-            System.out.println(ca);
-            pst.setString(4, ca);
-            pst.setString(5, m);
-            pst.execute();
-            
-            JOptionPane.showMessageDialog(null, "Registro modificado");
-            
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }      
-        
+        return ca;
     }
     
-    public void eliminar(){
-        
-        int fila = tbTurnos.getSelectedRow();
-        
-        try{
-            String sql = "delete from RHTurnos where idTurno = "+tbTurnos.getValueAt(fila, 0);
-            Statement st = con.createStatement();
-            st.execute(sql);
-            JOptionPane.showMessageDialog(null, "Registro eliminado");
-        
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbHora1;
     private javax.swing.JComboBox<String> cbHora2;
@@ -491,9 +384,6 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JCheckBox chbMiercoles;
     private javax.swing.JCheckBox chbSabado;
     private javax.swing.JCheckBox chbViernes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
