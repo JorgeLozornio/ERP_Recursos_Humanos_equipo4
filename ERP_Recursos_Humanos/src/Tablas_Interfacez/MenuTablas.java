@@ -95,6 +95,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void btnCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiudadesActionPerformed
         Ciudades c = new Ciudades();
         c.setVisible(true);
+        this.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnCiudadesActionPerformed
 
