@@ -3,14 +3,19 @@ package Tablas_Interfacez;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Ciudades extends javax.swing.JFrame {
+
     Conexion c = new Conexion();
     Connection con = c.conexion();
 
     public Ciudades() {
         initComponents();
+        consultaDatos();
     }
 
     @SuppressWarnings("unchecked")
@@ -25,50 +30,56 @@ public class Ciudades extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jButtonAgregar = new javax.swing.JButton();
-        jButtonConsultar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jTextFieldCiudad = new javax.swing.JTextField();
         jComboBoxEstatus = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelCiudad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCiudad.setText("Ciudad");
+        getContentPane().add(jLabelCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 136, 70, -1));
 
         jLabelEstatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelEstatus.setText("Estatus");
+        getContentPane().add(jLabelEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 253, 70, -1));
 
         jLabelEstado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelEstado.setText("Estado");
+        getContentPane().add(jLabelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 193, 80, -1));
 
         jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Coahuila de Zaragoza", "Colima", "Durango", "Estado de México", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas" }));
+        jComboBoxEstado.setToolTipText("Selecciona tu estado");
+        getContentPane().add(jComboBoxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 193, 220, -1));
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Ciudades");
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 11, 205, 45));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Id", "Ciudad", "Estado", "Estatus"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            }
+        ));
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 136, 400, 141));
 
         jButtonAgregar.setText("Agregar");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,12 +87,21 @@ public class Ciudades extends javax.swing.JFrame {
                 jButtonAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 313, 110, -1));
 
-        jButtonConsultar.setText("Consultar");
-
-        jButtonModificar.setText("Modificar");
+        jButtonModificar.setText("Actualizar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 313, 110, -1));
 
         jButtonEliminar.setText("Eliminar");
+        getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 313, 110, -1));
+
+        jTextFieldCiudad.setToolTipText("Ingresa el nombre de tu ciudad");
+        getContentPane().add(jTextFieldCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 140, 220, -1));
 
         jTextFieldCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,74 +110,11 @@ public class Ciudades extends javax.swing.JFrame {
         });
 
         jComboBoxEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        jComboBoxEstatus.setToolTipText("Indica el estatus");
+        getContentPane().add(jComboBoxEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 257, 220, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabelEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jComboBoxEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabelCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldCiudad))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabelEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 136, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCiudad)
-                    .addComponent(jTextFieldCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelEstado)
-                            .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelEstatus)
-                            .addComponent(jComboBoxEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAgregar)
-                    .addComponent(jButtonConsultar))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonModificar)
-                    .addComponent(jButtonEliminar))
-                .addContainerGap())
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Fondo 4.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1, 800, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,8 +122,13 @@ public class Ciudades extends javax.swing.JFrame {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // Manda a llamar el metodo: insertarDatos()
         insertarDatos();
+        // Manda a llamar el metodo: limpiar()
+        limpiar();
+        // Manda a llamar el metodo: consultaDatos()
+        consultaDatos();
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
+<<<<<<< Updated upstream
     private void jTextFieldCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCiudadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCiudadActionPerformed
@@ -185,18 +147,107 @@ public class Ciudades extends javax.swing.JFrame {
          pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
          
          pst.execute();
-            
-         JOptionPane.showMessageDialog(null, "Registro exitoso");
-         
-     }catch (Exception e){
-         JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
-     }
+=======
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // Manda llamar al metodo: actalizar();
+        actualizar();
+        // Manda a llamar el metodo: consultaDatos()
+        consultaDatos();
+        // Manda a llamar el metodo: limpiar()
+        limpiar();
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        // Manda llamar al metodo: limpiar()
+        limpiar();
+        
+        int fila = jTable.rowAtPoint(evt.getPoint());
+        
+        jTextFieldCiudad.setText(jTable.getValueAt(fila,1).toString());
+        jComboBoxEstado.setSelectedItem(jTable.getValueAt(fila,2));
+        jComboBoxEstatus.setSelectedItem(jTable.getValueAt(fila,3));
+    }//GEN-LAST:event_jTableMouseClicked
+
+    public void insertarDatos() {
+        try {
+            String SQL = "INSERT INTO RHCiudades (Nombre, idEstado, Estatus) VALUES(?, ?, ?)";
+
+            PreparedStatement pst = con.prepareStatement(SQL);
+
+            pst.setString(1, jTextFieldCiudad.getText());
+
+            pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
+
+            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
+        }
     }
-    
-    
-    
-    
-    
+
+    public void limpiar() {
+        jTextFieldCiudad.setText("");
+        jComboBoxEstado.setSelectedItem(null);
+        jComboBoxEstatus.setSelectedItem(null);
+    }
+
+    public void consultaDatos() {
+        String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
+        String[] registros = new String[5];
+        DefaultTableModel model = new DefaultTableModel(null, titulos);
+        String SQL = "SELECT * FROM RHCiudades";
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                registros[0] = rs.getString("idCiudad");
+                registros[1] = rs.getString("nombre");
+                registros[2] = rs.getString("idEstado");
+                registros[3] = rs.getString("estatus");
+                model.addRow(registros);
+            }
+            jTable.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
+        }
+
+    }
+
+    public void actualizar() {
+        try {
+            String SQL = "UPDATE RHCiudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
+>>>>>>> Stashed changes
+            
+            int fila = jTable.getSelectedRow();
+            
+            String m = (String)jTable.getValueAt(fila, 0);
+            
+            PreparedStatement pst = con.prepareStatement(SQL);
+            
+            pst.setString(1, jTextFieldCiudad.getText());
+
+            pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
+
+            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
+            
+            pst.setString(4, m);
+            
+            pst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Actualización exitosa");
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,11 +282,11 @@ public class Ciudades extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
-    private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCiudad;
     private javax.swing.JLabel jLabelEstado;
     private javax.swing.JLabel jLabelEstatus;
