@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Ciudades extends javax.swing.JFrame {
+
     Conexion c = new Conexion();
     Connection con = c.conexion();
 
@@ -76,7 +77,7 @@ public class Ciudades extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 388, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 388, 140));
 
         jButtonAgregar.setText("Agregar");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +96,11 @@ public class Ciudades extends javax.swing.JFrame {
         getContentPane().add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 110, -1));
 
         jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 110, -1));
 
         jTextFieldCiudad.addActionListener(new java.awt.event.ActionListener() {
@@ -135,37 +141,46 @@ public class Ciudades extends javax.swing.JFrame {
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // Manda llamar al metodo: limpiar()
         limpiar();
-        
+
         int fila = jTable.rowAtPoint(evt.getPoint());
-        
-        jTextFieldCiudad.setText(jTable.getValueAt(fila,1).toString());
-        jComboBoxEstado.setSelectedItem(jTable.getValueAt(fila,2));
-        jComboBoxEstatus.setSelectedItem(jTable.getValueAt(fila,3));
+
+        jTextFieldCiudad.setText(jTable.getValueAt(fila, 1).toString());
+        jComboBoxEstado.setSelectedItem(jTable.getValueAt(fila, 2));
+        jComboBoxEstatus.setSelectedItem(jTable.getValueAt(fila, 3));
     }//GEN-LAST:event_jTableMouseClicked
 
-    public void insertarDatos(){
-     try{
-         String SQL = "INSERT INTO RHCiudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
-         
-         PreparedStatement pst = con.prepareStatement(SQL);
-         
-         pst.setString(1, jTextFieldCiudad.getText());
-         
-         pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
-         
-         int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-         pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
-         
-         pst.execute();
-            
-         JOptionPane.showMessageDialog(null, "Registro exitoso");
-         
-     }catch (Exception e){
-         JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
-     }
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        // Manda a llamar al metodo eliminar
+        eliminar();
+        // Manda a llamar el metodo: consultaDatos()        
+        consultaDatos();
+        // Manda a llamar el metodo: limpiar()
+        limpiar();
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    public void insertarDatos() {
+        try {
+            String SQL = "INSERT INTO RHCiudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
+
+            PreparedStatement pst = con.prepareStatement(SQL);
+
+            pst.setString(1, jTextFieldCiudad.getText());
+
+            pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
+
+            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
+        }
     }
-    
-        public void limpiar() {
+
+    public void limpiar() {
         jTextFieldCiudad.setText("");
         jComboBoxEstado.setSelectedItem(null);
         jComboBoxEstatus.setSelectedItem(null);
@@ -197,31 +212,50 @@ public class Ciudades extends javax.swing.JFrame {
     public void actualizar() {
         try {
             String SQL = "UPDATE RHCiudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
-            
+
             int fila = jTable.getSelectedRow();
-            
-            String m = (String)jTable.getValueAt(fila, 0);
-            
+
+            String m = (String) jTable.getValueAt(fila, 0);
+
             PreparedStatement pst = con.prepareStatement(SQL);
-            
+
             pst.setString(1, jTextFieldCiudad.getText());
 
             pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
 
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
             pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
-            
+
             pst.setString(4, m);
-            
+
             pst.execute();
-            
+
             JOptionPane.showMessageDialog(null, "Actualización exitosa");
-        
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
         }
     }
-    
+
+    public void eliminar() {
+
+        int filaSeleccionada = jTable.getSelectedRow();
+
+        try {
+            String SQL = "DELETE FROM RHCiudades WHERE idCiudad =" + jTable.getValueAt(filaSeleccionada, 0);
+
+            Statement st = con.createStatement();
+
+            int n = st.executeUpdate(SQL);
+
+            if (n >= 0) {
+                JOptionPane.showMessageDialog(null, "El registro a sido eliminado exitosamente");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
