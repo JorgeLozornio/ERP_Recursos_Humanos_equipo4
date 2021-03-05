@@ -22,25 +22,38 @@ ADD CHECK (estatus = 'A' or estatus = 'I');
 
 /*Tabla Estados*/
 USE recursosHumanos;
-create table estados(
+create table Estados(
 idEstados int not null primary key auto_increment,
 nombre varchar(60),
 siglas varchar(50),
 estatus char);
 
-ALTER TABLE estados
+ALTER TABLE Estados
 ADD CHECK (estatus = 'A' or estatus = 'I');
-select*from estados; 
+select*from Estados; 
 
-/*Tabla Puestos*/
 USE recursosHumanos;
-create table puestos(
+create table Puestos(
 idPuesto int not null primary key auto_increment,
 nombre varchar(60),
 salarioMinimo float,
 salarioMaximo float,
 estatus char);
 
-ALTER TABLE puestos
+ALTER TABLE Puestos
 ADD CHECK (estatus = 'A' or estatus = 'I');
-select*from estados;
+select*from Puestos;
+
+/*Tabla Asistencias*/
+create table Asistencias(
+idAsistencia int not null primary key auto_increment,
+fecha date,
+horaEntrada date,
+horaSalida date,
+dia varchar(10),
+idEmpleado int);
+
+/* Foreign Key */
+ALTER TABLE Asistencias
+ADD CONSTRAINT FK_Asistencias_Empleados
+FOREIGN KEY(idEmpleado) REFERENCES Empleados(idEmpleado);
