@@ -13,7 +13,7 @@ estatus CHAR);
 
 /*Tabla Estados*/
 create table Estados(
-idEstados int not null primary key auto_increment,
+idEstado int not null primary key auto_increment,
 nombre varchar(60),
 siglas varchar(50),
 estatus char);
