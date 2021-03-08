@@ -1,21 +1,26 @@
 package Tablas_Interfacez;
 
+import TablasDAO.CiudadesDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Ciudades extends javax.swing.JFrame {
-
+    CiudadesDAO t = new CiudadesDAO();
     Conexion c = new Conexion();
     Connection con = c.conexion();
 
-    public Ciudades() {
+    public Ciudades() throws SQLException {
         initComponents();
-        consultaDatos();
+        this.setLocationRelativeTo(null);
+        jTable.setModel(t.consultaDatos());
     }
 
     @SuppressWarnings("unchecked")
@@ -182,12 +187,12 @@ public class Ciudades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        // Manda a llamar el metodo: insertarDatos()
-        insertarDatos();
+        int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+        t.insertarDatos(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus));
         // Manda a llamar el metodo: limpiar()
         limpiar();
         // Manda a llamar el metodo: consultaDatos()
-        consultaDatos();
+        jTable.setModel(t.consultaDatos());
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jTextFieldCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCiudadActionPerformed
@@ -196,9 +201,12 @@ public class Ciudades extends javax.swing.JFrame {
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // Manda llamar al metodo: actalizar();
-        actualizar();
+        int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+        int fila = jTable.getSelectedRow();
+        String m = (String) jTable.getValueAt(fila, 0);
+        t.actualizar(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
         // Manda a llamar el metodo: consultaDatos()
-        consultaDatos();
+        jTable.setModel(t.consultaDatos());
         // Manda a llamar el metodo: limpiar()
         limpiar();
     }//GEN-LAST:event_jButtonModificarActionPerformed
@@ -216,9 +224,11 @@ public class Ciudades extends javax.swing.JFrame {
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // Manda a llamar al metodo eliminar
-        eliminar();
+        int filaSeleccionada = jTable.getSelectedRow();
+        String id = "" + jTable.getValueAt(filaSeleccionada, 0);
+        t.eliminar(id);
         // Manda a llamar el metodo: consultaDatos()        
-        consultaDatos();
+        jTable.setModel(t.consultaDatos());
         // Manda a llamar el metodo: limpiar()
         limpiar();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
@@ -228,102 +238,10 @@ public class Ciudades extends javax.swing.JFrame {
         consultaIndividual(jTextFieldBuscar.getText());
     }//GEN-LAST:event_jTextFieldBuscarKeyReleased
 
-    public void insertarDatos() {
-        try {
-            String SQL = "INSERT INTO RHCiudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
-
-            PreparedStatement pst = con.prepareStatement(SQL);
-
-            pst.setString(1, jTextFieldCiudad.getText());
-
-            pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
-
-            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-            pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
-
-            pst.execute();
-
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
-        }
-    }
-
     public void limpiar() {
         jTextFieldCiudad.setText("");
         jComboBoxEstado.setSelectedItem(null);
         jComboBoxEstatus.setSelectedItem(null);
-    }
-
-    public void consultaDatos() {
-        String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
-        String[] registros = new String[5];
-        DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM RHCiudades";
-        try {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-
-            while (rs.next()) {
-                registros[0] = rs.getString("idCiudad");
-                registros[1] = rs.getString("nombre");
-                registros[2] = rs.getString("idEstado");
-                registros[3] = rs.getString("estatus");
-                model.addRow(registros);
-            }
-            jTable.setModel(model);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
-        }
-
-    }
-
-    public void actualizar() {
-        try {
-            String SQL = "UPDATE RHCiudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
-
-            int fila = jTable.getSelectedRow();
-
-            String m = (String) jTable.getValueAt(fila, 0);
-
-            PreparedStatement pst = con.prepareStatement(SQL);
-
-            pst.setString(1, jTextFieldCiudad.getText());
-
-            pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
-
-            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-            pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
-
-            pst.setString(4, m);
-
-            pst.execute();
-
-            JOptionPane.showMessageDialog(null, "Actualización exitosa");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
-        }
-    }
-
-    public void eliminar() {
-
-        int filaSeleccionada = jTable.getSelectedRow();
-
-        try {
-            String SQL = "DELETE FROM RHCiudades WHERE idCiudad =" + jTable.getValueAt(filaSeleccionada, 0);
-
-            Statement st = con.createStatement();
-
-            int n = st.executeUpdate(SQL);
-
-            if (n >= 0) {
-                JOptionPane.showMessageDialog(null, "El registro a sido eliminado exitosamente");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
-        }
     }
     
         public void consultaIndividual(String valor) {
@@ -376,7 +294,11 @@ public class Ciudades extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ciudades().setVisible(true);
+                try {
+                    new Ciudades().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Ciudades.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

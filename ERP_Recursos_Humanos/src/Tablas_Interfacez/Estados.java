@@ -218,7 +218,8 @@ public void Datos(){
          String SQL = "INSERT INTO RHEstados (IdEstados, nombre, Siglas, estatus) VALUES(?, ?, ?, ?)";
          
          
-     }}
+     } catch(Exception e){}
+}
     
     /**
      * @param args the command line arguments
