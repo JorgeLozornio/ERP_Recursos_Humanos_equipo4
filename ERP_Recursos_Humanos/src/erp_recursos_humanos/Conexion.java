@@ -11,11 +11,9 @@ public class Conexion {
     
     Connection con;
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String user = "ufcdipekfe2lrcg5";
-    private static final String pass = "EVojeEXkDROcXtIx66xt";
-    private static final String url = "jdbc:mysql://ufcdipekfe2lrcg5:EVojeEXkDROcXtIx66xt@bpon9bafeb9cpa9jaxao-mysql.services.clever-cloud.com:3306/bpon9bafeb9cpa9jaxao";
+    private static final String url = "jdbc:mysql://localhost:3306/ERP";
     
-    public Connection conexion(){
+    public Connection conexion(String user, String pass){
         
         con = null;
         

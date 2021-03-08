@@ -12,8 +12,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class TurnosDAO {
     
-    Conexion c = new Conexion();
-    Connection con = c.conexion();
+    Connection con;
+    
+    public TurnosDAO(Connection c){
+        con = c;
+    }
     
     public void insertar(String nombre, String h1, String h2, String dias){
         try{
