@@ -160,9 +160,9 @@ public class Login extends javax.swing.JFrame {
         Conexion c = new Conexion();
         if(c.probarConexion(txtUsuario.getText(), txtContra.getText())==true){
             Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
-        Menu m = new Menu(con);
-        m.setVisible(true);
-        this.setVisible(false);
+            Menu m = new Menu(con);
+            m.setVisible(true);
+            this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
         }

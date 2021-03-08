@@ -64,9 +64,9 @@ public class Turnos extends javax.swing.JFrame {
         chbViernes = new javax.swing.JCheckBox();
         chbSabado = new javax.swing.JCheckBox();
         chbDomingo = new javax.swing.JCheckBox();
-        jButton4 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBusqueda = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -207,13 +207,27 @@ public class Turnos extends javax.swing.JFrame {
         chbDomingo.setText("Domingo");
         getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
 
-        jButton4.setText("Buscar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 110, -1));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 110, -1));
 
         jLabel9.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel9.setText("Nombre: ");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 290, -1));
+
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 290, -1));
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
         jLabel19.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -397,6 +411,18 @@ public class Turnos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        tbTurnos.setModel(t.busqueda(txtBusqueda.getText()));
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
+        
+    }//GEN-LAST:event_txtBusquedaKeyTyped
+
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        tbTurnos.setModel(t.busqueda(txtBusqueda.getText()));
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
     
     public void limpiar(){
         txtNombre.setText(null);
@@ -443,6 +469,7 @@ public class Turnos extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnCrear;
     private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
@@ -456,7 +483,6 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JCheckBox chbMiercoles;
     private javax.swing.JCheckBox chbSabado;
     private javax.swing.JCheckBox chbViernes;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -473,8 +499,8 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbTurnos;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

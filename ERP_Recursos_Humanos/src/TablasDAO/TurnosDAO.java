@@ -106,4 +106,35 @@ public class TurnosDAO {
         
     }
     
+    public DefaultTableModel busqueda(String ca){
+        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias"};
+        String [] registros = new String [6];
+        
+        DefaultTableModel modelo = new DefaultTableModel (null,titulos);
+        String sql = "select * from Turnos where nombre like '"+ca+"%'";
+        System.out.println(sql);
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){
+                registros[0] = rs.getString("idTurno");
+                registros[1] = rs.getString("nombre");
+                registros[2] = rs.getString("horaInicio");
+                registros[3] = rs.getString("horaFin");
+                registros[4] = rs.getString("dias");
+                
+                modelo.addRow(registros);
+                
+            }
+            
+            return modelo;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return modelo;
+    }
+    
 }
