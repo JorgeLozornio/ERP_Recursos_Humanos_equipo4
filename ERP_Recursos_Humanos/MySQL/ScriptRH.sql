@@ -1,7 +1,7 @@
 /* Crear la base de datos */
-CREATE DATABASE recursosHumanos;
+CREATE DATABASE ERP;
 /* Uso de la base de datos */
-USE recursosHumanos;
+USE ERP;
 
 /* Creación de las tablas */
 /* Tabla "Ciudades" */
