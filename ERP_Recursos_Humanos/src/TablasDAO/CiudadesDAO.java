@@ -9,8 +9,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CiudadesDAO {
-    Conexion c = new Conexion();
-    Connection con = c.conexion();
+    Connection con;
+    
+    public CiudadesDAO(Connection c){
+        con = c;
+    }
         
     public void insertarDatos(String nombre, int idE, String estatus) {
         try {

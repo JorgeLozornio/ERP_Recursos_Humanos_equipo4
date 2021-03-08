@@ -111,7 +111,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void btnCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiudadesActionPerformed
         Ciudades c = null;
         try {
-            c = new Ciudades();
+            c = new Ciudades(con);
         } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
