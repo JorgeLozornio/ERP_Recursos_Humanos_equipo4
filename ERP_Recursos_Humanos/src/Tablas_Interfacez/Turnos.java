@@ -135,13 +135,13 @@ public class Turnos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 680, 320));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Humanst521 BT", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Turnos");
         jLabel2.setMaximumSize(new java.awt.Dimension(33, 30));
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel1.setText("Buscar:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
 
@@ -150,64 +150,73 @@ public class Turnos extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 239, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 239, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel3.setText("Hora Inicio:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
+        cbHora1.setFont(new java.awt.Font("Humanst521 BT", 0, 11)); // NOI18N
         cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
-        getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 70, -1));
+        getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 70, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel5.setText("Hora Fin: ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
+        cbHora2.setFont(new java.awt.Font("Humanst521 BT", 0, 11)); // NOI18N
         cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
-        getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 70, -1));
+        getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 70, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel7.setText("Dias:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         chbLunes.setBackground(new java.awt.Color(255, 255, 255));
+        chbLunes.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbLunes.setText("Lunes");
-        getContentPane().add(chbLunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+        getContentPane().add(chbLunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
         chbMartes.setBackground(new java.awt.Color(255, 255, 255));
+        chbMartes.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbMartes.setText("Martes");
-        getContentPane().add(chbMartes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
+        getContentPane().add(chbMartes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
         chbMiercoles.setBackground(new java.awt.Color(255, 255, 255));
+        chbMiercoles.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbMiercoles.setText("Miercoles");
-        getContentPane().add(chbMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
+        getContentPane().add(chbMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
 
         chbJueves.setBackground(new java.awt.Color(255, 255, 255));
+        chbJueves.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbJueves.setText("Jueves");
-        getContentPane().add(chbJueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
+        getContentPane().add(chbJueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
         chbViernes.setBackground(new java.awt.Color(255, 255, 255));
+        chbViernes.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbViernes.setText("Viernes");
-        getContentPane().add(chbViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
+        getContentPane().add(chbViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, -1));
 
         chbSabado.setBackground(new java.awt.Color(255, 255, 255));
+        chbSabado.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbSabado.setText("Sabado");
-        getContentPane().add(chbSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
+        getContentPane().add(chbSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
 
         chbDomingo.setBackground(new java.awt.Color(255, 255, 255));
+        chbDomingo.setFont(new java.awt.Font("Humanst521 BT", 0, 14)); // NOI18N
         chbDomingo.setText("Domingo");
-        getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+        getContentPane().add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
 
         jButton4.setText("Buscar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 110, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 110, -1));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel9.setText("Nombre: ");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 290, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 290, -1));
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Regresar");
@@ -216,7 +225,7 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 80, 30));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Eliminar");
@@ -225,7 +234,7 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 80, 30));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Editar");
@@ -271,7 +280,7 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Crear");

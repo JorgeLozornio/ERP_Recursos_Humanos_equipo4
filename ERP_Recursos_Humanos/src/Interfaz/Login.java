@@ -8,6 +8,7 @@ package Interfaz;
 import Tablas_Interfacez.MenuTablas;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -157,10 +158,14 @@ public class Login extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         Conexion c = new Conexion();
-        Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
+        if(c.probarConexion(txtUsuario.getText(), txtContra.getText())==true){
+            Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
         Menu m = new Menu(con);
         m.setVisible(true);
         this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+        }
     }//GEN-LAST:event_jLabel9MouseClicked
 
     /**

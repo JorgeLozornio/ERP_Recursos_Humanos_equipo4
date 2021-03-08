@@ -30,5 +30,24 @@ public class Conexion {
         return con;
         
     }
+    
+    public boolean probarConexion(String user, String pass){
+        con = null;
+        boolean b = false;
+        
+        try{
+            Class.forName(driver);
+            con = (Connection) DriverManager.getConnection(url, user, pass);
+            if(con != null){
+                b = true;
+                JOptionPane.showMessageDialog(null, "Conexión establecida");
+            }
+            
+        } catch (ClassNotFoundException |  SQLException e){
+            b = false;
+            JOptionPane.showMessageDialog(null, "Error de conexion: "+e.getMessage());
+        }
+        return b;
+    }
             
 }
