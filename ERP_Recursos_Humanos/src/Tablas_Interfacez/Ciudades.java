@@ -237,7 +237,7 @@ public class Ciudades extends javax.swing.JFrame {
             pst.setString(1, jTextFieldCiudad.getText());
 
             pst.setInt(2, jComboBoxEstado.getSelectedIndex() + 1);
-
+            
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
             pst.setString(3, jComboBoxEstatus.getItemAt(seleccionEstatus));
 
