@@ -158,12 +158,15 @@ public class Login extends javax.swing.JFrame {
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         Conexion c = new Conexion();
         Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
-        MenuTablas m = new MenuTablas(con);
+        Menu m = new Menu(con);
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel9MouseClicked
 
-
+    /**
+     * @param args the command line arguments
+     */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

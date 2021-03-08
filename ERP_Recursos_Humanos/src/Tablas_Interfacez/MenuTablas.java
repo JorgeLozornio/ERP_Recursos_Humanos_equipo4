@@ -22,6 +22,8 @@ public class MenuTablas extends javax.swing.JFrame {
     public MenuTablas(Connection c) {
         initComponents();
         con = c;
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -87,7 +89,7 @@ public class MenuTablas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(31, 31, 31)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(763, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +104,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 .addComponent(btnTurnos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogin)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         pack();
