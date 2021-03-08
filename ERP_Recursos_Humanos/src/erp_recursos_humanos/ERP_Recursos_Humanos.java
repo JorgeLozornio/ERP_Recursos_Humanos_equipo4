@@ -18,9 +18,6 @@ public class ERP_Recursos_Humanos {
         Login l = new Login();
         l.setVisible(true);
         
-        Conexion c = new Conexion();
-        Connection con = c.conexion("root", "");
-        
     }
     
 }

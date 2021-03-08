@@ -40,7 +40,6 @@ public class Conexion {
             con = (Connection) DriverManager.getConnection(url, user, pass);
             if(con != null){
                 b = true;
-                JOptionPane.showMessageDialog(null, "Conexión establecida");
             }
             
         } catch (ClassNotFoundException |  SQLException e){
