@@ -5,11 +5,6 @@
  */
 package Interfaz;
 
-import Tablas_Interfacez.MenuTablas;
-import erp_recursos_humanos.Conexion;
-import java.sql.Connection;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Lozy
@@ -34,7 +29,7 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         txtUsuario = new javax.swing.JTextField();
-        txtContra = new javax.swing.JPasswordField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -57,14 +52,14 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setBorder(null);
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 360, 50));
 
-        txtContra.setFont(new java.awt.Font("Humanst521 BT", 0, 24)); // NOI18N
-        txtContra.setBorder(null);
-        txtContra.addActionListener(new java.awt.event.ActionListener() {
+        jPasswordField1.setFont(new java.awt.Font("Humanst521 BT", 0, 24)); // NOI18N
+        jPasswordField1.setBorder(null);
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraActionPerformed(evt);
+                jPasswordField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 390, 50));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 390, 50));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cruzVerde2.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,11 +77,6 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 484, 140, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/BotonLogin.png"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
-            }
-        });
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, -1, -1));
 
         jLabel7.setText("______________________________________");
@@ -152,26 +142,44 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel10MouseClicked
 
-    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraActionPerformed
-
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        Conexion c = new Conexion();
-        if(c.probarConexion(txtUsuario.getText(), txtContra.getText())==true){
-            Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
-            Menu m = new Menu(con);
-            m.setVisible(true);
-            this.setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-        }
-    }//GEN-LAST:event_jLabel9MouseClicked
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Login().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -184,7 +192,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField txtContra;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

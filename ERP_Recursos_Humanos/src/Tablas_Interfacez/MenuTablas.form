@@ -27,15 +27,12 @@
               <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="btnCiudades" max="32767" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTurnos" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnestados" max="32767" attributes="0"/>
                   <Component id="btnLogin" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-              <EmptySpace pref="763" max="32767" attributes="0"/>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,7 +49,7 @@
               <Component id="btnTurnos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="246" max="32767" attributes="0"/>
+              <EmptySpace pref="106" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

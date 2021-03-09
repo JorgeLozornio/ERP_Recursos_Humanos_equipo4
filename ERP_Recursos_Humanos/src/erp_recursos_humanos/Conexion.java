@@ -11,9 +11,11 @@ public class Conexion {
     
     Connection con;
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/ERP";
+    private static final String user = "ufcdipekfe2lrcg5";
+    private static final String pass = "EVojeEXkDROcXtIx66xt";
+    private static final String url = "jdbc:mysql://ufcdipekfe2lrcg5:EVojeEXkDROcXtIx66xt@bpon9bafeb9cpa9jaxao-mysql.services.clever-cloud.com:3306/bpon9bafeb9cpa9jaxao";
     
-    public Connection conexion(String user, String pass){
+    public Connection conexion(){
         
         con = null;
         
@@ -29,24 +31,6 @@ public class Conexion {
         }
         return con;
         
-    }
-    
-    public boolean probarConexion(String user, String pass){
-        con = null;
-        boolean b = false;
-        
-        try{
-            Class.forName(driver);
-            con = (Connection) DriverManager.getConnection(url, user, pass);
-            if(con != null){
-                b = true;
-            }
-            
-        } catch (ClassNotFoundException |  SQLException e){
-            b = false;
-            JOptionPane.showMessageDialog(null, "Error de conexion: "+e.getMessage());
-        }
-        return b;
     }
             
 }
