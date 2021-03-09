@@ -43,7 +43,8 @@ idTurno int not null primary key auto_increment,
 nombre varchar(20) NOT NULL,
 horaInicio time NOT NULL,
 horaFin time NOT NULL,
-dias varchar(30) NOT NULL);
+dias varchar(30) NOT NULL,
+estatus char);
 
 /*Tabla Departamentos -- A*/
 Create Table Departamentos(
@@ -189,6 +190,9 @@ ALTER TABLE NominasPercepciones ADD CONSTRAINT FK_NominasPercepciones_Percepcion
 
 /* CHECKS */
 ALTER TABLE Ciudades
+ADD CHECK (estatus = 'A' or estatus = 'I');
+
+ALTER TABLE Turnos
 ADD CHECK (estatus = 'A' or estatus = 'I');
 
 ALTER TABLE Puestos
