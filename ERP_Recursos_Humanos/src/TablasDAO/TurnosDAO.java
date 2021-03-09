@@ -18,10 +18,10 @@ public class TurnosDAO {
         con = c;
     }
     
-    public void insertar(String nombre, String h1, String h2, String dias){
+    public void insertar(String nombre, String h1, String h2, String dias, String estatus){
         try{
             
-            String sql = "insert into Turnos (nombre, horaInicio, horaFin, dias) values (?,?,?,?)";
+            String sql = "insert into Turnos (nombre, horaInicio, horaFin, dias, estatus) values (?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1, nombre);
@@ -29,6 +29,7 @@ public class TurnosDAO {
             pst.setString(3, h2);
             
             pst.setString(4, dias);
+            pst.setString(5, estatus);
             pst.execute();
             
             JOptionPane.showMessageDialog(null, "Registro exitoso");
@@ -38,10 +39,10 @@ public class TurnosDAO {
         }
     }
     
-    public void actualizar(String nombre, String h1, String h2, String dias, String id){
+    public void actualizar(String nombre, String h1, String h2, String dias, String estatus, String id){
         
         try{
-            String sql = "update Turnos set nombre = ?, horaInicio = ?, horaFin = ?, dias = ? where idTurno = ?";
+            String sql = "update Turnos set nombre = ?, horaInicio = ?, horaFin = ?, dias = ?, estatus = ? where idTurno = ?";
             
             PreparedStatement pst = con.prepareStatement(sql);
         
@@ -50,7 +51,8 @@ public class TurnosDAO {
             pst.setString(3, h2);
            
             pst.setString(4, dias);
-            pst.setString(5, id);
+            pst.setString(5, estatus);
+            pst.setString(6, id);
             pst.execute();
             
             JOptionPane.showMessageDialog(null, "Registro modificado");
@@ -63,11 +65,11 @@ public class TurnosDAO {
     }
     
     public DefaultTableModel mostrarDatos(){
-        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias"};
-        String [] registros = new String [6];
+        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias", "estatus"};
+        String [] registros = new String [7];
         
         DefaultTableModel modelo = new DefaultTableModel (null,titulos);
-        String sql = "select * from Turnos";
+        String sql = "select * from Turnos where estatus = 'A'";
         
         try{
             Statement st = con.createStatement();
@@ -79,6 +81,7 @@ public class TurnosDAO {
                 registros[2] = rs.getString("horaInicio");
                 registros[3] = rs.getString("horaFin");
                 registros[4] = rs.getString("dias");
+                registros[5] = rs.getString("estatus");
                 
                 modelo.addRow(registros);
                 
@@ -95,7 +98,7 @@ public class TurnosDAO {
     public void eliminar(String id){        
         
         try{
-            String sql = "delete from Turnos where idTurno = "+id;
+            String sql = "update Turnos set estatus = 'I' where idTurno = "+id;
             Statement st = con.createStatement();
             st.execute(sql);
             JOptionPane.showMessageDialog(null, "Registro eliminado");
@@ -107,8 +110,8 @@ public class TurnosDAO {
     }
     
     public DefaultTableModel busqueda(String ca){
-        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias"};
-        String [] registros = new String [6];
+        String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias", "estatus"};
+        String [] registros = new String [7];
         
         DefaultTableModel modelo = new DefaultTableModel (null,titulos);
         String sql = "select * from Turnos where nombre like '"+ca+"%'";
@@ -124,6 +127,7 @@ public class TurnosDAO {
                 registros[2] = rs.getString("horaInicio");
                 registros[3] = rs.getString("horaFin");
                 registros[4] = rs.getString("dias");
+                registros[5] = rs.getString("estatus");
                 
                 modelo.addRow(registros);
                 

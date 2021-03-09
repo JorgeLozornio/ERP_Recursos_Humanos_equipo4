@@ -143,30 +143,30 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="24">
-            <StringItem index="0" value="0:00"/>
-            <StringItem index="1" value="1:00"/>
-            <StringItem index="2" value="2:00"/>
-            <StringItem index="3" value="3:00"/>
-            <StringItem index="4" value="4:00"/>
-            <StringItem index="5" value="5:00"/>
-            <StringItem index="6" value="6:00"/>
-            <StringItem index="7" value="7:00"/>
-            <StringItem index="8" value="8:00"/>
-            <StringItem index="9" value="9:00"/>
-            <StringItem index="10" value="10:00"/>
-            <StringItem index="11" value="11:00"/>
-            <StringItem index="12" value="12:00"/>
-            <StringItem index="13" value="13:00"/>
-            <StringItem index="14" value="14:00"/>
-            <StringItem index="15" value="15:00"/>
-            <StringItem index="16" value="16:00"/>
-            <StringItem index="17" value="17:00"/>
-            <StringItem index="18" value="18:00"/>
-            <StringItem index="19" value="19:00"/>
-            <StringItem index="20" value="20:00"/>
-            <StringItem index="21" value="21:00"/>
-            <StringItem index="22" value="22:00"/>
-            <StringItem index="23" value="23:00"/>
+            <StringItem index="0" value="00:00:00"/>
+            <StringItem index="1" value="01:00:00"/>
+            <StringItem index="2" value="02:00:00"/>
+            <StringItem index="3" value="03:00:00"/>
+            <StringItem index="4" value="04:00:00"/>
+            <StringItem index="5" value="05:00:00"/>
+            <StringItem index="6" value="06:00:00"/>
+            <StringItem index="7" value="07:00:00"/>
+            <StringItem index="8" value="08:00:00"/>
+            <StringItem index="9" value="09:00:00"/>
+            <StringItem index="10" value="10:00:00"/>
+            <StringItem index="11" value="11:00:00"/>
+            <StringItem index="12" value="12:00:00"/>
+            <StringItem index="13" value="13:00:00"/>
+            <StringItem index="14" value="14:00:00"/>
+            <StringItem index="15" value="15:00:00"/>
+            <StringItem index="16" value="16:00:00"/>
+            <StringItem index="17" value="17:00:00"/>
+            <StringItem index="18" value="18:00:00"/>
+            <StringItem index="19" value="19:00:00"/>
+            <StringItem index="20" value="20:00:00"/>
+            <StringItem index="21" value="21:00:00"/>
+            <StringItem index="22" value="22:00:00"/>
+            <StringItem index="23" value="23:00:00"/>
           </StringArray>
         </Property>
       </Properties>
@@ -176,6 +176,40 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="120" y="160" width="70" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbEstatus">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Humanst521 BT" size="11" style="0"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="A"/>
+            <StringItem index="1" value="I"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="90" y="400" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel13">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Humanst521 BT" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Estatus:"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="10" y="400" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -199,30 +233,30 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="24">
-            <StringItem index="0" value="0 00"/>
-            <StringItem index="1" value="1:00"/>
-            <StringItem index="2" value="2:00"/>
-            <StringItem index="3" value="3:00"/>
-            <StringItem index="4" value="4:00"/>
-            <StringItem index="5" value="5:00"/>
-            <StringItem index="6" value="6:00"/>
-            <StringItem index="7" value="7:00"/>
-            <StringItem index="8" value="8:00"/>
-            <StringItem index="9" value="9:00"/>
-            <StringItem index="10" value="10:00"/>
-            <StringItem index="11" value="11:00"/>
-            <StringItem index="12" value="12:00"/>
-            <StringItem index="13" value="13:00"/>
-            <StringItem index="14" value="14:00"/>
-            <StringItem index="15" value="15:00"/>
-            <StringItem index="16" value="16:00"/>
-            <StringItem index="17" value="17:00"/>
-            <StringItem index="18" value="18:00"/>
-            <StringItem index="19" value="19:00"/>
-            <StringItem index="20" value="20:00"/>
-            <StringItem index="21" value="21:00"/>
-            <StringItem index="22" value="22:00"/>
-            <StringItem index="23" value="23:00"/>
+            <StringItem index="0" value="00:00:00"/>
+            <StringItem index="1" value="01:00:00"/>
+            <StringItem index="2" value="02:00:00"/>
+            <StringItem index="3" value="03:00:00"/>
+            <StringItem index="4" value="04:00:00"/>
+            <StringItem index="5" value="05:00:00"/>
+            <StringItem index="6" value="06:00:00"/>
+            <StringItem index="7" value="07:00:00"/>
+            <StringItem index="8" value="08:00:00"/>
+            <StringItem index="9" value="09:00:00"/>
+            <StringItem index="10" value="10:00:00"/>
+            <StringItem index="11" value="11:00:00"/>
+            <StringItem index="12" value="12:00:00"/>
+            <StringItem index="13" value="13:00:00"/>
+            <StringItem index="14" value="14:00:00"/>
+            <StringItem index="15" value="15:00:00"/>
+            <StringItem index="16" value="16:00:00"/>
+            <StringItem index="17" value="17:00:00"/>
+            <StringItem index="18" value="18:00:00"/>
+            <StringItem index="19" value="19:00:00"/>
+            <StringItem index="20" value="20:00:00"/>
+            <StringItem index="21" value="21:00:00"/>
+            <StringItem index="22" value="22:00:00"/>
+            <StringItem index="23" value="23:00:00"/>
           </StringArray>
         </Property>
       </Properties>
@@ -441,7 +475,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="220" y="420" width="80" height="30"/>
+          <AbsoluteConstraints x="220" y="470" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -465,7 +499,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="120" y="420" width="80" height="30"/>
+          <AbsoluteConstraints x="120" y="470" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -511,7 +545,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="120" y="420" width="-1" height="-1"/>
+          <AbsoluteConstraints x="120" y="470" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -550,7 +584,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="420" width="80" height="30"/>
+          <AbsoluteConstraints x="20" y="470" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -565,7 +599,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="220" y="420" width="-1" height="-1"/>
+          <AbsoluteConstraints x="220" y="470" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -580,7 +614,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="420" width="-1" height="-1"/>
+          <AbsoluteConstraints x="20" y="470" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -54,6 +54,8 @@ public class Turnos extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbHora1 = new javax.swing.JComboBox<>();
+        cbEstatus = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbHora2 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -157,15 +159,23 @@ public class Turnos extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         cbHora1.setFont(new java.awt.Font("Humanst521 BT", 0, 11)); // NOI18N
-        cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
+        cbHora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00:00", "01:00:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00", "06:00:00", "07:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00" }));
         getContentPane().add(cbHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 70, -1));
+
+        cbEstatus.setFont(new java.awt.Font("Humanst521 BT", 0, 11)); // NOI18N
+        cbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        getContentPane().add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
+        jLabel13.setText("Estatus:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel5.setText("Hora Fin: ");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         cbHora2.setFont(new java.awt.Font("Humanst521 BT", 0, 11)); // NOI18N
-        cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
+        cbHora2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00:00", "01:00:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00", "06:00:00", "07:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00" }));
         getContentPane().add(cbHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 70, -1));
 
         jLabel7.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
@@ -245,7 +255,7 @@ public class Turnos extends javax.swing.JFrame {
         jLabel17.setText("Eliminar");
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 80, 30));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 80, 30));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -254,7 +264,7 @@ public class Turnos extends javax.swing.JFrame {
         jLabel15.setText("Editar");
         jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 80, 30));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 80, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -283,7 +293,7 @@ public class Turnos extends javax.swing.JFrame {
                 btnEditarMouseClicked(evt);
             }
         });
-        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, -1, -1));
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,7 +310,7 @@ public class Turnos extends javax.swing.JFrame {
         jLabel12.setText("Crear");
         jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 80, 30));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 80, 30));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRojo.png"))); // NOI18N
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -308,7 +318,7 @@ public class Turnos extends javax.swing.JFrame {
                 btnEliminarMouseClicked(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, -1, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, -1, -1));
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
         btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -316,7 +326,7 @@ public class Turnos extends javax.swing.JFrame {
                 btnCrearMouseClicked(evt);
             }
         });
-        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
+        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -10, 440, -1));
@@ -362,6 +372,7 @@ public class Turnos extends javax.swing.JFrame {
         if(ca.contains("D")){
             chbDomingo.setSelected(true);
         }
+        cbEstatus.setSelectedItem(tbTurnos.getValueAt(fila, 5));
         
     }//GEN-LAST:event_tbTurnosMouseClicked
 
@@ -384,7 +395,7 @@ public class Turnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch());
+        t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString());
         tbTurnos.setModel(t.mostrarDatos());
        limpiar();
     }//GEN-LAST:event_btnCrearMouseClicked
@@ -392,15 +403,21 @@ public class Turnos extends javax.swing.JFrame {
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         int fila = tbTurnos.getSelectedRow();
         String m = (String)tbTurnos.getValueAt(fila, 0);
-        t.actualizar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), m);
+        t.actualizar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString(), m);
         tbTurnos.setModel(t.mostrarDatos());
         limpiar();
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         int fila = tbTurnos.getSelectedRow();
+        String [] op = {"Si","No"};
         String id = ""+tbTurnos.getValueAt(fila, 0);
-        t.eliminar(id);
+        int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
+                "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, op,op[0]);
+        if(b == 0){
+            t.eliminar(id);
+        }        
         limpiar();
         tbTurnos.setModel(t.mostrarDatos());
     }//GEN-LAST:event_btnEliminarMouseClicked
@@ -435,7 +452,7 @@ public class Turnos extends javax.swing.JFrame {
         chbViernes.setSelected(false);       
         chbSabado.setSelected(false);       
         chbDomingo.setSelected(false);
-        
+        cbEstatus.setSelectedIndex(0);
     }
     
     public String ch(){
@@ -474,6 +491,7 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnRegresar;
+    private javax.swing.JComboBox<String> cbEstatus;
     private javax.swing.JComboBox<String> cbHora1;
     private javax.swing.JComboBox<String> cbHora2;
     private javax.swing.JCheckBox chbDomingo;
@@ -487,6 +505,7 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
