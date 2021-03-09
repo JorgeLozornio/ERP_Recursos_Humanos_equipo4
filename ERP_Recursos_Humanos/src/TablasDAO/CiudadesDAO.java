@@ -85,7 +85,7 @@ public class CiudadesDAO {
         public void eliminar(String id) {
 
         try {
-            String SQL = "DELETE FROM Ciudades WHERE idCiudad =" + id;
+            String SQL = "UPDATE Ciudades SET estatus = 'I' WHERE idCiudad =" + id;
 
             Statement st = con.createStatement();
             
