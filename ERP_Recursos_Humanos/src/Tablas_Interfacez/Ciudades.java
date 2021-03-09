@@ -226,7 +226,7 @@ public class Ciudades extends javax.swing.JFrame {
         String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM RHCiudades WHERE nombre LIKE '%"+valor+"%'";
+        String SQL = "SELECT * FROM Ciudades WHERE nombre LIKE '%"+valor+"%' AND estatus = 'A'";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);

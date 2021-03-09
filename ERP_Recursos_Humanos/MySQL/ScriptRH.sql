@@ -202,3 +202,9 @@ select*from Puestos;
 ALTER TABLE Estados
 ADD CHECK (estatus = 'A' or estatus = 'I');
 show tables;
+
+/* Creación de usuarios */
+CREATE USER Victor IDENTIFIED BY 'ERP123';
+GRANT ALL PRIVILEGES ON Turnos TO 'Victor';
+GRANT ALL PRIVILEGES ON Ciudades TO 'Victor';
+FLUSH PRIVILEGES;

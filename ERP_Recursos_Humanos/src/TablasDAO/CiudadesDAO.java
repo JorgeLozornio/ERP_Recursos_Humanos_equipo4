@@ -17,7 +17,7 @@ public class CiudadesDAO {
         
     public void insertarDatos(String nombre, int idE, String estatus) {
         try {
-            String SQL = "INSERT INTO RHCiudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
+            String SQL = "INSERT INTO Ciudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
 
             PreparedStatement pst = con.prepareStatement(SQL);
 
@@ -40,7 +40,7 @@ public class CiudadesDAO {
         String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM RHCiudades";
+        String SQL = "SELECT * FROM Ciudades WHERE estatus = 'A'";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -61,7 +61,7 @@ public class CiudadesDAO {
     
         public void actualizar(String nombre, int idE, String estatus, String id) {
         try {
-            String SQL = "UPDATE RHCiudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
+            String SQL = "UPDATE Ciudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
 
             PreparedStatement pst = con.prepareStatement(SQL);
 
@@ -85,7 +85,7 @@ public class CiudadesDAO {
         public void eliminar(String id) {
 
         try {
-            String SQL = "DELETE FROM RHCiudades WHERE idCiudad =" + id;
+            String SQL = "DELETE FROM Ciudades WHERE idCiudad =" + id;
 
             Statement st = con.createStatement();
             
