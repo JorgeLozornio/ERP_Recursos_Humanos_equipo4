@@ -56,9 +56,10 @@ public class PuestosDAO {
                 registros[0] = rs.getString("idPuestos");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("salarioMinimo");
-                registros[2] = rs.getString("salarioMaximo");
-                registros[3] = rs.getString("estatus");
+                registros[3] = rs.getString("salarioMaximo");
+                registros[4] = rs.getString("estatus");
                 model.addRow(registros);
+                return model;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
