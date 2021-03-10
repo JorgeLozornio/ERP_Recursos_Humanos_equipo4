@@ -145,13 +145,8 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTurnosActionPerformed
 
     private void btnestadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadosActionPerformed
-        Estados t = null;
-        try {
-            t = new Estados(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        t.setVisible(true);
+   Estados e = new Estados();
+        e.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnestadosActionPerformed
 
