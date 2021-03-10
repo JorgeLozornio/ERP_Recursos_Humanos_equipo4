@@ -125,11 +125,7 @@ public class Puestos extends javax.swing.JFrame {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
@@ -321,8 +317,8 @@ public class Puestos extends javax.swing.JFrame {
                 registros[0] = rs.getString("idPuesto");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("salarioMinimo");
-                registros[2] = rs.getString("salarioMaximo");
-                registros[3] = rs.getString("estatus");
+                registros[3] = rs.getString("salarioMaximo");
+                registros[4] = rs.getString("estatus");
                 model.addRow(registros);
             }
             jTable.setModel(model);
