@@ -39,7 +39,7 @@ public class EstadosDAO {
     public void actualizar(String nombre, String siglas,String estatus, String id){
         
         try{
-            String sql = "update Estados set nombre = ?, siglas = ?, estatus = ? where idEstados = ?";
+            String sql = "update Estados set nombre = ?, siglas = ?, estatus = ? where idEstado = ?";
             
             PreparedStatement pst = con.prepareStatement(sql);
         
@@ -58,7 +58,7 @@ public class EstadosDAO {
     }
     
     public DefaultTableModel mostrarDat(){
-        String [] titulos = {"idEstados","nombre", "siglas","estatus"};
+        String [] titulos = {"idEstado","nombre", "siglas","estatus"};
         String [] registros = new String [5];
         
         DefaultTableModel modeloo = new DefaultTableModel (null,titulos);
@@ -69,7 +69,7 @@ public class EstadosDAO {
             ResultSet rs = st.executeQuery(sql);
             
             while( rs.next()){
-                registros[0] = rs.getString("idEstados");
+                registros[0] = rs.getString("idEstado");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("siglas");
                 registros[3] = rs.getString("estatus");
@@ -89,7 +89,7 @@ public class EstadosDAO {
         public void eliminar(String id){        
         
         try{
-            String sql = "update Estados set estatus = 'I' where idEstados = "+id;
+            String sql = "update Estados set estatus = 'I' where idEstado = "+id;
             Statement st = con.createStatement();
             st.execute(sql);
             JOptionPane.showMessageDialog(null, "Registro eliminado");
