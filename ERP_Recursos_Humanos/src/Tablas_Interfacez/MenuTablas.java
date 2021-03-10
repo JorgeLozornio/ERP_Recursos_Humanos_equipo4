@@ -40,6 +40,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnTurnos = new javax.swing.JButton();
         btnestados = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
+        btnPuestos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +76,13 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
 
+        btnPuestos.setText("Puestos");
+        btnPuestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuestosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,7 +96,8 @@ public class MenuTablas extends javax.swing.JFrame {
                     .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(31, 31, 31)))
+                        .addGap(31, 31, 31))
+                    .addComponent(btnPuestos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(763, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,8 +112,10 @@ public class MenuTablas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTurnos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPuestos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogin)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,13 +145,8 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTurnosActionPerformed
 
     private void btnestadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadosActionPerformed
-        Estados t = null;
-        try {
-            t = new Estados(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        t.setVisible(true);
+   Estados e = new Estados();
+        e.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnestadosActionPerformed
 
@@ -151,11 +157,24 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
+        Puestos p = null;
+        try {
+            p = new Puestos(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        p.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPuestosActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnPuestos;
     private javax.swing.JButton btnTurnos;
     private javax.swing.JButton btnestados;
     private javax.swing.JLabel jLabel1;
