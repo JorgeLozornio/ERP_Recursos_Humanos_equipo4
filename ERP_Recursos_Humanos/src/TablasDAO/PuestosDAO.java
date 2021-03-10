@@ -53,7 +53,7 @@ public class PuestosDAO {
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
-                registros[0] = rs.getString("idPuestos");
+                registros[0] = rs.getString("idPuesto");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("salarioMinimo");
                 registros[3] = rs.getString("salarioMaximo");
@@ -67,9 +67,10 @@ public class PuestosDAO {
         return model;
     }
     
+    
     public void actualizar(String nombre, float salarioMinimo, float salarioMaximo, String estatus, String id) {
         try {
-            String SQL = "UPDATE Puestos SET nombre = ?, salarioMinimo = ?,salarioMaximo = ?, estatus = ? WHERE idPuesto = ?";
+            String SQL = "UPDATE Puestos SET nombre = ?, salarioMinimo = ?, salarioMaximo = ?, estatus = ? WHERE idPuesto = ?";
 
             PreparedStatement pst = con.prepareStatement(SQL);
 
@@ -95,7 +96,7 @@ public class PuestosDAO {
     public void eliminar(String id) {
 
         try {
-            String SQL = "UPDATE Puestos SET estatus = 'I' WHERE idCiudad =" + id;
+            String SQL = "UPDATE Puestos SET estatus = 'I' WHERE idPuesto =" + id;
 
             Statement st = con.createStatement();
             

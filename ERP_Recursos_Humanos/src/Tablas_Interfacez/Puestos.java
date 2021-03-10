@@ -309,7 +309,7 @@ public class Puestos extends javax.swing.JFrame {
     }
     
         public void consultaIndividual(String valor) {
-        String[] titulos = {"idPuestos", "nombre", "salarioMinimo", "SalarioMaximo", "estatus"};
+        String[] titulos = {"idPuesto", "nombre", "salarioMinimo", "SalarioMaximo", "estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
         String SQL = "SELECT * FROM Puestos WHERE nombre LIKE '%"+valor+"%' AND estatus = 'A'";
@@ -318,7 +318,7 @@ public class Puestos extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
-                registros[0] = rs.getString("idPuestos");
+                registros[0] = rs.getString("idPuesto");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("salarioMinimo");
                 registros[2] = rs.getString("salarioMaximo");
