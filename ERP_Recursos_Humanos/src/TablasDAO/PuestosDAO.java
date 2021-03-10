@@ -56,8 +56,8 @@ public class PuestosDAO {
                 registros[0] = rs.getString("idPuestos");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("salarioMinimo");
-                registros[2] = rs.getString("salarioMaximo");
-                registros[3] = rs.getString("estatus");
+                registros[3] = rs.getString("salarioMaximo");
+                registros[4] = rs.getString("estatus");
                 model.addRow(registros);
             }
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class PuestosDAO {
     public void eliminar(String id) {
 
         try {
-            String SQL = "UPDATE Puestos SET estatus = 'I' WHERE idCiudad =" + id;
+            String SQL = "UPDATE Puestos SET estatus = 'I' WHERE idPuesto =" + id;
 
             Statement st = con.createStatement();
             
