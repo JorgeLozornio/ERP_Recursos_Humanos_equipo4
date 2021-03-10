@@ -252,11 +252,10 @@ public class Estados extends javax.swing.JFrame {
     }//GEN-LAST:event_texsiglasActionPerformed
 
     private void regleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regleMouseClicked
-
-      MenuTablas m = new MenuTablas(con);
+        // TODO add your handling code here:
+          MenuTablas m = new MenuTablas(con);
         m.setVisible(true);
         this.setVisible(false);
-        
     }//GEN-LAST:event_regleMouseClicked
     public void limpiar() {
         texnombre.setText("");
