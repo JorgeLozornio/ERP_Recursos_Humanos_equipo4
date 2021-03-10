@@ -274,7 +274,7 @@ public class Estados extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
-                registros[0] = rs.getString("idEstados");
+                registros[0] = rs.getString("idEstado");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("Siglas");
                 registros[3] = rs.getString("estatus");
