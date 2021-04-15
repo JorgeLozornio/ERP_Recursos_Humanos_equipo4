@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Ciudades extends javax.swing.JFrame {
-    CiudadesDAO t ;
+
+    CiudadesDAO t;
     Connection con;
 
     public Ciudades(Connection c) throws SQLException {
@@ -46,6 +47,7 @@ public class Ciudades extends javax.swing.JFrame {
         jLabelModificar = new javax.swing.JLabel();
         txtEliminar = new javax.swing.JLabel();
         jLabelEliminar = new javax.swing.JLabel();
+        lblRegresar = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,6 +160,21 @@ public class Ciudades extends javax.swing.JFrame {
         });
         getContentPane().add(jLabelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
 
+        lblRegresar.setBackground(new java.awt.Color(255, 255, 255));
+        lblRegresar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        lblRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
+        lblRegresar.setText("Regresar");
+        lblRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblRegresar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegresarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 80, 30));
+
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -50, -1, -1));
 
@@ -185,12 +202,16 @@ public class Ciudades extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldBuscarKeyReleased
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
-        int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-        t.insertarDatos(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus));
-        // Manda a llamar el metodo: limpiar()
-        limpiar();
-        // Manda a llamar el metodo: consultaDatos()
-        jTable.setModel(t.consultaDatos());
+        if (jTextFieldCiudad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
+        } else {
+            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            t.insertarDatos(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus));
+            // Manda a llamar el metodo: limpiar()
+            limpiar();
+            // Manda a llamar el metodo: consultaDatos()
+            jTable.setModel(t.consultaDatos());
+        }
     }//GEN-LAST:event_jLabelAgregarMouseClicked
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
@@ -216,17 +237,24 @@ public class Ciudades extends javax.swing.JFrame {
         limpiar();
     }//GEN-LAST:event_jLabelEliminarMouseClicked
 
+    private void lblRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseClicked
+        // TODO add your handling code here:
+        MenuTablas m = new MenuTablas(con);
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblRegresarMouseClicked
+
     public void limpiar() {
         jTextFieldCiudad.setText("");
         jComboBoxEstado.setSelectedItem(null);
         jComboBoxEstatus.setSelectedItem(null);
     }
-    
-        public void consultaIndividual(String valor) {
+
+    public void consultaIndividual(String valor) {
         String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Ciudades WHERE nombre LIKE '%"+valor+"%' AND estatus = 'A'";
+        String SQL = "SELECT * FROM Ciudades WHERE nombre LIKE '%" + valor + "%' AND estatus = 'A'";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -245,7 +273,6 @@ public class Ciudades extends javax.swing.JFrame {
 
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBoxEstado;
@@ -263,6 +290,7 @@ public class Ciudades extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextField jTextFieldCiudad;
+    private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel txtAgregar;
     private javax.swing.JLabel txtEliminar;
     private javax.swing.JLabel txtModficar;
