@@ -24,6 +24,11 @@ public class Ciudades extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         jTable.setModel(t.consultaDatos());
+        llenarComboDepartamento();
+    }
+
+    public void llenarComboDepartamento() {
+        t.llenarCombo(jComboBoxEstado, 1);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,7 +70,6 @@ public class Ciudades extends javax.swing.JFrame {
         jLabelEstado.setText("Estado");
         getContentPane().add(jLabelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 193, 80, -1));
 
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Coahuila de Zaragoza", "Colima", "Durango", "Estado de México", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas" }));
         getContentPane().add(jComboBoxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 190, -1));
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N

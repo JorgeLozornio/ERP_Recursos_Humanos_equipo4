@@ -67,39 +67,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxEstado">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="31">
-            <StringItem index="0" value="Aguascalientes"/>
-            <StringItem index="1" value="Baja California"/>
-            <StringItem index="2" value="Baja California Sur"/>
-            <StringItem index="3" value="Campeche"/>
-            <StringItem index="4" value="Chiapas"/>
-            <StringItem index="5" value="Chihuahua"/>
-            <StringItem index="6" value="Coahuila de Zaragoza"/>
-            <StringItem index="7" value="Colima"/>
-            <StringItem index="8" value="Durango"/>
-            <StringItem index="9" value="Estado de M&#xe9;xico"/>
-            <StringItem index="10" value="Guanajuato"/>
-            <StringItem index="11" value="Guerrero"/>
-            <StringItem index="12" value="Hidalgo"/>
-            <StringItem index="13" value="Jalisco"/>
-            <StringItem index="14" value="Michoac&#xe1;n de Ocampo"/>
-            <StringItem index="15" value="Morelos"/>
-            <StringItem index="16" value="Nayarit"/>
-            <StringItem index="17" value="Nuevo Le&#xf3;n"/>
-            <StringItem index="18" value="Oaxaca"/>
-            <StringItem index="19" value="Puebla"/>
-            <StringItem index="20" value="Quer&#xe9;taro"/>
-            <StringItem index="21" value="Quintana Roo"/>
-            <StringItem index="22" value="San Luis Potos&#xed;"/>
-            <StringItem index="23" value="Sinaloa"/>
-            <StringItem index="24" value="Sonora"/>
-            <StringItem index="25" value="Tabasco"/>
-            <StringItem index="26" value="Tamaulipas"/>
-            <StringItem index="27" value="Tlaxcala"/>
-            <StringItem index="28" value="Veracruz de Ignacio de la Llave"/>
-            <StringItem index="29" value="Yucat&#xe1;n"/>
-            <StringItem index="30" value="Zacatecas"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>

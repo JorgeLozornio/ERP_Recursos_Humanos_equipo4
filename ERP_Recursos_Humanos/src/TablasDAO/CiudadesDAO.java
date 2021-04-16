@@ -5,16 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CiudadesDAO {
+
     Connection con;
-    
-    public CiudadesDAO(Connection c){
+
+    public CiudadesDAO(Connection c) {
         con = c;
     }
-        
+
     public void insertarDatos(String nombre, int idE, String estatus) {
         try {
             String SQL = "INSERT INTO Ciudades (nombre, idEstado, estatus) VALUES(?, ?, ?)";
@@ -35,8 +37,8 @@ public class CiudadesDAO {
             JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
         }
     }
-    
-        public DefaultTableModel consultaDatos() {
+
+    public DefaultTableModel consultaDatos() {
         String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
@@ -58,8 +60,8 @@ public class CiudadesDAO {
         return model;
 
     }
-    
-        public void actualizar(String nombre, int idE, String estatus, String id) {
+
+    public void actualizar(String nombre, int idE, String estatus, String id) {
         try {
             String SQL = "UPDATE Ciudades SET nombre = ?, idEstado = ?, estatus = ? WHERE idCiudad = ?";
 
@@ -70,7 +72,7 @@ public class CiudadesDAO {
             pst.setInt(2, idE + 1);
 
             pst.setString(3, estatus);
-            
+
             pst.setString(4, id);
 
             pst.execute();
@@ -81,20 +83,42 @@ public class CiudadesDAO {
             JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
         }
     }
-        
-        public void eliminar(String id) {
+
+    public void eliminar(String id) {
 
         try {
             String SQL = "UPDATE Ciudades SET estatus = 'I' WHERE idCiudad =" + id;
 
             Statement st = con.createStatement();
-            
+
             st.executeUpdate(SQL);
 
-                JOptionPane.showMessageDialog(null, "El registro a sido eliminado exitosamente");
-                
+            JOptionPane.showMessageDialog(null, "El registro a sido eliminado exitosamente");
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
+        }
+    }
+
+    public void llenarCombo(JComboBox cbo, int columna) {
+        try {
+            //Siempre que queremos llenar algo tenemos que limpiarlo
+            cbo.removeAllItems();
+            String SQL = "SELECT nombre FROM Estados";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            //Recorremos el ResultSet, nos devuelve verdadero cuando tiene un registro
+            while (rs.next()) {
+                //Al método getString le pasamos como argumento el nombre de la columna o número de la columna de la tabla que queremos que nos devuelva.
+                cbo.addItem(rs.getString(columna));
+            }
+            //Para que no se seleccione ninguno en el combobox
+            cbo.setSelectedIndex(-1);
+            //Limpiamos la memoria
+            rs.close();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
