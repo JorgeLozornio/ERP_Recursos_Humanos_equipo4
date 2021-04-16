@@ -29,6 +29,7 @@ public class Turnos extends javax.swing.JFrame {
     TurnosDAO t;
     Connection con;
     String us;
+    int i=0;
     
     public Turnos(Connection c, String u) throws SQLException {
         con = c;
@@ -406,9 +407,14 @@ public class Turnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString());
-        tbTurnos.setModel(t.mostrarDatos());
-       limpiar();
+        if(verificar()){
+            t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString());
+            tbTurnos.setModel(t.mostrarDatos());
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
+        }
+        
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
@@ -468,29 +474,74 @@ public class Turnos extends javax.swing.JFrame {
     
     public String ch(){
         String ca="";
+        
             
             if(chbLunes.isSelected()){
                 ca = "L ";
+                i++;
             }
             if(chbMartes.isSelected()){
                 ca = ca + "M ";
+                i++;
             }
             if(chbMiercoles.isSelected()){
                 ca = ca + "W ";
+                i++;
             }
             if(chbJueves.isSelected()){
                 ca = ca + "J ";
+                i++;
             }
             if(chbViernes.isSelected()){
                 ca = ca + "V ";
+                i++;
             }
             if(chbSabado.isSelected()){
                 ca = ca + "S ";
+                i++;
             }
             if(chbDomingo.isSelected()){
                 ca = ca + "D ";
+                i++;
             }
         return ca;
+    }
+    
+    public boolean verificar(){
+        cont();
+        if(txtNombre.getText().equals("")|cbHora1.getSelectedIndex()==cbHora2.getSelectedIndex()|i<5|i>6){
+            i=0;
+            return false;
+        }else{
+            i=0;
+            return true;
+        }                
+    }
+    
+    public void cont(){
+        
+            
+            if(chbLunes.isSelected()){
+                i++;
+            }
+            if(chbMartes.isSelected()){
+                i++;
+            }
+            if(chbMiercoles.isSelected()){
+                i++;
+            }
+            if(chbJueves.isSelected()){
+                i++;
+            }
+            if(chbViernes.isSelected()){
+                i++;
+            }
+            if(chbSabado.isSelected()){
+                i++;
+            }
+            if(chbDomingo.isSelected()){
+                i++;
+            }
     }
     
     
