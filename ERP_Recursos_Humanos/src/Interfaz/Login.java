@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Reloj.Reloj;
 import Tablas_Interfacez.MenuTablas;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
@@ -15,10 +16,7 @@ import javax.swing.JOptionPane;
  * @author Lozy
  */
 public class Login extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Login
-     */
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -160,7 +158,7 @@ public class Login extends javax.swing.JFrame {
         Conexion c = new Conexion();
         if(c.probarConexion(txtUsuario.getText(), txtContra.getText())==true){
             Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
-            Menu m = new Menu(con);
+            Menu m = new Menu(con, txtUsuario.getText());
             m.setVisible(true);
             this.setVisible(false);
         }else{

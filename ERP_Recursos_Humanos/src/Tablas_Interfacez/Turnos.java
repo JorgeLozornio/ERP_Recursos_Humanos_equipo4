@@ -5,6 +5,7 @@
  */
 package Tablas_Interfacez;
 
+import Reloj.Reloj;
 import TablasDAO.TurnosDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
@@ -27,12 +28,16 @@ public class Turnos extends javax.swing.JFrame {
     
     TurnosDAO t;
     Connection con;
+    String us;
     
-    public Turnos(Connection c) throws SQLException {
+    public Turnos(Connection c, String u) throws SQLException {
         con = c;
+        us = u;
         TurnosDAO tu = new TurnosDAO(con);
         t = tu;
         initComponents();
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
         this.setLocationRelativeTo(null);
         tbTurnos.setModel(t.mostrarDatos());
     }
@@ -70,6 +75,7 @@ public class Turnos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -248,6 +254,11 @@ public class Turnos extends javax.swing.JFrame {
         jLabel19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 80, 30));
 
+        lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj.setText("lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -423,7 +434,7 @@ public class Turnos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MenuTablas m = new MenuTablas(con);
+        MenuTablas m = new MenuTablas(con, us);
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarMouseClicked
@@ -518,6 +529,7 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblReloj;
     private javax.swing.JTable tbTurnos;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtNombre;

@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Reloj.Reloj;
 import Tablas_Interfacez.MenuTablas;
 import java.sql.Connection;
 
@@ -15,10 +16,14 @@ import java.sql.Connection;
 public class Menu extends javax.swing.JFrame {
 
     Connection con;
+    String us;
     
-    public Menu(Connection c) {
-        con = c;
+    public Menu(Connection c, String u) {
         initComponents();
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
+        con = c;
+        us = u;        
         this.setLocationRelativeTo(null);
     }
 
@@ -31,6 +36,9 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblReloj = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,6 +48,25 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj.setText("lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Regresar");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 480, 150, 30));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/BotonLogin.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Humanst521 BT", 1, 24)); // NOI18N
         jLabel3.setText("Base de Datos");
@@ -101,7 +128,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        MenuTablas m = new MenuTablas(con);
+        MenuTablas m = new MenuTablas(con, us);
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -111,6 +138,12 @@ public class Menu extends javax.swing.JFrame {
         xy = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        Login l = new Login();
+        l.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -119,5 +152,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
 }
