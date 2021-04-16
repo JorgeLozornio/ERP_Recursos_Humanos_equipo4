@@ -142,7 +142,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void btnCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiudadesActionPerformed
         Ciudades c = null;
         try {
-            c = new Ciudades(con);
+            c = new Ciudades(con, us);
         } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -165,7 +165,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void btnestadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadosActionPerformed
    Estados t = null;
         try {
-            t = new Estados(con);
+            t = new Estados(con, us);
         } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,7 +181,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
         Puestos t = null;
         try{
-            t = new Puestos(con);
+            t = new Puestos(con, us);
         } catch(SQLException ex){
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,7 +192,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void btnDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepartamentosActionPerformed
         Departamentos t = null;
         try{
-            t = new Departamentos(con);
+            t = new Departamentos(con, us);
         } catch(SQLException ex ){
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }

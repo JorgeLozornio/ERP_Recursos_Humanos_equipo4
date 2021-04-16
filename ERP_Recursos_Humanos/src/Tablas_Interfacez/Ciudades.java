@@ -1,5 +1,6 @@
 package Tablas_Interfacez;
 
+import Reloj.Reloj;
 import TablasDAO.CiudadesDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
@@ -16,12 +17,16 @@ public class Ciudades extends javax.swing.JFrame {
 
     CiudadesDAO t;
     Connection con;
+    String us;
 
-    public Ciudades(Connection c) throws SQLException {
+    public Ciudades(Connection c, String u) throws SQLException {
         con = c;
+        us = u;
         CiudadesDAO tu = new CiudadesDAO(con);
         t = tu;
         initComponents();
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
         this.setLocationRelativeTo(null);
         jTable.setModel(t.consultaDatos());
         llenarComboDepartamento();
@@ -54,6 +59,7 @@ public class Ciudades extends javax.swing.JFrame {
         jLabelEliminar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -182,6 +188,9 @@ public class Ciudades extends javax.swing.JFrame {
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -50, -1, -1));
 
+        lblReloj.setText("lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -243,7 +252,7 @@ public class Ciudades extends javax.swing.JFrame {
 
     private void lblRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseClicked
         // TODO add your handling code here:
-        MenuTablas m = new MenuTablas(con);
+        MenuTablas m = new MenuTablas(con, us);
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblRegresarMouseClicked
@@ -295,6 +304,7 @@ public class Ciudades extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextField jTextFieldCiudad;
     private javax.swing.JLabel lblRegresar;
+    private javax.swing.JLabel lblReloj;
     private javax.swing.JLabel txtAgregar;
     private javax.swing.JLabel txtEliminar;
     private javax.swing.JLabel txtModficar;

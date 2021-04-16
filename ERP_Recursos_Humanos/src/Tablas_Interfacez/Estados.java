@@ -1,6 +1,7 @@
 
 package Tablas_Interfacez;
 
+import Reloj.Reloj;
 import TablasDAO.EstadosDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,12 +18,16 @@ import javax.swing.table.DefaultTableModel;
 public class Estados extends javax.swing.JFrame {
     EstadosDAO t ;
     Connection con;
+    String us;
     
-    public Estados(Connection c) throws SQLException{
+    public Estados(Connection c, String u) throws SQLException{
         con=c;
+        us = u;
         EstadosDAO tu = new EstadosDAO(con);
         t=tu;
         initComponents();
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
         this.setLocationRelativeTo(null);
         Table1.setModel(t.mostrarDat());
     }
@@ -57,6 +62,7 @@ public class Estados extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         regle = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -191,6 +197,9 @@ public class Estados extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 80, -1));
 
+        lblReloj.setText("Lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -40, -1, 580));
 
@@ -259,7 +268,7 @@ public class Estados extends javax.swing.JFrame {
 
     private void regleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regleMouseClicked
 
-      MenuTablas m = new MenuTablas(con);
+      MenuTablas m = new MenuTablas(con, us);
         m.setVisible(true);
         this.setVisible(false);
         
@@ -351,6 +360,7 @@ public class Estados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldbusca;
+    private javax.swing.JLabel lblReloj;
     private javax.swing.JLabel regle;
     private javax.swing.JTextField texnombre;
     private javax.swing.JTextField texsiglas;

@@ -5,6 +5,7 @@
  */
 package Tablas_Interfacez;
 
+import Reloj.Reloj;
 import TablasDAO.DepartamentosDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
@@ -29,11 +30,16 @@ public class Departamentos extends javax.swing.JFrame {
    
      DepartamentosDAO dep ;
     Connection con;
-    public Departamentos(Connection c) throws SQLException{
+    String us;
+    
+    public Departamentos(Connection c, String u) throws SQLException{
         con = c;
+        us = u;
         DepartamentosDAO d = new DepartamentosDAO(con);
         dep=d;
         initComponents();
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
         tblDepartamentos.setModel(dep.mostrarTodo());
         this.setLocationRelativeTo(null);
     }
@@ -66,9 +72,10 @@ public class Departamentos extends javax.swing.JFrame {
         lblInsertar = new javax.swing.JLabel();
         lblActualizar = new javax.swing.JLabel();
         lblEliminar = new javax.swing.JLabel();
-        cbEst = new javax.swing.JComboBox<String>();
+        cbEst = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txfBuscar = new javax.swing.JTextField();
+        lblReloj = new javax.swing.JLabel();
 
         jLabel9.setText("jLabel9");
 
@@ -175,7 +182,7 @@ public class Departamentos extends javax.swing.JFrame {
         });
         getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 80, 30));
 
-        cbEst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "I" }));
+        cbEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
         getContentPane().add(cbEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 61, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -189,12 +196,15 @@ public class Departamentos extends javax.swing.JFrame {
         });
         getContentPane().add(txfBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 230, -1));
 
+        lblReloj.setText("lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseClicked
         // TODO add your handling code here:
-         MenuTablas m = new MenuTablas(con);
+         MenuTablas m = new MenuTablas(con, us);
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblRegresarMouseClicked
@@ -295,6 +305,7 @@ int xx, xy;
     private javax.swing.JLabel lblEliminar;
     private javax.swing.JLabel lblInsertar;
     private javax.swing.JLabel lblRegresar;
+    private javax.swing.JLabel lblReloj;
     private javax.swing.JTable tblDepartamentos;
     private javax.swing.JTextField txfBuscar;
     private javax.swing.JTextField txfNombre;
