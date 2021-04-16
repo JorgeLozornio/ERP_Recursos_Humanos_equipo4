@@ -31,9 +31,8 @@ public class EstadosDAO {
             pst.execute();
             
             JOptionPane.showMessageDialog(null, "Registro exitoso");
-            ////
         } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al registrar: ");
         }
     }
     public void actualizar(String nombre, String siglas,String estatus, String id){

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Tablas_Interfacez;
 
 import TablasDAO.EstadosDAO;
@@ -212,6 +208,9 @@ public class Estados extends javax.swing.JFrame {
 
     private void jLabelactuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelactuMouseClicked
         // 
+          if (texnombre.getText().isEmpty()) {
+             JOptionPane.showMessageDialog(null,"Error: Campo vacío");
+        }else{
         int seleccionEs=boxestatus.getSelectedIndex();
         int fila=Table1.getSelectedRow();
         String m=(String) Table1.getValueAt(fila, 0);
@@ -220,6 +219,7 @@ public class Estados extends javax.swing.JFrame {
         Table1.setModel(t.mostrarDat());
         
         limpiar();
+          }
     }//GEN-LAST:event_jLabelactuMouseClicked
 
     private void jLabelelimiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelelimiMouseClicked
@@ -234,11 +234,17 @@ public class Estados extends javax.swing.JFrame {
 
     private void jLabelagreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelagreMouseClicked
 
-        // TODO add your handling code here:
-        int seleccionEs=boxestatus.getSelectedIndex();
+        if (texnombre.getText().isEmpty() ) {
+             JOptionPane.showMessageDialog(null,"Error: Campo vacío");
+        }else if (texsiglas.getText().isEmpty() ) {
+             JOptionPane.showMessageDialog(null,"Error: Campo vacío");
+        
+        }else{
+                int seleccionEs=boxestatus.getSelectedIndex();
         t.insertar(texnombre.getText(), texsiglas.getText(), boxestatus.getItemAt(seleccionEs));
         limpiar();
         Table1.setModel(t.mostrarDat());
+                }
     }//GEN-LAST:event_jLabelagreMouseClicked
 
     private void jTextFieldbuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldbuscaKeyReleased
