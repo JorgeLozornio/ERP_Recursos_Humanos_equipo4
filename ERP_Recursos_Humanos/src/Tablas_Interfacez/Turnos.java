@@ -418,25 +418,33 @@ public class Turnos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        int fila = tbTurnos.getSelectedRow();
-        String m = (String)tbTurnos.getValueAt(fila, 0);
-        t.actualizar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString(), m);
-        tbTurnos.setModel(t.mostrarDatos());
-        limpiar();
+        if(verificar()){   
+            int fila = tbTurnos.getSelectedRow();
+            String m = (String)tbTurnos.getValueAt(fila, 0);
+            t.actualizar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString(), m);
+            tbTurnos.setModel(t.mostrarDatos());
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
+        }
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        int fila = tbTurnos.getSelectedRow();
-        String [] op = {"Si","No"};
-        String id = ""+tbTurnos.getValueAt(fila, 0);
-        int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
-                "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, op,op[0]);
-        if(b == 0){
-            t.eliminar(id);
-        }        
-        limpiar();
-        tbTurnos.setModel(t.mostrarDatos());
+        if(verificar()){ 
+            int fila = tbTurnos.getSelectedRow();
+            String [] op = {"Si","No"};
+            String id = ""+tbTurnos.getValueAt(fila, 0);
+            int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
+                    "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, op,op[0]);
+            if(b == 0){
+                t.eliminar(id);
+            }        
+            limpiar();
+            tbTurnos.setModel(t.mostrarDatos());
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun registro");
+        }
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked

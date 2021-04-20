@@ -25,7 +25,7 @@ public class Reloj  extends Thread{
         
         while(true){
             calcula();
-            label.setText(fch+"    "+hora+":"+min+":"+seg+" "+ampm+"     "+usuario);
+            label.setText(fch+"    "+hora+":"+min+":"+seg+"     "+usuario);
             try{
                 Thread.sleep(1000);
             }catch(InterruptedException e){
@@ -44,7 +44,7 @@ public class Reloj  extends Thread{
         ampm = calendario.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
         
         if(ampm.equals("PM")){
-            int h = calendario.get(Calendar.HOUR_OF_DAY)-12;
+            int h = calendario.get(Calendar.HOUR_OF_DAY);
             hora = h>9?""+h:"0"+h;            
         }else{
             hora = calendario.get(Calendar.HOUR_OF_DAY)>9?""+calendario.get(Calendar.HOUR_OF_DAY):"0"+calendario.get(Calendar.HOUR_OF_DAY);
