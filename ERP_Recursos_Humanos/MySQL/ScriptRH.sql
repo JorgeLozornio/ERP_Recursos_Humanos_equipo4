@@ -123,7 +123,8 @@ Create Table Deducciones(
 idDeduccion int not null primary key auto_increment,
 nombre varchar(30) NOT NULL,
 descripcion varchar(80) NOT NULL,
-porcentaje float NOT NULL);
+porcentaje float NOT NULL,
+estatus char NOT NULL);
 
 /*Tabla Percepciones*/
 Create Table Percepciones(
@@ -558,29 +559,7 @@ create table Pagos (
 	idPedido int not null,
 	idFormaPago int not null,
 	CONSTRAINT PK_Pagos PRIMARY KEY (idPago)
-);
-/*==============================================================*/
-/* Table:FormasPago									            */
-/*==============================================================*/
-Create Table FormasPago(
-idFormaPago int  NOT NULL,
-nombre varchar(50) NOT NULL,
-estatus char NOT NULL,
-CONSTRAINT PK_FormasPago PRIMARY KEY (idFormaPago)
-);
-/*==============================================================*/
-/* Table:Periodos									            */
-/*==============================================================*/
-Create Table Periodos(
-idPeriodo int  NOT NULL,
-nombre varchar(50) NOT NULL,
-fechaInicio date NOT NULL,
-fechaFin date NOT NULL,
-estatus char NOT NULL,
-CONSTRAINT PK_Periodos PRIMARY KEY (idPeriodo)
-);
-/*==============================================================*/
-/* Table:Deducciones			
+);			
 
 /* Foreign Key */
 ALTER TABLE Ciudades ADD CONSTRAINT FK_Ciudades_Estado FOREIGN KEY(idEstado) REFERENCES Estados(idEstado);
@@ -613,14 +592,17 @@ ADD CHECK (estatus = 'A' or estatus = 'I');
 
 ALTER TABLE Puestos
 ADD CHECK (estatus = 'A' or estatus = 'I');
-select*from Puestos;
 
 ALTER TABLE Estados
 ADD CHECK (estatus = 'A' or estatus = 'I');
 show tables;
 
+ALTER TABLE Deducciones
+ADD CHECK (estatus = 'A' or estatus = 'I');
+
 /* Creación de usuarios */
 CREATE USER Victor IDENTIFIED BY 'ERP123';
 GRANT ALL PRIVILEGES ON Turnos TO 'Victor';
 GRANT ALL PRIVILEGES ON Ciudades TO 'Victor';
+GRANT ALL PRIVILEGES ON Deducciones TO 'Victor';
 FLUSH PRIVILEGES;

@@ -48,16 +48,15 @@ public class MenuTablas extends javax.swing.JFrame {
         btnestados = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         btnPuestos = new javax.swing.JButton();
+        btnDeducciones = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
         lblReloj = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1080, 600));
         setMinimumSize(new java.awt.Dimension(1080, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1080, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
@@ -116,6 +115,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 189, -1));
+
+        btnDeducciones.setText("Deducciones");
+        btnDeducciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeduccionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 189, -1));
 
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -189,8 +196,25 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnPuestosActionPerformed
 
+    private void btnDeduccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeduccionesActionPerformed
+        Deducciones t = null;
+        try{
+            t = new Deducciones(con, us);
+        } catch(SQLException ex ){
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDeduccionesActionPerformed
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        Menu m = new Menu(con, us);
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLoginMouseClicked
+
     private void btnDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepartamentosActionPerformed
-        Departamentos t = null;
+                Departamentos t = null;
         try{
             t = new Departamentos(con, us);
         } catch(SQLException ex ){
@@ -200,16 +224,11 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnDepartamentosActionPerformed
 
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        Menu m = new Menu(con, us);
-        m.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnLoginMouseClicked
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
+    private javax.swing.JButton btnDeducciones;
     private javax.swing.JButton btnDepartamentos;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnPuestos;
