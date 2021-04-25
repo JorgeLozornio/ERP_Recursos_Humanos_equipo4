@@ -50,6 +50,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnPuestos = new javax.swing.JButton();
         btnDeducciones = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
+        btnPercepciones = new javax.swing.JButton();
         lblReloj = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -131,6 +132,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, 189, -1));
+
+        btnPercepciones.setText("Percepciones");
+        btnPercepciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPercepcionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPercepciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 190, -1));
 
         lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         lblReloj.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,6 +233,17 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnDepartamentosActionPerformed
 
+    private void btnPercepcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPercepcionesActionPerformed
+   Percepciones t = null;
+        try {
+            t = new Percepciones  (con, us);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPercepcionesActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,6 +251,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JButton btnDeducciones;
     private javax.swing.JButton btnDepartamentos;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnPercepciones;
     private javax.swing.JButton btnPuestos;
     private javax.swing.JButton btnTurnos;
     private javax.swing.JButton btnestados;
