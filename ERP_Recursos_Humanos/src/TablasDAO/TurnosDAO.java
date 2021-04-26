@@ -1,18 +1,22 @@
 
 package TablasDAO;
 
+import Paginacion.Paginacion;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 /////
 
 public class TurnosDAO {
     
     Connection con;
+    int i;
+    int f;
     
     public TurnosDAO(Connection c){
         con = c;
@@ -33,7 +37,7 @@ public class TurnosDAO {
             pst.execute();
             
             JOptionPane.showMessageDialog(null, "Registro exitoso");
-            mostrarDatos();
+            mostrarDatos(i, f);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
         }
@@ -64,12 +68,12 @@ public class TurnosDAO {
         
     }
     
-    public DefaultTableModel mostrarDatos(){
+    public DefaultTableModel mostrarDatos(int inicio, int fin){
         String [] titulos = {"idTurno","nombre", "horaInicio", "horaFin", "dias", "estatus"};
         String [] registros = new String [7];
         
         DefaultTableModel modelo = new DefaultTableModel (null,titulos);
-        String sql = "select * from Turnos where estatus = 'A'";
+        String sql = "select * from Turnos where estatus = 'A' limit "+inicio+", "+fin;
         
         try{
             Statement st = con.createStatement();

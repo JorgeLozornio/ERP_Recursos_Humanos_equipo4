@@ -5,6 +5,7 @@
  */
 package Tablas_Interfacez;
 
+import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.TurnosDAO;
 import erp_recursos_humanos.Conexion;
@@ -30,6 +31,10 @@ public class Turnos extends javax.swing.JFrame {
     Connection con;
     String us;
     int i=0;
+    int inicio=0;
+    int fin=5;
+    int limit;
+    //int limit = p.getLimit("Turnos", fin);
     
     public Turnos(Connection c, String u) throws SQLException {
         con = c;
@@ -40,7 +45,9 @@ public class Turnos extends javax.swing.JFrame {
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         this.setLocationRelativeTo(null);
-        tbTurnos.setModel(t.mostrarDatos());
+        tbTurnos.setModel(t.mostrarDatos(inicio, fin));
+        Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Turnos")), fin);
     }
 
     /**
@@ -79,6 +86,8 @@ public class Turnos extends javax.swing.JFrame {
         lblReloj = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JLabel();
@@ -278,6 +287,27 @@ public class Turnos extends javax.swing.JFrame {
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 80, 30));
 
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, -1, -1));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSiguienteMouseClicked(evt);
+            }
+        });
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, -1, -1));
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -409,7 +439,7 @@ public class Turnos extends javax.swing.JFrame {
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         if(verificar()){
             t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString());
-            tbTurnos.setModel(t.mostrarDatos());
+            tbTurnos.setModel(t.mostrarDatos(inicio, fin));
             limpiar();
         }else{
             JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
@@ -422,7 +452,7 @@ public class Turnos extends javax.swing.JFrame {
             int fila = tbTurnos.getSelectedRow();
             String m = (String)tbTurnos.getValueAt(fila, 0);
             t.actualizar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString(), m);
-            tbTurnos.setModel(t.mostrarDatos());
+            tbTurnos.setModel(t.mostrarDatos(inicio, fin));
             limpiar();
         }else{
             JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
@@ -441,7 +471,7 @@ public class Turnos extends javax.swing.JFrame {
                 t.eliminar(id);
             }        
             limpiar();
-            tbTurnos.setModel(t.mostrarDatos());
+            tbTurnos.setModel(t.mostrarDatos(inicio, fin));
         }else{
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun registro");
         }
@@ -464,6 +494,30 @@ public class Turnos extends javax.swing.JFrame {
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         tbTurnos.setModel(t.busqueda(txtBusqueda.getText()));
     }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
+       
+    }//GEN-LAST:event_btnSiguienteMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+       if(inicio == limit*5){
+           btnSiguiente.setEnabled(false);
+       }else{
+           btnAtras.setEnabled(true);
+           inicio = inicio+5;
+           tbTurnos.setModel(t.mostrarDatos(inicio, fin));
+       }        
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if(inicio == 0){
+            btnAtras.setEnabled(false);
+        }else{
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            tbTurnos.setModel(t.mostrarDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     
     public void limpiar(){
@@ -552,15 +606,22 @@ public class Turnos extends javax.swing.JFrame {
             }
     }
     
+    public int getLimit(int n, int lim){        
+        limit = (int) Math.ceil(n/lim);
+        System.out.println(n +" "+ limit);
+        return limit;
+    }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnCrear;
     private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnRegresar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cbEstatus;
     private javax.swing.JComboBox<String> cbHora1;
     private javax.swing.JComboBox<String> cbHora2;
