@@ -229,25 +229,33 @@ public class Ciudades extends javax.swing.JFrame {
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
         // Manda llamar al metodo: actalizar();
-        int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-        int fila = jTable.getSelectedRow();
-        String m = (String) jTable.getValueAt(fila, 0);
-        t.actualizar(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
-        // Manda a llamar el metodo: consultaDatos()
-        jTable.setModel(t.consultaDatos());
-        // Manda a llamar el metodo: limpiar()
-        limpiar();
+        if (jTextFieldCiudad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
+        } else {
+            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            int fila = jTable.getSelectedRow();
+            String m = (String) jTable.getValueAt(fila, 0);
+            t.actualizar(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
+            // Manda a llamar el metodo: consultaDatos()
+            jTable.setModel(t.consultaDatos());
+            // Manda a llamar el metodo: limpiar()
+            limpiar();
+        }
     }//GEN-LAST:event_jLabelModificarMouseClicked
 
     private void jLabelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEliminarMouseClicked
-        // Manda a llamar al metodo eliminar
-        int filaSeleccionada = jTable.getSelectedRow();
-        String id = "" + jTable.getValueAt(filaSeleccionada, 0);
-        t.eliminar(id);
-        // Manda a llamar el metodo: consultaDatos()        
-        jTable.setModel(t.consultaDatos());
-        // Manda a llamar el metodo: limpiar()
-        limpiar();
+        if (jTextFieldCiudad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de seleccionar el valor a eliminar");
+        } else {
+            // Manda a llamar al metodo eliminar
+            int filaSeleccionada = jTable.getSelectedRow();
+            String id = "" + jTable.getValueAt(filaSeleccionada, 0);
+            t.eliminar(id);
+            // Manda a llamar el metodo: consultaDatos()        
+            jTable.setModel(t.consultaDatos());
+            // Manda a llamar el metodo: limpiar()
+            limpiar();
+        }
     }//GEN-LAST:event_jLabelEliminarMouseClicked
 
     private void lblRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseClicked

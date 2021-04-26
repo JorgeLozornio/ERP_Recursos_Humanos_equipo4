@@ -42,7 +42,7 @@ public class Deducciones extends javax.swing.JFrame {
         jLabeEstatus = new javax.swing.JLabel();
         jComboBoxEstatus = new javax.swing.JComboBox<>();
         jTextFieldNombre = new javax.swing.JTextField();
-        jTextFieldDescripción = new javax.swing.JTextField();
+        jTextFieldDescripcion = new javax.swing.JTextField();
         jTextFieldPorcentaje = new javax.swing.JTextField();
         jLabelBuscar = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
@@ -91,7 +91,7 @@ public class Deducciones extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 210, -1));
-        getContentPane().add(jTextFieldDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 210, 103));
+        getContentPane().add(jTextFieldDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 210, 103));
 
         jTextFieldPorcentaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,10 +181,15 @@ public class Deducciones extends javax.swing.JFrame {
 
             }
         ));
+        jTableD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableD);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 400, 370));
-        getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 330, 30));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 570, 370));
+        getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 500, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,11 +210,11 @@ public class Deducciones extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRegresarMouseClicked
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
-        if (jTextFieldNombre.getText().isEmpty() && jTextFieldDescripción.getText().isEmpty() && jTextFieldPorcentaje.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
+        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
         } else {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-            t.insertarDatos(jTextFieldNombre.getText(), jTextFieldDescripción.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus));
+            t.insertarDatos(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus));
             // Manda a llamar el metodo: limpiar()
             limpiar();
             // Manda a llamar el metodo: consultaDatos()
@@ -219,34 +224,54 @@ public class Deducciones extends javax.swing.JFrame {
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
         // Manda llamar al metodo: actalizar();
-        int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-        int fila = jTableD.getSelectedRow();
-        String m = (String) jTableD.getValueAt(fila, 0);
-        t.actualizar(jTextFieldNombre.getText(), jTextFieldDescripción.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
-        // Manda a llamar el metodo: consultaDatos()
-        jTableD.setModel(t.consultaDatos());
-        // Manda a llamar el metodo: limpiar()
-        limpiar();
+        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes llenar todos los campos");
+        } else {
+            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            int fila = jTableD.getSelectedRow();
+            String m = (String) jTableD.getValueAt(fila, 0);
+            t.actualizar(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
+            // Manda a llamar el metodo: consultaDatos()
+            jTableD.setModel(t.consultaDatos());
+            // Manda a llamar el metodo: limpiar()
+            limpiar();
+        }
     }//GEN-LAST:event_jLabelModificarMouseClicked
 
     private void jLabelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEliminarMouseClicked
-        // Manda a llamar al metodo eliminar
-        int filaSeleccionada = jTableD.getSelectedRow();
-        String id = "" + jTableD.getValueAt(filaSeleccionada, 0);
-        t.eliminar(id);
-        // Manda a llamar el metodo: consultaDatos()
-        jTableD.setModel(t.consultaDatos());
-        // Manda a llamar el metodo: limpiar()
-        limpiar();
+        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de seleccionar el valor a eliminar");
+        } else {
+// Manda a llamar al metodo eliminar
+            int filaSeleccionada = jTableD.getSelectedRow();
+            String id = "" + jTableD.getValueAt(filaSeleccionada, 0);
+            t.eliminar(id);
+            // Manda a llamar el metodo: consultaDatos()
+            jTableD.setModel(t.consultaDatos());
+            // Manda a llamar el metodo: limpiar()
+            limpiar();
+        }
     }//GEN-LAST:event_jLabelEliminarMouseClicked
+
+    private void jTableDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDMouseClicked
+        // Manda llamar al metodo: limpiar()
+        limpiar();
+
+        int fila = jTableD.rowAtPoint(evt.getPoint());
+        jTextFieldNombre.setText(jTableD.getValueAt(fila, 1).toString());
+        jTextFieldDescripcion.setText(jTableD.getValueAt(fila, 2).toString());
+        jTextFieldPorcentaje.setText(jTableD.getValueAt(fila, 3).toString());
+        jComboBoxEstatus.setSelectedItem(jTableD.getValueAt(fila, 4));
+    }//GEN-LAST:event_jTableDMouseClicked
 
     public void limpiar() {
         jTextFieldNombre.setText("");
+        jTextFieldDescripcion.setText("");
         jTextFieldPorcentaje.setText("");
-        jTextFieldDescripción.setText("");
+        jComboBoxEstatus.setSelectedItem(null);
     }
-    
-        public void consultaIndividual(String valor) {
+
+    public void consultaIndividual(String valor) {
         String[] titulos = {"idDeduccion", "nombre, descripcion, porcentaje, estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
@@ -256,7 +281,7 @@ public class Deducciones extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
-                registros[0] = rs.getString("idDeduccion");                
+                registros[0] = rs.getString("idDeduccion");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("descripcion");
                 registros[3] = rs.getString("porcentaje");
@@ -269,7 +294,7 @@ public class Deducciones extends javax.swing.JFrame {
         }
 
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabeDescripción;
@@ -285,7 +310,7 @@ public class Deducciones extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableD;
     private javax.swing.JTextField jTextFieldBuscar;
-    private javax.swing.JTextField jTextFieldDescripción;
+    private javax.swing.JTextField jTextFieldDescripcion;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldPorcentaje;
     private javax.swing.JLabel lblRegresar;

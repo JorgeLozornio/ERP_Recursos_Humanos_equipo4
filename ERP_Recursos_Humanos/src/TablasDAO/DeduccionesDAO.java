@@ -18,7 +18,7 @@ public class DeduccionesDAO {
 
     public void insertarDatos(String nombre, String descripcion, float porcentaje, String estatus) {
         try {
-            String SQL = "INSERT INTO Ciudades (nombre, descripcion, porcentaje) VALUES(?, ?, ?)";
+            String SQL = "INSERT INTO Deducciones (nombre, descripcion, porcentaje, estatus) VALUES(?, ?, ?, ?)";
 
             PreparedStatement pst = con.prepareStatement(SQL);
 
@@ -40,7 +40,7 @@ public class DeduccionesDAO {
     }
 
     public DefaultTableModel consultaDatos() {
-        String[] titulos = {"idDeduccion", "nombre", "descripcion", "porcentaje", "estatus"};
+        String[] titulos = {"idDeduccion", "Nombre", "Descripcion", "Porcentaje", "Estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
         String SQL = "SELECT * FROM Deducciones WHERE estatus = 'A'";
@@ -53,7 +53,7 @@ public class DeduccionesDAO {
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("descripcion");
                 registros[3] = rs.getString("porcentaje");
-                registros[4] = rs.getString("estatus");
+                registros[4] = rs.getString("Estatus");
                 model.addRow(registros);
             }
         } catch (Exception e) {
@@ -76,6 +76,8 @@ public class DeduccionesDAO {
             pst.setFloat(3, porcentaje);
             
             pst.setString(4, estatus);
+            
+            pst.setString(5, id);
 
             pst.execute();
 
