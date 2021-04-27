@@ -129,7 +129,7 @@ Create Table Percepciones(
 idPercepcion int not null primary key auto_increment,
 nombre varchar(30) NOT NULL,
 descripcion varchar(80) NOT NULL,
-diasPagar int NOT NULL
+diasPagar int NOT NULL,
 estatus char NOT NULL);
 
 /*Tabla DocumentacionEmpleado*/
@@ -139,6 +139,7 @@ nombreDocumento varchar(80) NOT NULL,
 fechaEntrega date NOT NULL,
 documento blob NOT NULL,
 idEmpleado int NOT NULL);
+ALTER TABLE DocumentacionEmpleado ADD COLUMN estatus VARCHAR (1) NOT NULL;
 
 /*Tabla NominasDeducciones*/
 Create Table NominasDeducciones(
@@ -203,6 +204,8 @@ ALTER TABLE Estados
 ADD CHECK (estatus = 'A' or estatus = 'I');
 show tables;
 
+ALTER TABLE DocumentacionEmpleado
+ADD CHECK (estatus = 'A' or estatus = 'I');
 /* Creación de usuarios */
 CREATE USER Victor IDENTIFIED BY 'ERP123';
 GRANT ALL PRIVILEGES ON Turnos TO 'Victor';
@@ -210,4 +213,9 @@ GRANT ALL PRIVILEGES ON Ciudades TO 'Victor';
 GRANT ALL PRIVILEGES ON Departamentos TO 'Victor';
 GRANT ALL PRIVILEGES ON Estados TO 'Victor';
 GRANT ALL PRIVILEGES ON Puestos TO 'Victor';
+GRANT ALL PRIVILEGES ON Empleados TO 'Victor';
+GRANT ALL PRIVILEGES ON DocumentacionEmpleado TO 'Victor';
+GRANT ALL PRIVILEGES ON Percepciones TO 'Victor';
+GRANT ALL PRIVILEGES ON Deducciones TO 'Victor';
+GRANT ALL PRIVILEGES ON Periodos TO 'Victor';
 FLUSH PRIVILEGES;
