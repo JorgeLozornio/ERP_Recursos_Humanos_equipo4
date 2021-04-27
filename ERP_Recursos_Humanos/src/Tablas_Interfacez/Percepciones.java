@@ -59,6 +59,10 @@ public class Percepciones extends javax.swing.JFrame {
         jAgregar = new javax.swing.JLabel();
         jActualizar = new javax.swing.JLabel();
         jElimianar = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,37 +125,56 @@ public class Percepciones extends javax.swing.JFrame {
         jEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
         getContentPane().add(jEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 145, -1));
 
+        jRegrasar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jRegrasar.setText("Regresar");
         jRegrasar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jRegrasarMouseClicked(evt);
             }
         });
-        getContentPane().add(jRegrasar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, -1, -1));
+        getContentPane().add(jRegrasar, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 415, 60, 20));
 
+        jAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jAgregar.setForeground(new java.awt.Color(255, 255, 255));
         jAgregar.setText("Agregar");
         jAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jAgregarMouseClicked(evt);
             }
         });
-        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 70, 30));
 
+        jActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jActualizar.setForeground(new java.awt.Color(255, 255, 255));
         jActualizar.setText("Actualizar");
         jActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jActualizarMouseClicked(evt);
             }
         });
-        getContentPane().add(jActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, -1, -1));
+        getContentPane().add(jActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 30));
 
+        jElimianar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jElimianar.setForeground(new java.awt.Color(255, 255, 255));
         jElimianar.setText("Eliminar");
         jElimianar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jElimianarMouseClicked(evt);
             }
         });
-        getContentPane().add(jElimianar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
+        getContentPane().add(jElimianar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, 30));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonV.png")); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonRojo.png")); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonAzul.png")); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonRosa.png")); // NOI18N
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, -1));
 
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 580));
@@ -273,11 +296,15 @@ public class Percepciones extends javax.swing.JFrame {
     private javax.swing.JLabel jElimianar;
     private javax.swing.JComboBox<String> jEstatus;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelSombra;
     private javax.swing.JLabel jRegrasar;
     private javax.swing.JScrollPane jScrollPane1;
