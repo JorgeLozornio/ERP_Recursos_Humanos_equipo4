@@ -294,7 +294,7 @@ public class Percepciones extends javax.swing.JFrame {
     }
 
     public void consultaIndividual(String valor) {
-        String[] titulos = {"idPercepcion", "nombre, descripcion, diasPagar, estatus"};
+        String[] titulos = {"idPercepcion", "nombre", "descripcion" ,"diasPagar" ,"estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
         String SQL = "SELECT * FROM Percepciones WHERE nombre LIKE '%" + valor + "%' AND estatus = 'A'";
