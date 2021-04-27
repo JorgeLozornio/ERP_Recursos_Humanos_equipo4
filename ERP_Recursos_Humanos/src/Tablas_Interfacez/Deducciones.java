@@ -219,6 +219,12 @@ public class Deducciones extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableD);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 570, 370));
+
+        jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarKeyReleased(evt);
+            }
+        });
         getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 500, 30));
 
         pack();
@@ -317,6 +323,11 @@ public class Deducciones extends javax.swing.JFrame {
             jTableD.setModel(t.consultaDatos(inicio, fin));
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void jTextFieldBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyReleased
+        // Manda a llamar al metodo: consultaIndividual()
+        consultaIndividual(jTextFieldBuscar.getText());
+    }//GEN-LAST:event_jTextFieldBuscarKeyReleased
 
     public void limpiar() {
         jTextFieldNombre.setText("");
