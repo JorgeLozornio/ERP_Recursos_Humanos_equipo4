@@ -52,6 +52,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnDepartamentos = new javax.swing.JButton();
         btnPeriodos = new javax.swing.JButton();
         btnPercepciones = new javax.swing.JButton();
+        btnEmpleados = new javax.swing.JButton();
         lblReloj = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -116,7 +117,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPuestosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 189, -1));
+        getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 189, -1));
 
         btnDeducciones.setText("Deducciones");
         btnDeducciones.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +125,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDeduccionesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 189, -1));
+        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 189, -1));
 
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +133,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDepartamentosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, 189, -1));
+        getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 189, -1));
 
         btnPeriodos.setText("Periodos");
         btnPeriodos.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +141,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPeriodosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 190, -1));
+        getContentPane().add(btnPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 190, -1));
 
         btnPercepciones.setText("Percepciones");
         btnPercepciones.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +149,15 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPercepcionesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPercepciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 190, -1));
+        getContentPane().add(btnPercepciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 190, -1));
+
+        btnEmpleados.setText("Empleados");
+        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpleadosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 190, -1));
 
         lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         lblReloj.setForeground(new java.awt.Color(255, 255, 255));
@@ -264,12 +273,24 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnPeriodosActionPerformed
 
+    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+        Empleados t = null;
+        try{
+            t = new Empleados(con, us);
+        } catch(SQLException ex ){
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnDeducciones;
     private javax.swing.JButton btnDepartamentos;
+    private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnPercepciones;
     private javax.swing.JButton btnPeriodos;
