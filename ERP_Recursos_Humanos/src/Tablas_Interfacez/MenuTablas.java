@@ -50,6 +50,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnPuestos = new javax.swing.JButton();
         btnDeducciones = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
+        btnPeriodos = new javax.swing.JButton();
         btnPercepciones = new javax.swing.JButton();
         lblReloj = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -132,6 +133,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, 189, -1));
+
+        btnPeriodos.setText("Periodos");
+        btnPeriodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPeriodosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 190, -1));
 
         btnPercepciones.setText("Percepciones");
         btnPercepciones.addActionListener(new java.awt.event.ActionListener() {
@@ -244,6 +253,17 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnPercepcionesActionPerformed
 
+    private void btnPeriodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriodosActionPerformed
+        Periodos p = null;
+        try{
+            p = new Periodos(con, us);
+        } catch(SQLException ex ){
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPeriodosActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -252,6 +272,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JButton btnDepartamentos;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnPercepciones;
+    private javax.swing.JButton btnPeriodos;
     private javax.swing.JButton btnPuestos;
     private javax.swing.JButton btnTurnos;
     private javax.swing.JButton btnestados;
