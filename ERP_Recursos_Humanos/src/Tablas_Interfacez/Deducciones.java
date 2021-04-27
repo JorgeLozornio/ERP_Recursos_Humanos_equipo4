@@ -240,7 +240,7 @@ public class Deducciones extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRegresarMouseClicked
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
-        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty()) {
+        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty() || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
         } else {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
@@ -254,7 +254,7 @@ public class Deducciones extends javax.swing.JFrame {
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
         // Manda llamar al metodo: actalizar();
-        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty()) {
+        if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty() || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: Debes llenar todos los campos");
         } else {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
