@@ -72,6 +72,7 @@ public class percepcionesDAO {
             pst.setString(2, descripcion);
             pst.setFloat(3, diasPagar);
             pst.setString(4, estatus);
+            pst.setString(5, id);
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Actualización exitosa");

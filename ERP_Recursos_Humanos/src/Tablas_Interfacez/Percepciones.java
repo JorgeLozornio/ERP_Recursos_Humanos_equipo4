@@ -180,7 +180,7 @@ public class Percepciones extends javax.swing.JFrame {
         int seleccionEstatus = jEstatus.getSelectedIndex();
         int fila = tableP.getSelectedRow();
         String m = (String) tableP.getValueAt(fila, 0);
-        t.actualizar(txNombre.getText(), txDescripcion.getText(), (int) Float.parseFloat(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus), m);
+        t.actualizar(txNombre.getText(), txDescripcion.getText(), txDiaspagar.getX(), jEstatus.getItemAt(seleccionEstatus), m);
         tableP.setModel(t.mostrarDat());
         limpiar();
     }//GEN-LAST:event_jActualizarMouseClicked
