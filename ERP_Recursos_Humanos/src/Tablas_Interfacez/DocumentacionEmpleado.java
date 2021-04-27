@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Tablas_Interfacez;
+
 import Herramientas.Sesion;
 import Interfaz.Login;
 import Paginacion.Paginacion;
@@ -20,12 +21,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Mino
  */
 public class DocumentacionEmpleado extends javax.swing.JFrame {
- DocumentacionEmpleadoDAO t;
+
+    DocumentacionEmpleadoDAO t;
     Connection con;
     String us;
     int aE[];
@@ -33,11 +36,12 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
     int inicio = 0;
     int fin = 5;
     int limit;
+
     /**
      * Creates new form DocumentacionEmpleado
      */
-    public DocumentacionEmpleado(Connection c, String u)throws SQLException {
-       con = c;
+    public DocumentacionEmpleado(Connection c, String u) throws SQLException {
+        con = c;
         us = u;
         DocumentacionEmpleadoDAO tu = new DocumentacionEmpleadoDAO(con);
         t = tu;
@@ -50,12 +54,14 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
         limit = getLimit(Integer.parseInt(p.count("DocumentacionEmpleado")), fin);
         llenarComboEmpleado();
     }
-public void llenarComboEmpleado() {
+
+    public void llenarComboEmpleado() {
         t.llenarCombo(cbEmpleado, 1);
         int num = cbEmpleado.getItemCount();
-        aE=new int[num];
-        t.llenarArreglo(aE,1,num);
+        aE = new int[num];
+        t.llenarArreglo(aE, 1, num);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,13 +245,13 @@ public void llenarComboEmpleado() {
 
     private void lblInsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInsertarMouseClicked
         // TODO add your handling code here:
-        
-       if (txfNombre.getText().isEmpty() || txfDocumento.getText().isEmpty() || dcEntrega.getDate().toString().isEmpty() || cbEmpleado.getSelectedIndex()==-1) {
+
+        if (txfNombre.getText().isEmpty() || txfDocumento.getText().isEmpty() || dcEntrega.getDate().toString().isEmpty() || cbEmpleado.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
         } else {
             int seleccionEstatus = cbEstatus.getSelectedIndex();
             int seleccionEmpleado = cbEmpleado.getSelectedIndex();
-            t.insertarDatos(txfNombre.getText(), dcEntrega.getDate(), txfDocumento.getText(), cbEstatus.getItemAt(seleccionEstatus).toString(),aE[seleccionEmpleado]+1);
+            t.insertarDatos(txfNombre.getText(), dcEntrega.getDate(), txfDocumento.getText(), cbEstatus.getItemAt(seleccionEstatus).toString(), aE[seleccionEmpleado] + 1);
             limpiar();
             // Manda a llamar el metodo: consultaDatos()
             tbDoc.setModel(t.consultaDatos(inicio, fin));
@@ -254,14 +260,14 @@ public void llenarComboEmpleado() {
 
     private void lblActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActualizarMouseClicked
         // TODO add your handling code here:
-        if (txfNombre.getText().isEmpty() || txfDocumento.getText().isEmpty() || dcEntrega.getDate().toString().isEmpty() || cbEmpleado.getSelectedIndex()==-1) {
+        if (txfNombre.getText().isEmpty() || txfDocumento.getText().isEmpty() || dcEntrega.getDate().toString().isEmpty() || cbEmpleado.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
         } else {
-             int seleccionEstatus = cbEstatus.getSelectedIndex();
+            int seleccionEstatus = cbEstatus.getSelectedIndex();
             int seleccionEmpleado = cbEmpleado.getSelectedIndex();
             int fila = tbDoc.getSelectedRow();
             String m = (String) tbDoc.getValueAt(fila, 0);
-            t.actualizar(txfNombre.getText(), dcEntrega.getDate(), txfDocumento.getText(), cbEstatus.getItemAt(seleccionEstatus).toString(),aE[seleccionEmpleado]+1,m);
+            t.actualizar(txfNombre.getText(), dcEntrega.getDate(), txfDocumento.getText(), cbEstatus.getItemAt(seleccionEstatus).toString(), aE[seleccionEmpleado] + 1, m);
             // Manda a llamar el metodo: consultaDatos()
             tbDoc.setModel(t.consultaDatos(inicio, fin));
             // Manda a llamar el metodo: limpiar()
@@ -272,7 +278,7 @@ public void llenarComboEmpleado() {
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
         // TODO add your handling code here:
-        if (txfNombre.getText().isEmpty() || txfDocumento.getText().isEmpty() || dcEntrega.getDate().toString().isEmpty() || cbEmpleado.getSelectedIndex()==-1) {
+        if (txfNombre.getText().isEmpty() || txfDocumento.getText().isEmpty() || dcEntrega.getDate().toString().isEmpty() || cbEmpleado.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
         } else {
             int filaSeleccionada = tbDoc.getSelectedRow();
@@ -287,17 +293,17 @@ public void llenarComboEmpleado() {
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
         // TODO add your handling code here:
-       JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-    int result = fileChooser.showOpenDialog(this);
-    if (result != JFileChooser.CANCEL_OPTION) {
-        File fileName = fileChooser.getSelectedFile();
-        if ((fileName == null) || (fileName.getName().equals(""))) {
-            txfDocumento.setText("...");
-        } else {
-            txfDocumento.setText(fileName.getAbsolutePath());
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        int result = fileChooser.showOpenDialog(this);
+        if (result != JFileChooser.CANCEL_OPTION) {
+            File fileName = fileChooser.getSelectedFile();
+            if ((fileName == null) || (fileName.getName().equals(""))) {
+                txfDocumento.setText("...");
+            } else {
+                txfDocumento.setText(fileName.getAbsolutePath());
+            }
         }
-    }
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void lblRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseClicked
@@ -309,45 +315,48 @@ public void llenarComboEmpleado() {
 
     private void txfBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBuscarKeyReleased
         // TODO add your handling code here:
-       consultaIndividual(txfBuscar.getText());
+        consultaIndividual(txfBuscar.getText());
     }//GEN-LAST:event_txfBuscarKeyReleased
 
     private void tbDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDocMouseClicked
         // TODO add your handling code here:
         limpiar();
-SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-Date fechaDate = null;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
         int fila = tbDoc.rowAtPoint(evt.getPoint());
         String fecha = tbDoc.getValueAt(fila, 2).toString();
-        try{
-         fechaDate=formato.parse(fecha);
-    } catch (ParseException ex){
-        JOptionPane.showMessageDialog(null, "Error formato de fecha incorrecto: " + ex.getMessage());
-    }
-       
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Error formato de fecha incorrecto: " + ex.getMessage());
+        }
+
         txfNombre.setText(tbDoc.getValueAt(fila, 1).toString());
         dcEntrega.setDate(fechaDate);
         txfDocumento.setText(tbDoc.getValueAt(fila, 3).toString());
         cbEstatus.setSelectedItem(tbDoc.getValueAt(fila, 4));
-        cbEmpleado.setSelectedIndex(Integer.parseInt(tbDoc.getValueAt(fila, 5).toString())-1);
+        cbEmpleado.setSelectedIndex(Integer.parseInt(tbDoc.getValueAt(fila, 5).toString()) - 1);
     }//GEN-LAST:event_tbDocMouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
         Sesion s = new Sesion(con);
-        if(s.cerrarSesion()){
+        if (s.cerrarSesion()) {
             Login l = new Login();
             l.setVisible(true);
             this.setVisible(false);
     }//GEN-LAST:event_jLabel8MouseClicked
- public void limpiar() {
+    }
+
+    public void limpiar() {
         txfNombre.setText("");
         dcEntrega.setDate(null);
         txfDocumento.setText("");
         cbEstatus.setSelectedItem(null);
         cbEmpleado.setSelectedItem(null);
     }
-  public void consultaIndividual(String valor) {
+
+    public void consultaIndividual(String valor) {
         String[] titulos = {"idDocumento", "Nombre Documento", "Fecha Entrega", "Documento", "Estatus", "idEmpleado"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
@@ -362,7 +371,7 @@ Date fechaDate = null;
                 registros[2] = rs.getString("fechaEntrega");
                 registros[3] = rs.getString("documento");
                 registros[4] = rs.getString("estatus");
-                 registros[5] = rs.getString("idEmpleado");
+                registros[5] = rs.getString("idEmpleado");
                 model.addRow(registros);
             }
             tbDoc.setModel(model);
@@ -371,11 +380,13 @@ Date fechaDate = null;
         }
 
     }
+
     public int getLimit(int n, int lim) {
         limit = (int) Math.ceil(n / lim);
         System.out.println(n + " " + limit);
         return limit;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -406,7 +417,7 @@ Date fechaDate = null;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }
