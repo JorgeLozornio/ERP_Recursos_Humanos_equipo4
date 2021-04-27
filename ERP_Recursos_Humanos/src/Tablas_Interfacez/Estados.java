@@ -1,6 +1,9 @@
 
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
+import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.EstadosDAO;
 import java.sql.Connection;
@@ -19,6 +22,10 @@ public class Estados extends javax.swing.JFrame {
     EstadosDAO t ;
     Connection con;
     String us;
+    int i=0;
+    int inicio=0;
+    int fin =5;
+    int limit;
     
     public Estados(Connection c, String u) throws SQLException{
         con=c;
@@ -29,7 +36,9 @@ public class Estados extends javax.swing.JFrame {
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         this.setLocationRelativeTo(null);
-        Table1.setModel(t.mostrarDat());
+        Table1.setModel(t.mostrarDat(inicio,fin));
+         Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Estados")), fin);
     }
 
 
@@ -63,7 +72,12 @@ public class Estados extends javax.swing.JFrame {
         regle = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
+        barra = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,7 +99,7 @@ public class Estados extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 24)); // NOI18N
         jLabel1.setText("ESTADOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Buscar:");
@@ -114,7 +128,7 @@ public class Estados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Table1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 520, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 520, 170));
 
         jLabelagre.setBackground(new java.awt.Color(102, 255, 102));
         jLabelagre.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
@@ -197,11 +211,66 @@ public class Estados extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 80, -1));
 
+        lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("Lorem");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(794, 10, 30, -1));
+
+        cerrarSesion.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 100, -1));
+
+        barra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        barra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                barraMouseDragged(evt);
+            }
+        });
+        barra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barraMousePressed(evt);
+            }
+        });
+        getContentPane().add(barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 0, 1010, -1));
 
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -40, -1, 580));
+
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 50, 30));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSiguienteMouseClicked(evt);
+            }
+        });
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, 50, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -225,7 +294,7 @@ public class Estados extends javax.swing.JFrame {
         String m=(String) Table1.getValueAt(fila, 0);
         t.actualizar(texnombre.getText(), texsiglas.getText(), boxestatus.getItemAt(seleccionEs), m);
         
-        Table1.setModel(t.mostrarDat());
+        Table1.setModel(t.mostrarDat(inicio,fin));
         
         limpiar();
           }
@@ -235,7 +304,7 @@ public class Estados extends javax.swing.JFrame {
         int filaSele = Table1.getSelectedRow();
         String id = "" + Table1.getValueAt(filaSele, 0);
         t.eliminar(id);
-        Table1.setModel(t.mostrarDat());
+        Table1.setModel(t.mostrarDat(inicio,fin));
         
         limpiar();
 // TODO add your handling code here:
@@ -252,7 +321,7 @@ public class Estados extends javax.swing.JFrame {
                 int seleccionEs=boxestatus.getSelectedIndex();
         t.insertar(texnombre.getText(), texsiglas.getText(), boxestatus.getItemAt(seleccionEs));
         limpiar();
-        Table1.setModel(t.mostrarDat());
+        Table1.setModel(t.mostrarDat(inicio,fin));
                 }
     }//GEN-LAST:event_jLabelagreMouseClicked
 
@@ -273,6 +342,57 @@ public class Estados extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_regleMouseClicked
+
+    private void barraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x-xx, y-xy);
+    }//GEN-LAST:event_barraMouseDragged
+int xx,xy;
+    private void barraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_barraMousePressed
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_cerrarSesionMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if (inicio == 0) {
+            btnAtras.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            Table1.setModel(t.mostrarDat(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
+
+    }//GEN-LAST:event_btnSiguienteMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (inicio == limit * 5) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnAtras.setEnabled(true);
+            inicio = inicio + 5;
+            Table1.setModel(t.mostrarDat(inicio, fin));
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
     public void limpiar() {
         texnombre.setText("");
         texsiglas.setText("");
@@ -301,6 +421,11 @@ public class Estados extends javax.swing.JFrame {
         }
 
     }
+     public int getLimit(int n, int lim) {
+        limit = (int) Math.ceil(n / lim);
+        System.out.println(n + " " + limit);
+        return limit;
+     }
     
     /**
      * @param args the command line arguments
@@ -338,13 +463,18 @@ public class Estados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table1;
+    private javax.swing.JLabel barra;
     private javax.swing.JComboBox<String> boxestatus;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

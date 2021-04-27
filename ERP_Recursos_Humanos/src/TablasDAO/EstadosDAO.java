@@ -56,12 +56,12 @@ public class EstadosDAO {
         }      
     }
     
-    public DefaultTableModel mostrarDat(){
+    public DefaultTableModel mostrarDat(int inicio,int fin){
         String [] titulos = {"idEstado","nombre", "siglas","estatus"};
         String [] registros = new String [5];
         
         DefaultTableModel modeloo = new DefaultTableModel (null,titulos);
-        String sql = "select * from Estados where estatus = 'A'";
+        String sql = "select * from Estados where estatus = 'A'limit " +inicio+", "+fin;
         
         try{
             Statement st = con.createStatement();
