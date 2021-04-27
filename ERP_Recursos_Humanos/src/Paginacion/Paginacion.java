@@ -23,8 +23,6 @@ public class Paginacion {
             rs.next();
             c = rs.getString("count(*)");
             
-            JOptionPane.showMessageDialog(null, c);
-            
         } catch(Exception e){
         }
         return c;

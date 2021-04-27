@@ -1,6 +1,8 @@
 
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.EmpleadosDAO;
@@ -41,7 +43,6 @@ public class Empleados extends javax.swing.JFrame {
         lblReloj = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtColonia = new javax.swing.JTextField();
@@ -104,8 +105,10 @@ public class Empleados extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        lblSesion = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
@@ -136,19 +139,6 @@ public class Empleados extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         jLabel5.setText("Turno:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
-        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel1MouseDragged(evt);
-            }
-        });
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         getContentPane().add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 150, -1));
 
         jLabel6.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -355,11 +345,35 @@ public class Empleados extends javax.swing.JFrame {
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
         getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, -1, -1));
 
+        lblSesion.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        lblSesion.setForeground(new java.awt.Color(255, 255, 255));
+        lblSesion.setText("Cerrar Sesión");
+        lblSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lblSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRojo.png"))); // NOI18N
         getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 210, -1, -1));
 
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
         getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel1MouseDragged(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/FondoBlanco.png"))); // NOI18N
         getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
@@ -390,6 +404,15 @@ public class Empleados extends javax.swing.JFrame {
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel37MouseClicked
+
+    private void lblSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_lblSesionMouseClicked
 
     
 
@@ -449,6 +472,7 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblReloj;
+    private javax.swing.JLabel lblSesion;
     private javax.swing.JRadioButton rbF;
     private javax.swing.JRadioButton rbM;
     private javax.swing.JTextField txtCP;

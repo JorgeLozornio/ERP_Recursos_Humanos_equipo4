@@ -5,6 +5,8 @@
  */
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.TurnosDAO;
@@ -42,7 +44,7 @@ public class Turnos extends javax.swing.JFrame {
         TurnosDAO tu = new TurnosDAO(con);
         t = tu;
         initComponents();
-        Reloj h = new Reloj(lblReloj, u);
+        Reloj h = new Reloj(cerrarSesion, u);
         h.start();
         this.setLocationRelativeTo(null);
         tbTurnos.setModel(t.mostrarDatos(inicio, fin));
@@ -83,13 +85,15 @@ public class Turnos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        lblReloj = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        lblReloj = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblReloj2 = new javax.swing.JLabel();
+        barra = new javax.swing.JLabel();
         btnEditar = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -264,10 +268,16 @@ public class Turnos extends javax.swing.JFrame {
         jLabel19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 80, 30));
 
-        lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
-        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
-        lblReloj.setText("lorem");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        cerrarSesion.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -308,6 +318,11 @@ public class Turnos extends javax.swing.JFrame {
         });
         getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, -1, -1));
 
+        lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj.setText("lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -316,18 +331,23 @@ public class Turnos extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
-        jLabel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        lblReloj2.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        lblReloj2.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj2.setText("lorem");
+        getContentPane().add(lblReloj2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        barra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        barra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel4MouseDragged(evt);
+                barraMouseDragged(evt);
             }
         });
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        barra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                barraMousePressed(evt);
             }
         });
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
         btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -418,17 +438,17 @@ public class Turnos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tbTurnosMouseClicked
 
-    private void jLabel4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseDragged
+    private void barraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         
         this.setLocation(x-xx, y-xy);
-    }//GEN-LAST:event_jLabel4MouseDragged
+    }//GEN-LAST:event_barraMouseDragged
     int xx, xy;
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void barraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_barraMousePressed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         this.setVisible(false);
@@ -518,6 +538,15 @@ public class Turnos extends javax.swing.JFrame {
             tbTurnos.setModel(t.mostrarDatos(inicio, fin));
         }
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_cerrarSesionMouseClicked
 
     
     public void limpiar(){
@@ -615,6 +644,7 @@ public class Turnos extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel barra;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnCrear;
@@ -625,6 +655,7 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbEstatus;
     private javax.swing.JComboBox<String> cbHora1;
     private javax.swing.JComboBox<String> cbHora2;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JCheckBox chbDomingo;
     private javax.swing.JCheckBox chbJueves;
     private javax.swing.JCheckBox chbLunes;
@@ -642,7 +673,6 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -650,6 +680,7 @@ public class Turnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblReloj;
+    private javax.swing.JLabel lblReloj2;
     private javax.swing.JTable tbTurnos;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtNombre;

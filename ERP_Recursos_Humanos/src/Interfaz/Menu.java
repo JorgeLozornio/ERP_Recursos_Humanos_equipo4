@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Herramientas.Sesion;
 import Reloj.Reloj;
 import Tablas_Interfacez.MenuTablas;
 import java.sql.Connection;
@@ -37,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblReloj = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -53,6 +55,17 @@ public class Menu extends javax.swing.JFrame {
         lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Cerrar Sesión");
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Humanst521 BT", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,6 +157,15 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jLabel8MouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -154,6 +176,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
 }

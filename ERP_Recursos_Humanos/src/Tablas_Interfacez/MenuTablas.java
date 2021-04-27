@@ -5,6 +5,7 @@
  */
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
 import Interfaz.Login;
 import Interfaz.Menu;
 import Reloj.Reloj;
@@ -50,6 +51,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnPuestos = new javax.swing.JButton();
         btnDeducciones = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         btnPeriodos = new javax.swing.JButton();
         btnPercepciones = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
@@ -134,6 +136,17 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 189, -1));
+
+        jLabel5.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Cerrar Sesión");
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, -1));
 
         btnPeriodos.setText("Periodos");
         btnPeriodos.addActionListener(new java.awt.event.ActionListener() {
@@ -284,6 +297,15 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jLabel5MouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -301,6 +323,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
 }
