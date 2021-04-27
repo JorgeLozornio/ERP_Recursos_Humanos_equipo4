@@ -1,6 +1,7 @@
 
 package Tablas_Interfacez;
 
+import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.percepcionesDAO;
 import java.sql.Connection;
@@ -19,6 +20,10 @@ public class Percepciones extends javax.swing.JFrame {
     percepcionesDAO t;
     Connection con;
     String us;
+    int i=0;
+    int inicio=0;
+    int fin =5;
+    int limit;
 
     public Percepciones(Connection c, String u) throws SQLException {
         con = c;
@@ -29,7 +34,9 @@ public class Percepciones extends javax.swing.JFrame {
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         this.setLocationRelativeTo(null);
-        tableP.setModel(t.mostrarDat());
+        tableP.setModel(t.mostrarDat(inicio,fin));
+        Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Percepciones")), fin);
     }
 
     /**
@@ -64,6 +71,8 @@ public class Percepciones extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,6 +188,27 @@ public class Percepciones extends javax.swing.JFrame {
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 580));
 
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 50, 30));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSiguienteMouseClicked(evt);
+            }
+        });
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 390, 50, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,9 +217,9 @@ public class Percepciones extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error: campos vacios");
         } else {
             int seleccionEstatus = jEstatus.getSelectedIndex();
-            t.insertar(txNombre.getText(), txDescripcion.getText(), (int) Float.parseFloat(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus));
+            t.insertar(txNombre.getText(), txDescripcion.getText(), Integer.parseInt(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus));
             limpiar();
-            tableP.setModel(t.mostrarDat());
+            tableP.setModel(t.mostrarDat(inicio,fin));
         }
     }//GEN-LAST:event_jAgregarMouseClicked
 
@@ -203,17 +233,21 @@ public class Percepciones extends javax.swing.JFrame {
         int seleccionEstatus = jEstatus.getSelectedIndex();
         int fila = tableP.getSelectedRow();
         String m = (String) tableP.getValueAt(fila, 0);
-        t.actualizar(txNombre.getText(), txDescripcion.getText(), txDiaspagar.getX(), jEstatus.getItemAt(seleccionEstatus), m);
-        tableP.setModel(t.mostrarDat());
+        t.actualizar(txNombre.getText(), txDescripcion.getText(),Integer.parseInt(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus), m);
+        tableP.setModel(t.mostrarDat(inicio,fin));
         limpiar();
     }//GEN-LAST:event_jActualizarMouseClicked
 
     private void jElimianarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jElimianarMouseClicked
-        int filaSeleccionada = tableP.getSelectedRow();
-        String id = "" + tableP.getValueAt(filaSeleccionada, 0);
-        t.eliminar(id);
-        tableP.setModel(t.mostrarDat());
-        limpiar();
+        if (txNombre.getText().isEmpty() || txDescripcion.getText().isEmpty() || txDiaspagar.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de seleccionar el valor a eliminar");
+        } else {
+            int filaSeleccionada = tableP.getSelectedRow();
+            String id = "" + tableP.getValueAt(filaSeleccionada, 0);
+            t.eliminar(id);
+            tableP.setModel(t.mostrarDat(inicio, fin));
+            limpiar();
+        }
     }//GEN-LAST:event_jElimianarMouseClicked
 
     private void txBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyReleased
@@ -228,6 +262,30 @@ public class Percepciones extends javax.swing.JFrame {
         txDiaspagar.setText(tableP.getValueAt(fila, 3).toString());
         jEstatus.setSelectedItem(tableP.getValueAt(fila,4));
     }//GEN-LAST:event_tablePMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if (inicio == 0) {
+            btnAtras.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            tableP.setModel(t.mostrarDat(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
+
+    }//GEN-LAST:event_btnSiguienteMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (inicio == limit * 5) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnAtras.setEnabled(true);
+            inicio = inicio + 5;
+            tableP.setModel(t.mostrarDat(inicio, fin));
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     public void limpiar() {
         txNombre.setText("");
@@ -257,6 +315,10 @@ public class Percepciones extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar: ");
         }
 
+    }public int getLimit(int n, int lim) {
+        limit = (int) Math.ceil(n / lim);
+        System.out.println(n + " " + limit);
+        return limit;
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -291,6 +353,8 @@ public class Percepciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jActualizar;
     private javax.swing.JLabel jAgregar;
     private javax.swing.JLabel jElimianar;

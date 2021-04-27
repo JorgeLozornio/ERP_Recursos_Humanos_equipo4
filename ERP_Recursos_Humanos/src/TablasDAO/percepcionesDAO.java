@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -22,27 +23,27 @@ public class percepcionesDAO {
 
     public void insertar(String nombre, String descripcion, int diasPagar, String estatus) {
         try {
-            String SQL = "INSERT INTO Ciudades (nombre, descripcion, diasPagar) VALUES(?, ?, ?)";
+            String SQL = "INSERT INTO Percepciones (nombre, descripcion, diasPagar ,estatus) VALUES(?, ?, ?,?)";
 
             PreparedStatement pst = con.prepareStatement(SQL);
             pst.setString(1, nombre);
             pst.setString(2, descripcion);
-            pst.setFloat(3, diasPagar);
+            pst.setInt(3, diasPagar);
             pst.setString(4, estatus);
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Registro exitoso");
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar: ");
+            JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
         }
     }
 
-    public DefaultTableModel mostrarDat() {
+    public DefaultTableModel mostrarDat(int inicio,int fin) {
         String[] titulos = {"idPercepcion", "nombre", "descripcion", "diasPagar", "estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Percepciones WHERE estatus = 'A'";
+        String SQL = "SELECT * FROM Percepciones WHERE estatus = 'A' limit " +inicio+", "+fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -56,7 +57,7 @@ public class percepcionesDAO {
                 model.addRow(registros);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al consultar: ");
+            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
         }
         return model;
 
@@ -70,7 +71,7 @@ public class percepcionesDAO {
 
             pst.setString(1, nombre);
             pst.setString(2, descripcion);
-            pst.setFloat(3, diasPagar);
+            pst.setInt(3, diasPagar);
             pst.setString(4, estatus);
             pst.setString(5, id);
             pst.execute();
@@ -78,7 +79,7 @@ public class percepcionesDAO {
             JOptionPane.showMessageDialog(null, "Actualización exitosa");
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al consultar: ");
+            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
         }
     }
 
@@ -96,5 +97,6 @@ public class percepcionesDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar: ");
         }
-    }
-}
+    }}
+
+   
