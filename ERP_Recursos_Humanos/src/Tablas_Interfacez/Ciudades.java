@@ -1,5 +1,6 @@
 package Tablas_Interfacez;
 
+import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.CiudadesDAO;
 import erp_recursos_humanos.Conexion;
@@ -18,6 +19,10 @@ public class Ciudades extends javax.swing.JFrame {
     CiudadesDAO t;
     Connection con;
     String us;
+    int i = 0;
+    int inicio = 0;
+    int fin = 5;
+    int limit;
 
     public Ciudades(Connection c, String u) throws SQLException {
         con = c;
@@ -28,7 +33,9 @@ public class Ciudades extends javax.swing.JFrame {
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         this.setLocationRelativeTo(null);
-        jTable.setModel(t.consultaDatos());
+        jTable.setModel(t.consultaDatos(inicio, fin));
+        Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Ciudades")), fin);
         llenarComboDepartamento();
     }
 
@@ -60,6 +67,8 @@ public class Ciudades extends javax.swing.JFrame {
         lblRegresar = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,6 +200,27 @@ public class Ciudades extends javax.swing.JFrame {
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
 
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, -1, -1));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSiguienteMouseClicked(evt);
+            }
+        });
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -223,7 +253,7 @@ public class Ciudades extends javax.swing.JFrame {
             // Manda a llamar el metodo: limpiar()
             limpiar();
             // Manda a llamar el metodo: consultaDatos()
-            jTable.setModel(t.consultaDatos());
+            jTable.setModel(t.consultaDatos(inicio, fin));
         }
     }//GEN-LAST:event_jLabelAgregarMouseClicked
 
@@ -237,7 +267,7 @@ public class Ciudades extends javax.swing.JFrame {
             String m = (String) jTable.getValueAt(fila, 0);
             t.actualizar(jTextFieldCiudad.getText(), jComboBoxEstado.getSelectedIndex(), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
             // Manda a llamar el metodo: consultaDatos()
-            jTable.setModel(t.consultaDatos());
+            jTable.setModel(t.consultaDatos(inicio, fin));
             // Manda a llamar el metodo: limpiar()
             limpiar();
         }
@@ -252,7 +282,7 @@ public class Ciudades extends javax.swing.JFrame {
             String id = "" + jTable.getValueAt(filaSeleccionada, 0);
             t.eliminar(id);
             // Manda a llamar el metodo: consultaDatos()        
-            jTable.setModel(t.consultaDatos());
+            jTable.setModel(t.consultaDatos(inicio, fin));
             // Manda a llamar el metodo: limpiar()
             limpiar();
         }
@@ -264,6 +294,30 @@ public class Ciudades extends javax.swing.JFrame {
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblRegresarMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if (inicio == 0) {
+            btnAtras.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            jTable.setModel(t.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
+
+    }//GEN-LAST:event_btnSiguienteMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (inicio == limit * 5) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnAtras.setEnabled(true);
+            inicio = inicio + 5;
+            jTable.setModel(t.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     public void limpiar() {
         jTextFieldCiudad.setText("");
@@ -294,8 +348,16 @@ public class Ciudades extends javax.swing.JFrame {
 
     }
 
+    public int getLimit(int n, int lim) {
+        limit = (int) Math.ceil(n / lim);
+        System.out.println(n + " " + limit);
+        return limit;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabelAgregar;

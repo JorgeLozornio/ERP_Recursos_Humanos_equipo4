@@ -39,11 +39,11 @@ public class DeduccionesDAO {
         }
     }
 
-    public DefaultTableModel consultaDatos() {
+    public DefaultTableModel consultaDatos(int inicio, int fin) {
         String[] titulos = {"idDeduccion", "Nombre", "Descripcion", "Porcentaje", "Estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Deducciones WHERE estatus = 'A'";
+        String SQL = "SELECT * FROM Deducciones WHERE estatus = 'A' limit "+inicio+", "+fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);

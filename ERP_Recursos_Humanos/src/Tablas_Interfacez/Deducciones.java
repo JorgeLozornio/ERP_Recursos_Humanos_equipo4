@@ -1,5 +1,6 @@
 package Tablas_Interfacez;
 
+import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.DeduccionesDAO;
 import erp_recursos_humanos.Conexion;
@@ -18,6 +19,10 @@ public class Deducciones extends javax.swing.JFrame {
     DeduccionesDAO t;
     Connection con;
     String us;
+    int i = 0;
+    int inicio = 0;
+    int fin = 5;
+    int limit;
 
     public Deducciones(Connection c, String u) throws SQLException {
         con = c;
@@ -28,7 +33,9 @@ public class Deducciones extends javax.swing.JFrame {
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         this.setLocationRelativeTo(null);
-        jTableD.setModel(t.consultaDatos());
+        jTableD.setModel(t.consultaDatos(inicio, fin));
+        Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Deducciones")), fin);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,6 +60,8 @@ public class Deducciones extends javax.swing.JFrame {
         jLabelModificar = new javax.swing.JLabel();
         txtEliminar = new javax.swing.JLabel();
         jLabelEliminar = new javax.swing.JLabel();
+        btnSiguiente = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
         jLabelSombra = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableD = new javax.swing.JTable();
@@ -167,6 +176,27 @@ public class Deducciones extends javax.swing.JFrame {
         });
         getContentPane().add(jLabelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, -1, -1));
 
+        btnSiguiente.setText(">");
+        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSiguienteMouseClicked(evt);
+            }
+        });
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, -1, -1));
+
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, -1, -1));
+
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 580));
 
@@ -188,7 +218,7 @@ public class Deducciones extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableD);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 570, 370));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 570, 370));
         getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 500, 30));
 
         pack();
@@ -218,7 +248,7 @@ public class Deducciones extends javax.swing.JFrame {
             // Manda a llamar el metodo: limpiar()
             limpiar();
             // Manda a llamar el metodo: consultaDatos()
-            jTableD.setModel(t.consultaDatos());
+            jTableD.setModel(t.consultaDatos(inicio, fin));
         }
     }//GEN-LAST:event_jLabelAgregarMouseClicked
 
@@ -232,7 +262,7 @@ public class Deducciones extends javax.swing.JFrame {
             String m = (String) jTableD.getValueAt(fila, 0);
             t.actualizar(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
             // Manda a llamar el metodo: consultaDatos()
-            jTableD.setModel(t.consultaDatos());
+            jTableD.setModel(t.consultaDatos(inicio, fin));
             // Manda a llamar el metodo: limpiar()
             limpiar();
         }
@@ -247,7 +277,7 @@ public class Deducciones extends javax.swing.JFrame {
             String id = "" + jTableD.getValueAt(filaSeleccionada, 0);
             t.eliminar(id);
             // Manda a llamar el metodo: consultaDatos()
-            jTableD.setModel(t.consultaDatos());
+            jTableD.setModel(t.consultaDatos(inicio, fin));
             // Manda a llamar el metodo: limpiar()
             limpiar();
         }
@@ -263,6 +293,30 @@ public class Deducciones extends javax.swing.JFrame {
         jTextFieldPorcentaje.setText(jTableD.getValueAt(fila, 3).toString());
         jComboBoxEstatus.setSelectedItem(jTableD.getValueAt(fila, 4));
     }//GEN-LAST:event_jTableDMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if (inicio == 0) {
+            btnAtras.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            jTableD.setModel(t.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
+
+    }//GEN-LAST:event_btnSiguienteMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (inicio == limit * 5) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnAtras.setEnabled(true);
+            inicio = inicio + 5;
+            jTableD.setModel(t.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     public void limpiar() {
         jTextFieldNombre.setText("");
@@ -295,7 +349,15 @@ public class Deducciones extends javax.swing.JFrame {
 
     }
 
+    public int getLimit(int n, int lim) {
+        limit = (int) Math.ceil(n / lim);
+        System.out.println(n + " " + limit);
+        return limit;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabeDescripción;
     private javax.swing.JLabel jLabeEstatus;

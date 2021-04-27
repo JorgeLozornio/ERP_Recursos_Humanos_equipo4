@@ -38,11 +38,11 @@ public class CiudadesDAO {
         }
     }
 
-    public DefaultTableModel consultaDatos() {
+    public DefaultTableModel consultaDatos(int inicio, int fin) {
         String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Ciudades WHERE estatus = 'A'";
+        String SQL = "SELECT * FROM Ciudades WHERE estatus = 'A' limit "+inicio+", "+fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
