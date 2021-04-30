@@ -138,9 +138,18 @@ public class EmpleadosDAO {
             String departamento, String puesto, String ciudad, String sucursal, String turno, String id){
         
         try{
-            String sql = "update Turnos set nombre = ?, horaInicio = ?, horaFin = ?, dias = ?, estatus = ? where idTurno = ?";
+            String sql = "update Empleados set nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, sexo = ?, fechaNacimiento = ?,"
+                    + "curp = ?, estadoCivil = ?, fechaContratacion = ?, salarioDiario = ?, nss = ?, diasVacaciones = ?, diasPermiso = ?, fotografia = ?,"
+                    + "direccion = ?, colonia = ?, codigoPostal = ?, escolaridad = ?, especialidad = ?, email = ?, pass = ?, tipo = ?, estatus = ?,"
+                    + "idDepartamento = ?, idPuesto = ?, idCiudad = ?, idSucursal = ?, idTurno = ? where idEmpleado = ?";
             
             PreparedStatement pst = con.prepareStatement(sql);
+            
+            String idD = getIdDepartamento(departamento);
+            String idP= getIdPuesto(puesto);
+            String idC = getIdCiudad(ciudad);
+            String idS = getIdSucursal(sucursal);
+            String idT = getIdTurno(turno);
         
             pst.setString(1, nombre);
             pst.setString(2, paterno);
@@ -165,11 +174,12 @@ public class EmpleadosDAO {
             pst.setString(20, pass);
             pst.setString(21, tipo);
             pst.setString(22, estatus);
-            pst.setString(23, departamento);
-            pst.setString(24, puesto);
-            pst.setString(25, ciudad);
-            pst.setString(26, sucursal);
-            pst.setString(27, turno);
+            pst.setString(23, idD);
+            pst.setString(24, idP);
+            pst.setString(25, idC);
+            pst.setString(26, idS);
+            pst.setString(27, idT);
+            pst.setString(28, id);
             pst.execute();
             
             JOptionPane.showMessageDialog(null, "Registro modificado");

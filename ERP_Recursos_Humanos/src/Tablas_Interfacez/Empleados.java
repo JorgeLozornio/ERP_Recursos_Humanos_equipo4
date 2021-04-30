@@ -311,6 +311,20 @@ public class Empleados extends javax.swing.JFrame {
         lblEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEditar.setText("Editar");
         lblEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblEditar.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                lblEditarAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        lblEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditarMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 150, 80, 30));
 
         lblInsertar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
@@ -627,7 +641,7 @@ public class Empleados extends javax.swing.JFrame {
         }
         for(int i = 0; i<cbPuesto.getItemCount(); i++){
             if(cbPuesto.getItemAt(i).equals(r[24])){
-                cbPuesto.setSelectedIndex(i);
+                cbPuesto.setSelectedItem(i);
             }
         }
         for(int i = 0; i<cbCiudad.getItemCount(); i++){
@@ -646,6 +660,24 @@ public class Empleados extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tbEmpleadosMouseClicked
+
+    private void lblEditarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblEditarAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblEditarAncestorAdded
+
+    private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
+        int fila = tbEmpleados.getSelectedRow();
+        String m = (String)tbEmpleados.getValueAt(fila, 0);
+        t.actualizar(txtNombre.getText(),txtPaterno.getText(), txtMaterno.getText(), rb(), ((JTextField)fechaNacimiento.getDateEditor().getUiComponent()).getText(),
+                    txtCurp.getText(), cbEstadoCiv.getSelectedItem().toString(), ((JTextField)fechaContratacion.getDateEditor().getUiComponent()).getText(),
+                    txtSalario.getText(), txtNss.getText(), txtVacaciones.getText(), txtPermiso.getText(), txtRuta.getText(),
+                    txtDireccion.getText(), txtColonia.getText(), txtCP.getText(), cbEscolaridad.getSelectedItem().toString(),
+                    txtEspecialidad.getText(), txtEmail.getText(), txtContra.getPassword().toString(), cbTipo.getSelectedItem().toString(),
+                    cbEstatus.getSelectedItem().toString(), cbDepartamento.getSelectedItem().toString(),
+                    cbPuesto.getSelectedItem().toString(), cbCiudad.getSelectedItem().toString(), cbSucursal.getSelectedItem().toString(),
+                    cbTurno.getSelectedItem().toString(),m);
+        tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
+    }//GEN-LAST:event_lblEditarMouseClicked
 
     public void llenarCombos() {
         t.combo(cbDepartamento, 1, "Departamentos");
