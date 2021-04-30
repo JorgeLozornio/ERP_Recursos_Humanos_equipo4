@@ -6,6 +6,7 @@ import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.EmpleadosDAO;
+import java.awt.ComponentOrientation;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -124,6 +125,8 @@ public class Empleados extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbTurno = new javax.swing.JComboBox<>();
         txtRuta = new javax.swing.JTextField();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -219,6 +222,11 @@ public class Empleados extends javax.swing.JFrame {
                 "idEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Sexo", "FchNacimiento", "CURP", "EstadoCivil", "fchContratacion", "SalarioDiario", "NSS", "DiasVacaciones", "DiasPermiso", "Fotografia", "Direccion", "Colonia", "CP", "Escolaridad", "Especialidad", "Email", "Contraseña", "Tipo", "Estatus", "Departamento", "Puesto", "Ciudad", "Sucursal", "Turno"
             }
         ));
+        tbEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbEmpleados);
         if (tbEmpleados.getColumnModel().getColumnCount() > 0) {
             tbEmpleados.getColumnModel().getColumn(0).setHeaderValue("idEmpleado");
@@ -449,6 +457,22 @@ public class Empleados extends javax.swing.JFrame {
         jPanel1.add(cbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 170, -1));
         jPanel1.add(txtRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 250, 340, -1));
 
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, -1, -1));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1800, 570));
 
         pack();
@@ -521,11 +545,107 @@ public class Empleados extends javax.swing.JFrame {
                     cbEstatus.getSelectedItem().toString(), cbDepartamento.getSelectedItem().toString(),
                     cbPuesto.getSelectedItem().toString(), cbCiudad.getSelectedItem().toString(), cbSucursal.getSelectedItem().toString(),
                     cbTurno.getSelectedItem().toString());
+            tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
             limpiar();
         }else{
             JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
         }
     }//GEN-LAST:event_lblInsertarMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if(inicio == 0){
+            btnAtras.setEnabled(false);
+        }else{
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if(inicio == limit*5){
+           btnSiguiente.setEnabled(false);
+       }else{
+           btnAtras.setEnabled(true);
+           inicio = inicio+5;
+           tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
+       }      
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void tbEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmpleadosMouseClicked
+        int fila = tbEmpleados.getSelectedRow();
+        String r[];
+        String m = (String)tbEmpleados.getValueAt(fila, 0);
+        r = t.busquedaIndividual(m);
+        txtNombre.setText(r[1]);
+        txtPaterno.setText(r[2]);
+        txtMaterno.setText(r[3]);
+        if(r[4].equals("M")){
+            rbM.setSelected(true);
+            rbF.setSelected(false);
+        }else{
+            rbM.setSelected(false);
+            rbF.setSelected(true);
+        }
+        //(JTextField)fechaNacimiento.setCalendar());
+        txtCurp.setText(r[6]);
+        for(int i = 0; i<cbEstadoCiv.getItemCount(); i++){
+            if(r[7] == cbEstadoCiv.getItemAt(i)){
+                cbEstadoCiv.setSelectedIndex(i);
+            }
+        }
+        txtSalario.setText(r[9]);
+        txtNss.setText(r[10]);
+        txtVacaciones.setText(r[11]);
+        txtPermiso.setText(r[12]);
+        txtRuta.setText(r[13]);
+        txtDireccion.setText(r[14]);
+        txtColonia.setText(r[15]);
+        txtCP.setText(r[16]);
+        for(int i = 0; i<cbEscolaridad.getItemCount(); i++){
+            if(r[17] == cbEscolaridad.getItemAt(i)){
+                cbEscolaridad.setSelectedIndex(i);
+            }
+        }
+        txtEspecialidad.setText(r[18]);
+        txtEmail.setText(r[19]);
+        txtContra.setText(r[20]);
+        for(int i = 0; i<cbTipo.getItemCount(); i++){
+            if(r[21] == cbTipo.getItemAt(i)){
+                cbTipo.setSelectedIndex(i);
+            }
+        }
+        for(int i = 0; i<cbEstatus.getItemCount(); i++){
+            if(r[22] == cbEstatus.getItemAt(i)){
+                cbEstatus.setSelectedIndex(i);
+            }
+        }    
+        for(int i = 0; i<cbDepartamento.getItemCount(); i++){
+            if(r[23] == cbDepartamento.getItemAt(i)){
+                cbDepartamento.setSelectedIndex(i);
+            }
+        }
+        for(int i = 0; i<cbPuesto.getItemCount(); i++){
+            if(cbPuesto.getItemAt(i).equals(r[24])){
+                cbPuesto.setSelectedIndex(i);
+            }
+        }
+        for(int i = 0; i<cbCiudad.getItemCount(); i++){
+            if(r[25] == cbCiudad.getItemAt(i)){
+                cbCiudad.setSelectedIndex(i);
+            }
+        }        
+        for(int i = 0; i<cbSucursal.getItemCount(); i++){
+            if(r[26] == cbSucursal.getItemAt(i)){
+                cbSucursal.setSelectedIndex(i);
+            }
+        }
+        for(int i = 0; i<cbTurno.getItemCount(); i++){
+            if(r[7] == cbTurno.getItemAt(i)){
+                cbTurno.setSelectedIndex(i);
+            }
+        }
+    }//GEN-LAST:event_tbEmpleadosMouseClicked
 
     public void llenarCombos() {
         t.combo(cbDepartamento, 1, "Departamentos");
@@ -661,7 +781,9 @@ public class Empleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnFoto;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cbCiudad;
     private javax.swing.JComboBox<String> cbDepartamento;
     private javax.swing.JComboBox<String> cbEscolaridad;

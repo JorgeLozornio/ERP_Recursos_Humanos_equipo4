@@ -132,6 +132,104 @@ public class EmpleadosDAO {
         return modelo;
     }
     
+    public void actualizar(String nombre, String paterno, String materno, String sexo, String nacimiento, String curp, String civil,
+            String contratacion, String salario, String nss, String vacaciones, String permiso, String fotografia, String direccion,
+            String colonia, String cp, String escolaridad, String especialidad, String email, String pass, String tipo, String estatus,
+            String departamento, String puesto, String ciudad, String sucursal, String turno, String id){
+        
+        try{
+            String sql = "update Turnos set nombre = ?, horaInicio = ?, horaFin = ?, dias = ?, estatus = ? where idTurno = ?";
+            
+            PreparedStatement pst = con.prepareStatement(sql);
+        
+            pst.setString(1, nombre);
+            pst.setString(2, paterno);
+            pst.setString(3, materno);
+           
+            pst.setString(4, sexo);
+            pst.setString(5, nacimiento);
+            pst.setString(6, curp);
+            pst.setString(7, civil);
+            pst.setString(8, contratacion);
+            pst.setString(9, salario);
+            pst.setString(10, nss);
+            pst.setString(11, vacaciones);
+            pst.setString(12, permiso);
+            pst.setString(13, fotografia);
+            pst.setString(14, direccion);
+            pst.setString(15, colonia);
+            pst.setString(16, cp);
+            pst.setString(17, escolaridad);
+            pst.setString(18, especialidad);
+            pst.setString(19, email);
+            pst.setString(20, pass);
+            pst.setString(21, tipo);
+            pst.setString(22, estatus);
+            pst.setString(23, departamento);
+            pst.setString(24, puesto);
+            pst.setString(25, ciudad);
+            pst.setString(26, sucursal);
+            pst.setString(27, turno);
+            pst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Registro modificado");
+            
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }      
+        
+    }
+    
+    public String[] busquedaIndividual(String id){
+        String [] registros = new String [29];
+        
+        String sql = "select * from Empleados where idEmpleado = "+id;
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){
+                registros[0] = rs.getString("idEmpleado");
+                registros[1] = rs.getString("nombre");
+                registros[2] = rs.getString("apellidoPaterno");
+                registros[3] = rs.getString("apellidoMaterno");
+                registros[4] = rs.getString("sexo");
+                registros[5] = rs.getString("fechaNacimiento");
+                registros[6] = rs.getString("curp");
+                registros[7] = rs.getString("estadoCivil");
+                registros[8] = rs.getString("fechaContratacion");
+                registros[9] = rs.getString("salarioDiario");
+                registros[10] = rs.getString("nss");
+                registros[11] = rs.getString("diasVacaciones");
+                registros[12] = rs.getString("diasPermiso");
+                registros[13] = rs.getString("fotografia");
+                registros[14] = rs.getString("direccion");
+                registros[15] = rs.getString("colonia");
+                registros[16] = rs.getString("codigoPostal");
+                registros[17] = rs.getString("escolaridad");
+                registros[18] = rs.getString("especialidad");
+                registros[19] = rs.getString("email");
+                registros[20] = rs.getString("pass");
+                registros[21] = rs.getString("tipo");
+                registros[22] = rs.getString("estatus");
+                registros[23] = rs.getString("idDepartamento");
+                registros[24] = rs.getString("idPuesto");
+                registros[25] = rs.getString("idCiudad");
+                registros[26] = rs.getString("idSucursal");
+                registros[27] = rs.getString("idTurno");
+                
+            }
+            
+            return registros;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return registros;
+    }
+    
     
     public void combo(JComboBox cbo, int columna, String tabla){
         try {
