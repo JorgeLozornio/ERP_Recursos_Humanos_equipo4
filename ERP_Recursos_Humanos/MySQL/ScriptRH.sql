@@ -137,7 +137,7 @@ Create Table DocumentacionEmpleado(
 idDocumento int not null primary key auto_increment,
 nombreDocumento varchar(80) NOT NULL,
 fechaEntrega date NOT NULL,
-documento blob NOT NULL,
+documento mediumblob NOT NULL,
 idEmpleado int NOT NULL);
 ALTER TABLE DocumentacionEmpleado ADD COLUMN estatus VARCHAR (1) NOT NULL;
 
