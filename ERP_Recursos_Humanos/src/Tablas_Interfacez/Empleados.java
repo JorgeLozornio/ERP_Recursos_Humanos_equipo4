@@ -9,7 +9,10 @@ import TablasDAO.EmpleadosDAO;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 
 public class Empleados extends javax.swing.JFrame {
@@ -20,6 +23,7 @@ public class Empleados extends javax.swing.JFrame {
     int i=0;
     int inicio=0;
     int fin=5;
+    int aE[];
     int limit;
     //int limit = p.getLimit("Turnos", fin);
     
@@ -35,6 +39,8 @@ public class Empleados extends javax.swing.JFrame {
         //tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
         Paginacion p = new Paginacion(con);
         //limit = getLimit(Integer.parseInt(p.count("Turnos")), fin);
+        llenarCombos();
+        rbM.setSelected(true);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -68,9 +74,9 @@ public class Empleados extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblSesion = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
+        lblEliminar = new javax.swing.JLabel();
+        lblEditar = new javax.swing.JLabel();
+        lblInsertar = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         lblFoto = new javax.swing.JLabel();
@@ -112,6 +118,8 @@ public class Empleados extends javax.swing.JFrame {
         cbSucursal = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         cbTurno = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        txtRuta = new javax.swing.JTextField();
 
         jLabel2.setText("jLabel2");
 
@@ -145,9 +153,19 @@ public class Empleados extends javax.swing.JFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         rbM.setText("Masculino");
+        rbM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbMMouseClicked(evt);
+            }
+        });
         getContentPane().add(rbM, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
         rbF.setText("Femenino");
+        rbF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbFMouseClicked(evt);
+            }
+        });
         getContentPane().add(rbF, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -265,26 +283,31 @@ public class Empleados extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel40.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Eliminar");
-        jLabel40.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 240, 80, 30));
+        lblEliminar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        lblEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        lblEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEliminar.setText("Eliminar");
+        lblEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 240, 80, 30));
 
-        jLabel39.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setText("Editar");
-        jLabel39.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 150, 80, 30));
+        lblEditar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        lblEditar.setForeground(new java.awt.Color(255, 255, 255));
+        lblEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEditar.setText("Editar");
+        lblEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 150, 80, 30));
 
-        jLabel38.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setText("Crear");
-        jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 60, 80, 30));
+        lblInsertar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        lblInsertar.setForeground(new java.awt.Color(255, 255, 255));
+        lblInsertar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblInsertar.setText("Crear");
+        lblInsertar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblInsertar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblInsertarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 60, 80, 30));
 
         jLabel37.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
@@ -302,7 +325,7 @@ public class Empleados extends javax.swing.JFrame {
         jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1700, 10, -1, -1));
 
         lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 370, 250));
+        jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, 340, 230));
 
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
         jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 60, -1, -1));
@@ -319,7 +342,7 @@ public class Empleados extends javax.swing.JFrame {
                 btnFotoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 280, 370, -1));
+        jPanel1.add(btnFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 280, 340, -1));
         jPanel1.add(txtNss, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 180, -1));
 
         jLabel15.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -377,7 +400,7 @@ public class Empleados extends javax.swing.JFrame {
         jLabel26.setText("Tipo:");
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, -1));
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", " " }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Laborador" }));
         jPanel1.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 180, -1));
 
         jLabel27.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -417,6 +440,15 @@ public class Empleados extends javax.swing.JFrame {
 
         jPanel1.add(cbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 170, -1));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 80, -1, -1));
+        jPanel1.add(txtRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 250, 340, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1800, 570));
 
         pack();
@@ -449,6 +481,12 @@ public class Empleados extends javax.swing.JFrame {
         if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
             File archivo = new File(fc.getSelectedFile().toString());            
             rsscalelabel.RSScaleLabel.setScaleLabel(lblFoto, fc.getSelectedFile().toString());
+            //File fileName = fc.getSelectedFile();
+            if ((archivo == null) || (archivo.getName().equals(""))) {
+                txtRuta.setText("...");
+            } else {
+                txtRuta.setText(archivo.getAbsolutePath());
+            }
         }
     }//GEN-LAST:event_btnFotoActionPerformed
    
@@ -464,7 +502,144 @@ public class Empleados extends javax.swing.JFrame {
         this.setLocation(x-xx, y-xy);
     }//GEN-LAST:event_jPanel2MouseDragged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        boolean i = vCurp();
+        limpiar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rbMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbMMouseClicked
+        rbF.setSelected(false);
+    }//GEN-LAST:event_rbMMouseClicked
+
+    private void rbFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbFMouseClicked
+        rbM.setSelected(false);
+    }//GEN-LAST:event_rbFMouseClicked
+
+    private void lblInsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInsertarMouseClicked
+        if(verificar()){
+            t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString());
+            tbTurnos.setModel(t.mostrarDatos(inicio, fin));
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
+        }
+    }//GEN-LAST:event_lblInsertarMouseClicked
+
+    public void llenarCombos() {
+        t.combo(cbDepartamento, 1, "Departamentos");
+        t.combo(cbPuesto, 1, "Puestos");
+        t.combo(cbCiudad, 1, "Ciudades");
+        t.combo(cbSucursal, 1, "Sucursales");
+        t.combo(cbTurno, 1, "Turnos");
+    }
     
+    public boolean verificar(){
+        if(txtNombre.equals("") || txtPaterno.equals("") || txtMaterno.equals("") || vrb() || fechaNacimiento.equals("") || txtCurp.equals("") || fechaContratacion.equals("") ||
+                txtSalario.equals("") || vEmail() || vNSS() || txtVacaciones.equals("") || Integer.parseInt(txtVacaciones.getText())<7 || Integer.parseInt(txtSalario.getText())<141.7
+                || txtPermiso.equals("") || Integer.parseInt(txtPermiso.getText())<3 || vCurp() || txtDireccion.equals("") || txtColonia.equals("") || vCP() || txtEspecialidad.equals("")
+                || txtContra.equals("") || txtRuta.equals("")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean vrb(){
+        if(rbF.isSelected() || rbM.isSelected()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean vEmail(){
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+ 
+        // El email a validar
+        String email = txtEmail.getText();
+ 
+        Matcher mather = pattern.matcher(email);
+ 
+        if (mather.find() == true) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Email escrito en formato erroneo");
+            return false;
+        }
+    }
+    
+    public boolean vNSS(){
+        Pattern pattern = Pattern
+                .compile("^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$");
+ 
+        // El email a validar
+        String nss = txtNss.getText();
+ 
+        Matcher mather = pattern.matcher(nss);
+ 
+        if (mather.find() == true) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "NSS escrito en formato erroneo");
+            return false;
+        }
+    }
+    
+    public boolean vCurp(){
+        Pattern pattern = Pattern
+                .compile("^[A-Z][A-Z][A-Z][A-Z][0-9][0-9][0-9][0-9][0-9][0-9][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][0-9][0-9]$");
+ 
+        // El email a validar
+        String nss = txtCurp.getText();
+ 
+        Matcher mather = pattern.matcher(nss);
+ 
+        if (mather.find() == true) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "CURP escrita en formato erroneo");
+            return false;
+        }
+    }
+    
+    public boolean vCP(){
+        Pattern pattern = Pattern
+                .compile("^[0-9][0-9][0-9][0-9][0-9]$");
+ 
+        // El email a validar
+        String nss = txtCurp.getText();
+ 
+        Matcher mather = pattern.matcher(nss);
+ 
+        if (mather.find() == true) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "CP escrito en formato erroneo");
+            return false;
+        }
+    }
+    
+    public void limpiar(){
+        txtNombre.setText("");
+        txtPaterno.setText("");
+        txtMaterno.setText("");
+        fechaNacimiento.setDate(null);
+        txtCurp.setText("");
+        fechaContratacion.setDate(null);
+        txtSalario.setText("");
+        txtNss.setText("");
+        txtVacaciones.setText("");
+        txtPermiso.setText("");
+        txtRuta.setText("");
+        txtDireccion.setText("");
+        txtColonia.setText("");
+        txtCP.setText("");
+        txtEspecialidad.setText("");
+        txtEmail.setText("");
+        txtContra.setText("");        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFoto;
@@ -479,6 +654,7 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbTurno;
     private com.toedter.calendar.JDateChooser fechaContratacion;
     private com.toedter.calendar.JDateChooser fechaNacimiento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -507,10 +683,7 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -520,7 +693,10 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblEditar;
+    private javax.swing.JLabel lblEliminar;
     private javax.swing.JLabel lblFoto;
+    private javax.swing.JLabel lblInsertar;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JLabel lblSesion;
     private javax.swing.JRadioButton rbF;
@@ -537,6 +713,7 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JTextField txtNss;
     private javax.swing.JTextField txtPaterno;
     private javax.swing.JTextField txtPermiso;
+    private javax.swing.JTextField txtRuta;
     private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtVacaciones;
     // End of variables declaration//GEN-END:variables
