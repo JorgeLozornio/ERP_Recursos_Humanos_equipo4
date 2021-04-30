@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class EmpleadosDAO {
@@ -74,6 +75,61 @@ public class EmpleadosDAO {
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
         }
+    }
+    
+    public DefaultTableModel mostrarDatos(int inicio, int fin){
+        String [] titulos = {"idEmpleado","nombre", "apellidoPaterno", "apellidoMAterno", "sexo", "fechaNacimiento",
+        "curp", "estadoCivil", "fechaContratacion", "salarioDiario", "nss", "diasVacaciones", "diasPermiso",
+        "fotografia", "direccion", "colonia", "codigoPostal", "escolaridad", "especialidad", "email", "password",
+        "tipo", "estatus", "departamento", "puesto", "ciudad", "sucursal", "turno"};
+        String [] registros = new String [29];
+        
+        DefaultTableModel modelo = new DefaultTableModel (null,titulos);
+        String sql = "select * from Empleados where estatus = 'A' limit "+inicio+", "+fin;
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){
+                registros[0] = rs.getString("idEmpleado");
+                registros[1] = rs.getString("nombre");
+                registros[2] = rs.getString("apellidoPaterno");
+                registros[3] = rs.getString("apellidoMaterno");
+                registros[4] = rs.getString("sexo");
+                registros[5] = rs.getString("fechaNacimiento");
+                registros[6] = rs.getString("curp");
+                registros[7] = rs.getString("estadoCivil");
+                registros[8] = rs.getString("fechaContratacion");
+                registros[9] = rs.getString("salarioDiario");
+                registros[10] = rs.getString("nss");
+                registros[11] = rs.getString("diasVacaciones");
+                registros[12] = rs.getString("diasPermiso");
+                registros[13] = rs.getString("fotografia");
+                registros[14] = rs.getString("direccion");
+                registros[15] = rs.getString("colonia");
+                registros[16] = rs.getString("codigoPostal");
+                registros[17] = rs.getString("escolaridad");
+                registros[18] = rs.getString("especialidad");
+                registros[19] = rs.getString("email");
+                registros[20] = rs.getString("pass");
+                registros[21] = rs.getString("tipo");
+                registros[22] = rs.getString("estatus");
+                registros[23] = rs.getString("idDepartamento");
+                registros[24] = rs.getString("idPuesto");
+                registros[25] = rs.getString("idCiudad");
+                registros[26] = rs.getString("idSucursal");
+                registros[27] = rs.getString("idTurno");
+                modelo.addRow(registros);
+                
+            }
+            
+            return modelo;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return modelo;
     }
     
     
