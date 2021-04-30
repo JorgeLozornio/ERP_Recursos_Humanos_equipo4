@@ -5,6 +5,8 @@ package TablasDAO;
  *
  * @author andre
  */
+
+import Paginacion.Paginacion;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,11 +45,11 @@ public class PeriodosDAO {
         }
     }
     
-    public DefaultTableModel consultaDatos() {
+    public DefaultTableModel consultaDatos(int inicio, int fin) {
         String[] titulos = {"idPeriodo", "nombre", "fechaInicio", "fechaFin", "estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Periodos WHERE estatus = 'A'";
+        String SQL = "select * from Periodos where estatus = 'A' limit " + inicio + ", " + fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
