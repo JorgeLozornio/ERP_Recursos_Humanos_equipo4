@@ -148,7 +148,7 @@ public class Percepciones extends javax.swing.JFrame {
                 jRegrasarMouseClicked(evt);
             }
         });
-        getContentPane().add(jRegrasar, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 415, 60, 20));
+        getContentPane().add(jRegrasar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 60, 20));
 
         jAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jAgregar.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,7 +158,7 @@ public class Percepciones extends javax.swing.JFrame {
                 jAgregarMouseClicked(evt);
             }
         });
-        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 70, 30));
+        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 70, 30));
 
         jActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jActualizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,7 +168,7 @@ public class Percepciones extends javax.swing.JFrame {
                 jActualizarMouseClicked(evt);
             }
         });
-        getContentPane().add(jActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 30));
+        getContentPane().add(jActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, -1, 30));
 
         jElimianar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jElimianar.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,19 +178,19 @@ public class Percepciones extends javax.swing.JFrame {
                 jElimianarMouseClicked(evt);
             }
         });
-        getContentPane().add(jElimianar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, 30));
+        getContentPane().add(jElimianar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, -1, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonV.png")); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonRojo.png")); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonAzul.png")); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonRosa.png")); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, 80, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,12 +260,14 @@ public class Percepciones extends javax.swing.JFrame {
             limpiar();
             tableP.setModel(t.mostrarDat(inicio,fin));
         }
+        
     }//GEN-LAST:event_jAgregarMouseClicked
 
     private void jRegrasarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRegrasarMouseClicked
         MenuTablas m = new MenuTablas(con, us);
         m.setVisible(true);
         this.setVisible(false);
+        
     }//GEN-LAST:event_jRegrasarMouseClicked
 
     private void jActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jActualizarMouseClicked
@@ -275,6 +277,7 @@ public class Percepciones extends javax.swing.JFrame {
         t.actualizar(txNombre.getText(), txDescripcion.getText(),Integer.parseInt(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus), m);
         tableP.setModel(t.mostrarDat(inicio,fin));
         limpiar();
+        
     }//GEN-LAST:event_jActualizarMouseClicked
 
     private void jElimianarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jElimianarMouseClicked
@@ -287,6 +290,7 @@ public class Percepciones extends javax.swing.JFrame {
             tableP.setModel(t.mostrarDat(inicio, fin));
             limpiar();
         }
+        
     }//GEN-LAST:event_jElimianarMouseClicked
 
     private void txBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyReleased
@@ -296,10 +300,11 @@ public class Percepciones extends javax.swing.JFrame {
     private void tablePMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePMouseClicked
          limpiar();
         int fila=tableP.rowAtPoint(evt.getPoint());
-        txNombre.setText(tableP.getValueAt(fila, 1).toString());
+         txNombre.setText(tableP.getValueAt(fila, 1).toString());
         txDescripcion.setText(tableP.getValueAt(fila, 2).toString());
         txDiaspagar.setText(tableP.getValueAt(fila, 3).toString());
         jEstatus.setSelectedItem(tableP.getValueAt(fila,4));
+        
     }//GEN-LAST:event_tablePMouseClicked
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -308,8 +313,10 @@ public class Percepciones extends javax.swing.JFrame {
         } else {
             btnSiguiente.setEnabled(true);
             inicio = inicio - 5;
+        
             tableP.setModel(t.mostrarDat(inicio, fin));
         }
+        
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
@@ -322,6 +329,7 @@ public class Percepciones extends javax.swing.JFrame {
         } else {
             btnAtras.setEnabled(true);
             inicio = inicio + 5;
+            
             tableP.setModel(t.mostrarDat(inicio, fin));
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed

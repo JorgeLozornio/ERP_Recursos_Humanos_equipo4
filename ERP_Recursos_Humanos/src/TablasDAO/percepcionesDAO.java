@@ -4,10 +4,12 @@ package TablasDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import modelo.modelo_percepcion;
 
 /**
  *
@@ -39,11 +41,11 @@ public class percepcionesDAO {
         }
     }
 
-    public DefaultTableModel mostrarDat(int inicio,int fin) {
+    public DefaultTableModel mostrarDat(int inicio, int fin) {
         String[] titulos = {"idPercepcion", "nombre", "descripcion", "diasPagar", "estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Percepciones WHERE estatus = 'A' limit " +inicio+", "+fin;
+        String SQL = "SELECT * FROM Percepciones WHERE estatus = 'A' limit " + inicio + ", " + fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -97,6 +99,32 @@ public class percepcionesDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar: ");
         }
-    }}
+    }
+
+    public modelo_percepcion consultaIdpercep(int idpercep) {
+        String sql = (" select * "
+                + " from Percepciones "
+                + " where idPercepcion=" + idpercep);
+        modelo_percepcion per = new modelo_percepcion();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                per.setIdPercep(rs.getInt("idPercepcion"));
+                per.setNombre(rs.getString("nombre"));
+                per.setDescripcion(rs.getString("descripcion"));
+                per.setDiasPagar(rs.getInt("diasPagar"));
+                per.setEstatus(rs.getString("estatus"));
+
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e.getMessage());
+        }
+        return per;
+    }
+}
 
    
