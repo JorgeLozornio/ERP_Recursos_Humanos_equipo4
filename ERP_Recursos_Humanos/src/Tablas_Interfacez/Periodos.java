@@ -1,6 +1,7 @@
 package Tablas_Interfacez;
 
 
+import Paginacion.Paginacion;
 import TablasDAO.PeriodosDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
@@ -23,6 +24,10 @@ public class Periodos extends javax.swing.JFrame {
     PeriodosDAO p ;
     Connection con;
     String us;
+    int inicio=0;
+    int fin=5;
+    int limit;
+    
     public Periodos(Connection c, String u) throws SQLException {
         con = c;
         us = u;
@@ -31,7 +36,10 @@ public class Periodos extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
-        jTable.setModel(p.consultaDatos());
+        jTable.setModel(p.consultaDatos(inicio, fin));
+        
+        Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Periodos")), fin);
     }
     
     
@@ -66,6 +74,8 @@ public class Periodos extends javax.swing.JFrame {
         txtEliminar2 = new javax.swing.JLabel();
         jButtonLimpiar = new javax.swing.JLabel();
         jButtonAgregar1 = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,7 +120,7 @@ public class Periodos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 388, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 388, 200));
 
         jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +137,7 @@ public class Periodos extends javax.swing.JFrame {
                 jTextFieldBuscarKeyReleased(evt);
             }
         });
-        getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 82, 326, 30));
+        getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 326, 30));
 
         jButtonModificar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonModificar.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +148,7 @@ public class Periodos extends javax.swing.JFrame {
 
         jLabelBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelBuscar.setText("Buscar:");
-        getContentPane().add(jLabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 83, -1, -1));
+        getContentPane().add(jLabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
 
         jButtonAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonAgregar.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,7 +230,7 @@ public class Periodos extends javax.swing.JFrame {
         txtEliminar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtEliminar2.setText("Limpiar");
         txtEliminar2.setAlignmentY(1.0F);
-        getContentPane().add(txtEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 60, 30));
+        getContentPane().add(txtEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 60, 30));
 
         jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
         jButtonLimpiar.setAlignmentX(-0.1F);
@@ -229,13 +239,29 @@ public class Periodos extends javax.swing.JFrame {
                 jButtonLimpiarMouseClicked(evt);
             }
         });
-        getContentPane().add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
+        getContentPane().add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
 
         jButtonAgregar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonAgregar1.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAgregar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jButtonAgregar1.setText("Agregar");
         getContentPane().add(jButtonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 60, 30));
+
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, -1, -1));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -268,7 +294,7 @@ public class Periodos extends javax.swing.JFrame {
                 // Manda a llamar el metodo: limpiar()
                 limpiar();
                 // Manda a llamar el metodo: consultaDatos()
-                jTable.setModel(p.consultaDatos());
+                jTable.setModel(p.consultaDatos(inicio, fin));
         }else{
               JOptionPane.showMessageDialog(null, "Ingresa fechas validas");
             }
@@ -286,7 +312,7 @@ public class Periodos extends javax.swing.JFrame {
                 String m = (String) jTable.getValueAt(fila, 0);
                 p.actualizar(jTextFieldNombre.getText(), jComboBoxEstatus.getItemAt(seleccionEstatus), fi, ff,m);
                 // Manda a llamar el metodo: consultaDatos()
-                jTable.setModel(p.consultaDatos());
+                jTable.setModel(p.consultaDatos(inicio, fin));
                 // Manda a llamar el metodo: limpiar()
                 limpiar();
         }else{
@@ -307,7 +333,7 @@ public class Periodos extends javax.swing.JFrame {
         String id = "" + jTable.getValueAt(filaSeleccionada, 0);
         p.eliminar(id);
         // Manda a llamar el metodo: consultaDatos()        
-        jTable.setModel(p.consultaDatos());
+        jTable.setModel(p.consultaDatos(inicio, fin));
         // Manda a llamar el metodo: limpiar()
         limpiar();
     }//GEN-LAST:event_jButtonEliminarMouseClicked
@@ -315,6 +341,26 @@ public class Periodos extends javax.swing.JFrame {
     private void jButtonLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseClicked
         limpiar();
     }//GEN-LAST:event_jButtonLimpiarMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if(inicio == limit*5){
+           btnSiguiente.setEnabled(false);
+       }else{
+           btnAtras.setEnabled(true);
+           inicio = inicio+5;
+           jTable.setModel(p.consultaDatos(inicio, fin));
+       }  
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if(inicio == 0){
+            btnAtras.setEnabled(false);
+        }else{
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            jTable.setModel(p.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     public void limpiar(){
         jTextFieldNombre.setText("");
@@ -347,9 +393,15 @@ public class Periodos extends javax.swing.JFrame {
 
     }
 
-    
+    public int getLimit(int n, int lim){        
+        limit = (int) Math.ceil(n/lim);
+        System.out.println(n +" "+ limit);
+        return limit;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;
     private javax.swing.JLabel jButton1;
