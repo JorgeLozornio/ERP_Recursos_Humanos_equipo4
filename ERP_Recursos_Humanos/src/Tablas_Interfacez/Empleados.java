@@ -9,10 +9,13 @@ import TablasDAO.EmpleadosDAO;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 public class Empleados extends javax.swing.JFrame {
@@ -25,6 +28,7 @@ public class Empleados extends javax.swing.JFrame {
     int fin=5;
     int aE[];
     int limit;
+    String d[];
     //int limit = p.getLimit("Turnos", fin);
     
     public Empleados(Connection c, String u) throws SQLException {
@@ -171,6 +175,8 @@ public class Empleados extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         jLabel9.setText("Sexo:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        fechaContratacion.setDateFormatString("YYYY-MM-dd");
         getContentPane().add(fechaContratacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -188,6 +194,8 @@ public class Empleados extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         jLabel12.setText("Estado civil:");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        fechaNacimiento.setDateFormatString("YYYY-MM-dd");
         getContentPane().add(fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -400,7 +408,7 @@ public class Empleados extends javax.swing.JFrame {
         jLabel26.setText("Tipo:");
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, -1));
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Laborador" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "E" }));
         jPanel1.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 180, -1));
 
         jLabel27.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -503,8 +511,8 @@ public class Empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean i = vCurp();
-        limpiar();
+        EmpleadosDAO e = new EmpleadosDAO(con);
+        System.out.println(e.getIdDepartamento("Ventas"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rbMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbMMouseClicked
@@ -516,9 +524,16 @@ public class Empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_rbFMouseClicked
 
     private void lblInsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInsertarMouseClicked
+        System.out.println(fechaNacimiento.getDate().toString());
         if(verificar()){
-            t.insertar(txtNombre.getText(), cbHora1.getSelectedIndex()+":00", cbHora2.getSelectedIndex()+":00", ch(), cbEstatus.getSelectedItem().toString());
-            tbTurnos.setModel(t.mostrarDatos(inicio, fin));
+            t.insertar(txtNombre.getText(),txtPaterno.getText(), txtMaterno.getText(), rb(), ((JTextField)fechaNacimiento.getDateEditor().getUiComponent()).getText(),
+                    txtCurp.getText(), cbEstadoCiv.getSelectedItem().toString(), ((JTextField)fechaContratacion.getDateEditor().getUiComponent()).getText(),
+                    txtSalario.getText(), txtNss.getText(), txtVacaciones.getText(), txtPermiso.getText(), txtRuta.getText(),
+                    txtDireccion.getText(), txtColonia.getText(), txtCP.getText(), cbEscolaridad.getSelectedItem().toString(),
+                    txtEspecialidad.getText(), txtEmail.getText(), txtContra.getPassword().toString(), cbTipo.getSelectedItem().toString(),
+                    cbEstatus.getSelectedItem().toString(), cbDepartamento.getSelectedItem().toString(),
+                    cbPuesto.getSelectedItem().toString(), cbCiudad.getSelectedItem().toString(), cbSucursal.getSelectedItem().toString(),
+                    cbTurno.getSelectedItem().toString());
             limpiar();
         }else{
             JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
@@ -534,7 +549,8 @@ public class Empleados extends javax.swing.JFrame {
     }
     
     public boolean verificar(){
-        if(txtNombre.equals("") || txtPaterno.equals("") || txtMaterno.equals("") || vrb() || fechaNacimiento.equals("") || txtCurp.equals("") || fechaContratacion.equals("") ||
+        System.out.println("vrb: "+vrb()+" Email:"+vEmail()+" NSS:"+vNSS()+" CURP: "+vCurp()+" CP_ "+vCP());
+        if(txtNombre.equals("") || txtPaterno.equals("") || txtMaterno.equals("") || vrb() || fechaNacimiento.equals(null) || txtCurp.equals("") || fechaContratacion.equals(null) ||
                 txtSalario.equals("") || vEmail() || vNSS() || txtVacaciones.equals("") || Integer.parseInt(txtVacaciones.getText())<7 || Integer.parseInt(txtSalario.getText())<141.7
                 || txtPermiso.equals("") || Integer.parseInt(txtPermiso.getText())<3 || vCurp() || txtDireccion.equals("") || txtColonia.equals("") || vCP() || txtEspecialidad.equals("")
                 || txtContra.equals("") || txtRuta.equals("")){
@@ -572,7 +588,7 @@ public class Empleados extends javax.swing.JFrame {
     
     public boolean vNSS(){
         Pattern pattern = Pattern
-                .compile("^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$");
+                .compile("^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$");
  
         // El email a validar
         String nss = txtNss.getText();
@@ -609,7 +625,7 @@ public class Empleados extends javax.swing.JFrame {
                 .compile("^[0-9][0-9][0-9][0-9][0-9]$");
  
         // El email a validar
-        String nss = txtCurp.getText();
+        String nss = txtCP.getText();
  
         Matcher mather = pattern.matcher(nss);
  
@@ -639,6 +655,16 @@ public class Empleados extends javax.swing.JFrame {
         txtEspecialidad.setText("");
         txtEmail.setText("");
         txtContra.setText("");        
+    }
+    
+    public String rb(){
+        if(rbM.isSelected()){
+            System.out.println("M");
+            return "M";
+        }else{
+            System.out.println("F");
+            return "F";
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
