@@ -206,6 +206,10 @@ show tables;
 
 ALTER TABLE DocumentacionEmpleado
 ADD CHECK (estatus = 'A' or estatus = 'I');
+
+ALTER TABLE Percepciones
+ADD CHECK (estatus = 'A' or estatus = 'I');
+
 /* Creación de usuarios */
 CREATE USER Victor IDENTIFIED BY 'ERP123';
 GRANT ALL PRIVILEGES ON Turnos TO 'Victor';
