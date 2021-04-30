@@ -622,4 +622,5 @@ GRANT ALL PRIVILEGES ON DocumentacionEmpleado TO 'Victor';
 GRANT ALL PRIVILEGES ON Percepciones TO 'Victor';
 GRANT ALL PRIVILEGES ON Deducciones TO 'Victor';
 GRANT ALL PRIVILEGES ON Periodos TO 'Victor';
+GRANT ALL PRIVILEGES ON Sucursales TO 'Victor';
 FLUSH PRIVILEGES;
