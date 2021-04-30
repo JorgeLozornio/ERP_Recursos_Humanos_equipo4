@@ -66,7 +66,7 @@ salarioDiario float NOT NULL,
 nss varchar(10) NOT NULL,
 diasVacaciones int NOT NULL,
 diasPermiso int NOT NULL,
-fotografia blob NOT NULL,
+fotografia mediumblob NOT NULL,
 direccion varchar(80) NOT NULL,
 colonia varchar(50) NOT NULL,
 codigoPostal varchar(5) NOT NULL,
@@ -122,7 +122,8 @@ Create Table Deducciones(
 idDeduccion int not null primary key auto_increment,
 nombre varchar(30) NOT NULL,
 descripcion varchar(80) NOT NULL,
-porcentaje float NOT NULL);
+porcentaje float NOT NULL,
+estatus char NOT NULL);
 
 /*Tabla Percepciones*/
 Create Table Percepciones(
@@ -198,17 +199,18 @@ ADD CHECK (estatus = 'A' or estatus = 'I');
 
 ALTER TABLE Puestos
 ADD CHECK (estatus = 'A' or estatus = 'I');
-select*from Estados;
 
 ALTER TABLE Estados
 ADD CHECK (estatus = 'A' or estatus = 'I');
-show tables;
 
 ALTER TABLE DocumentacionEmpleado
 ADD CHECK (estatus = 'A' or estatus = 'I');
 
 ALTER TABLE Percepciones
 ADD CHECK (estatus = 'A' or estatus = 'I');
+
+ALTER TABLE Deducciones
+ADD CHECK (porcentaje > 0 AND porcentaje < 100);
 
 /* Creación de usuarios */
 CREATE USER Victor IDENTIFIED BY 'ERP123';
