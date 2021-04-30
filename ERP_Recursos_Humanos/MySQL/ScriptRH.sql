@@ -210,6 +210,9 @@ ALTER TABLE Percepciones
 ADD CHECK (estatus = 'A' or estatus = 'I');
 
 ALTER TABLE Deducciones
+ADD CHECK (estatus = 'A' or estatus = 'I');
+
+ALTER TABLE Deducciones
 ADD CHECK (porcentaje > 0 AND porcentaje < 100);
 
 /* Creación de usuarios */
