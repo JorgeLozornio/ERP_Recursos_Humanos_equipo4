@@ -85,7 +85,15 @@ public class EmpleadosDAO {
         String [] registros = new String [29];
         
         DefaultTableModel modelo = new DefaultTableModel (null,titulos);
-        String sql = "select * from Empleados where estatus = 'A' limit "+inicio+", "+fin;
+        String sql = "select e.idEmpleado, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.sexo, e.fechaNacimiento, e.curp, \n" +
+                    "e.estadoCivil, e.fechaContratacion, e.salarioDiario, e.nss, e.diasVacaciones, e.diasPermiso, e.fotografia,\n" +
+                    "e.direccion, e.colonia, e.codigoPostal, e.escolaridad, e.especialidad, e.email, e.pass, e.tipo, e.estatus,\n" +
+                    "d.nombre as idDepartamento, p.nombre as idPuesto, c.nombre as idCiudad, s.nombre as idSucursal, t.nombre as idTurno from empleados as e join departamentos as d\n" +
+                    "on e.idDepartamento = d.idDepartamento join puestos as  p\n" +
+                    "on e.idPuesto = p.idPuesto join ciudades as c\n" +
+                    "on e.idCiudad = c.idCiudad join  sucursales as s \n" +
+                    "on e.idSucursal = s.idSucursal join turnos as t\n" +
+                    "on e .idTurno = t.idTurno where e.estatus = 'A' limit "+inicio+", "+fin;
         
         try{
             Statement st = con.createStatement();
@@ -194,7 +202,15 @@ public class EmpleadosDAO {
     public String[] busquedaIndividual(String id){
         String [] registros = new String [29];
         
-        String sql = "select * from Empleados where idEmpleado = "+id;
+        String sql = "select e.idEmpleado, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.sexo, e.fechaNacimiento, e.curp, \n" +
+                    "e.estadoCivil, e.fechaContratacion, e.salarioDiario, e.nss, e.diasVacaciones, e.diasPermiso, e.fotografia,\n" +
+                    "e.direccion, e.colonia, e.codigoPostal, e.escolaridad, e.especialidad, e.email, e.pass, e.tipo, e.estatus,\n" +
+                    "d.nombre, c.nombre, s.nombre, t.nombre from empleados as e join departamentos as d\n" +
+                    "on e.idDepartamento = d.idDepartamento join puestos as  p\n" +
+                    "on e.idPuesto = p.idPuesto join ciudades as c\n" +
+                    "on e.idCiudad = c.idCiudad join  sucursales as s \n" +
+                    "on e.idSucursal = s.idSucursal join turnos as t\n" +
+                    "on e .idTurno = t.idTurno where e.idEmpleado = "+id;
         
         try{
             Statement st = con.createStatement();
@@ -245,7 +261,7 @@ public class EmpleadosDAO {
         try {
             //Siempre que queremos llenar algo tenemos que limpiarlo
             cbo.removeAllItems();
-            String SQL = "SELECT nombre FROM "+tabla;
+            String SQL = "SELECT nombre FROM "+tabla+" where estatus = 'A'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             //Recorremos el ResultSet, nos devuelve verdadero cuando tiene un registro

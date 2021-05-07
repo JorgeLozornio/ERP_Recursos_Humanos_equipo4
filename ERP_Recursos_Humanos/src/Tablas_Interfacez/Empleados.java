@@ -6,12 +6,17 @@ import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.EmpleadosDAO;
+import com.toedter.calendar.JDateChooser;
 import java.awt.ComponentOrientation;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -549,7 +554,7 @@ public class Empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_rbFMouseClicked
 
     private void lblInsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInsertarMouseClicked
-        System.out.println(fechaNacimiento.getDate().toString());
+        //System.out.println(fechaNacimiento.getDate().toString());
         if(verificar()){
             t.insertar(txtNombre.getText(),txtPaterno.getText(), txtMaterno.getText(), rb(), ((JTextField)fechaNacimiento.getDateEditor().getUiComponent()).getText(),
                     txtCurp.getText(), cbEstadoCiv.getSelectedItem().toString(), ((JTextField)fechaContratacion.getDateEditor().getUiComponent()).getText(),
@@ -601,13 +606,18 @@ public class Empleados extends javax.swing.JFrame {
             rbM.setSelected(false);
             rbF.setSelected(true);
         }
-        //(JTextField)fechaNacimiento.setCalendar());
-        txtCurp.setText(r[6]);
-        for(int i = 0; i<cbEstadoCiv.getItemCount(); i++){
-            if(r[7] == cbEstadoCiv.getItemAt(i)){
-                cbEstadoCiv.setSelectedIndex(i);
-            }
+        
+        try{
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbEmpleados.getValueAt(fila,5));
+            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbEmpleados.getValueAt(fila,8));            
+            fechaNacimiento.setDate(date);
+            fechaContratacion.setDate(date2);
+        }catch(ParseException ex){
+            
         }
+        
+        txtCurp.setText(r[6]);
+        cbEstadoCiv.setSelectedItem(r[7]);
         txtSalario.setText(r[9]);
         txtNss.setText(r[10]);
         txtVacaciones.setText(r[11]);
@@ -616,49 +626,25 @@ public class Empleados extends javax.swing.JFrame {
         txtDireccion.setText(r[14]);
         txtColonia.setText(r[15]);
         txtCP.setText(r[16]);
-        for(int i = 0; i<cbEscolaridad.getItemCount(); i++){
-            if(r[17] == cbEscolaridad.getItemAt(i)){
-                cbEscolaridad.setSelectedIndex(i);
-            }
-        }
+        cbEscolaridad.setSelectedItem(r[17]);
         txtEspecialidad.setText(r[18]);
         txtEmail.setText(r[19]);
         txtContra.setText(r[20]);
-        for(int i = 0; i<cbTipo.getItemCount(); i++){
-            if(r[21] == cbTipo.getItemAt(i)){
-                cbTipo.setSelectedIndex(i);
-            }
-        }
-        for(int i = 0; i<cbEstatus.getItemCount(); i++){
-            if(r[22] == cbEstatus.getItemAt(i)){
-                cbEstatus.setSelectedIndex(i);
-            }
-        }    
-        for(int i = 0; i<cbDepartamento.getItemCount(); i++){
-            if(r[23] == cbDepartamento.getItemAt(i)){
+        cbTipo.setSelectedItem(r[21]);
+        cbEstatus.setSelectedItem(r[22]);
+        
+        for(int i = 0; i < cbDepartamento.getItemCount(); i++){
+            System.out.println(cbDepartamento.getItemAt(i)+" "+r[23]);
+            if(cbDepartamento.getItemAt(i).equals(r[23])){
                 cbDepartamento.setSelectedIndex(i);
-            }
+            }            
         }
-        for(int i = 0; i<cbPuesto.getItemCount(); i++){
-            if(cbPuesto.getItemAt(i).equals(r[24])){
-                cbPuesto.setSelectedItem(i);
-            }
-        }
-        for(int i = 0; i<cbCiudad.getItemCount(); i++){
-            if(r[25] == cbCiudad.getItemAt(i)){
-                cbCiudad.setSelectedIndex(i);
-            }
-        }        
-        for(int i = 0; i<cbSucursal.getItemCount(); i++){
-            if(r[26] == cbSucursal.getItemAt(i)){
-                cbSucursal.setSelectedIndex(i);
-            }
-        }
-        for(int i = 0; i<cbTurno.getItemCount(); i++){
-            if(r[7] == cbTurno.getItemAt(i)){
-                cbTurno.setSelectedIndex(i);
-            }
-        }
+        
+        cbDepartamento.setSelectedItem(r[23]);
+        cbPuesto.setSelectedItem(r[24]);
+        cbCiudad.setSelectedItem(r[25]);
+        cbSucursal.setSelectedItem(r[26]);
+        cbTurno.setSelectedItem(r[27]);
     }//GEN-LAST:event_tbEmpleadosMouseClicked
 
     private void lblEditarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblEditarAncestorAdded
@@ -689,10 +675,10 @@ public class Empleados extends javax.swing.JFrame {
     
     public boolean verificar(){
         System.out.println("vrb: "+vrb()+" Email:"+vEmail()+" NSS:"+vNSS()+" CURP: "+vCurp()+" CP_ "+vCP());
-        if(txtNombre.equals("") || txtPaterno.equals("") || txtMaterno.equals("") || vrb() || fechaNacimiento.equals(null) || txtCurp.equals("") || fechaContratacion.equals(null) ||
-                txtSalario.equals("") || vEmail() || vNSS() || txtVacaciones.equals("") || Integer.parseInt(txtVacaciones.getText())<7 || Integer.parseInt(txtSalario.getText())<141.7
-                || txtPermiso.equals("") || Integer.parseInt(txtPermiso.getText())<3 || vCurp() || txtDireccion.equals("") || txtColonia.equals("") || vCP() || txtEspecialidad.equals("")
-                || txtContra.equals("") || txtRuta.equals("")){
+        if(txtNombre.equals("") | txtPaterno.equals("") | txtMaterno.equals("") | vrb() | fechaNacimiento.equals(null) | txtCurp.equals("") | fechaContratacion.equals(null) |
+                txtSalario.equals("") | vEmail() | vNSS() | txtVacaciones.equals("") | Integer.parseInt(txtVacaciones.getText())<7 | Integer.parseInt(txtSalario.getText())<141.7
+                | txtPermiso.equals("") | Integer.parseInt(txtPermiso.getText())<3 | vCurp() | txtDireccion.equals("") | txtColonia.equals("") | vCP() | txtEspecialidad.equals("")
+                | txtContra.equals("") | txtRuta.equals("")){
             return true;
         }else{
             return false;
