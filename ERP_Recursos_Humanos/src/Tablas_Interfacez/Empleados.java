@@ -309,6 +309,11 @@ public class Empleados extends javax.swing.JFrame {
         lblEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEliminar.setText("Eliminar");
         lblEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEliminarMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 240, 80, 30));
 
         lblEditar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
@@ -595,7 +600,7 @@ public class Empleados extends javax.swing.JFrame {
         int fila = tbEmpleados.getSelectedRow();
         String r[];
         String m = (String)tbEmpleados.getValueAt(fila, 0);
-        r = t.busquedaIndividual(m);
+        r = t.busquedaIndividual(m, lblFoto);
         txtNombre.setText(r[1]);
         txtPaterno.setText(r[2]);
         txtMaterno.setText(r[3]);
@@ -607,14 +612,6 @@ public class Empleados extends javax.swing.JFrame {
             rbF.setSelected(true);
         }
         
-        try{
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbEmpleados.getValueAt(fila,5));
-            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbEmpleados.getValueAt(fila,8));            
-            fechaNacimiento.setDate(date);
-            fechaContratacion.setDate(date2);
-        }catch(ParseException ex){
-            
-        }
         
         txtCurp.setText(r[6]);
         cbEstadoCiv.setSelectedItem(r[7]);
@@ -645,6 +642,15 @@ public class Empleados extends javax.swing.JFrame {
         cbCiudad.setSelectedItem(r[25]);
         cbSucursal.setSelectedItem(r[26]);
         cbTurno.setSelectedItem(r[27]);
+        
+        try{
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbEmpleados.getValueAt(fila,5));
+            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbEmpleados.getValueAt(fila,8));            
+            fechaNacimiento.setDate(date);
+            fechaContratacion.setDate(date2);
+        }catch(ParseException ex){
+            
+        }
     }//GEN-LAST:event_tbEmpleadosMouseClicked
 
     private void lblEditarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblEditarAncestorAdded
@@ -664,6 +670,26 @@ public class Empleados extends javax.swing.JFrame {
                     cbTurno.getSelectedItem().toString(),m);
         tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
     }//GEN-LAST:event_lblEditarMouseClicked
+
+    private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
+        
+        if(verificar()){ 
+            int fila = tbEmpleados.getSelectedRow();
+            String [] op = {"Si","No"};
+            String id = ""+tbEmpleados.getValueAt(fila, 0);
+            int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
+                    "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, op,op[0]);
+            if(b == 0){
+                t.eliminar(id);
+            }        
+            limpiar();
+            tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun registro");
+        }
+        
+    }//GEN-LAST:event_lblEliminarMouseClicked
 
     public void llenarCombos() {
         t.combo(cbDepartamento, 1, "Departamentos");

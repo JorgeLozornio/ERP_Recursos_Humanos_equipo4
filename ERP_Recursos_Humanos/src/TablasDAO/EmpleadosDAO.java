@@ -1,11 +1,21 @@
 
 package TablasDAO;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +35,11 @@ public class EmpleadosDAO {
             String permiso, String fotografia, String direccion, String colonia, String cp, String escolaridad,
             String especialidad, String email, String contra, String tipo, String estatus, String departamento,
             String puesto, String ciudad, String sucursal, String turno){
+        FileInputStream fis = null;
         try{
+            
+            File file = new File(fotografia);
+            fis = new FileInputStream(file);
             
             String sql = "insert into Empleados (nombre, apellidoPaterno, apellidoMaterno, sexo, fechaNacimiento,"
                     + "curp, estadoCivil, fechaContratacion, salarioDiario, nss, diasVacaciones, diasPermiso, fotografia,"
@@ -53,7 +67,7 @@ public class EmpleadosDAO {
             pst.setString(10, nss);
             pst.setString(11, vacaciones);
             pst.setString(12, permiso);
-            pst.setString(13, fotografia);
+            pst.setBinaryStream(13,fis,(int)file.length());
             pst.setString(14, direccion);
             pst.setString(15, colonia);
             pst.setString(16, cp);
@@ -100,6 +114,14 @@ public class EmpleadosDAO {
             ResultSet rs = st.executeQuery(sql);
             
             while( rs.next()){
+                Blob blob = rs.getBlob("fotografia");
+                byte[] data = blob.getBytes(1, (int)blob.length());
+                BufferedImage img = null;
+                try{
+                    img = ImageIO.read(new ByteArrayInputStream(data));
+                }catch(IOException e){
+                    JOptionPane.showMessageDialog(null, e);
+                }
                 registros[0] = rs.getString("idEmpleado");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("apellidoPaterno");
@@ -113,7 +135,7 @@ public class EmpleadosDAO {
                 registros[10] = rs.getString("nss");
                 registros[11] = rs.getString("diasVacaciones");
                 registros[12] = rs.getString("diasPermiso");
-                registros[13] = rs.getString("fotografia");
+                registros[13] = img+"";
                 registros[14] = rs.getString("direccion");
                 registros[15] = rs.getString("colonia");
                 registros[16] = rs.getString("codigoPostal");
@@ -144,8 +166,10 @@ public class EmpleadosDAO {
             String contratacion, String salario, String nss, String vacaciones, String permiso, String fotografia, String direccion,
             String colonia, String cp, String escolaridad, String especialidad, String email, String pass, String tipo, String estatus,
             String departamento, String puesto, String ciudad, String sucursal, String turno, String id){
-        
+        FileInputStream fis = null;
         try{
+            File file = new File(fotografia);
+            fis = new FileInputStream(file);
             String sql = "update Empleados set nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, sexo = ?, fechaNacimiento = ?,"
                     + "curp = ?, estadoCivil = ?, fechaContratacion = ?, salarioDiario = ?, nss = ?, diasVacaciones = ?, diasPermiso = ?, fotografia = ?,"
                     + "direccion = ?, colonia = ?, codigoPostal = ?, escolaridad = ?, especialidad = ?, email = ?, pass = ?, tipo = ?, estatus = ?,"
@@ -172,7 +196,7 @@ public class EmpleadosDAO {
             pst.setString(10, nss);
             pst.setString(11, vacaciones);
             pst.setString(12, permiso);
-            pst.setString(13, fotografia);
+            pst.setBinaryStream(13,fis,(int)file.length());
             pst.setString(14, direccion);
             pst.setString(15, colonia);
             pst.setString(16, cp);
@@ -199,13 +223,13 @@ public class EmpleadosDAO {
         
     }
     
-    public String[] busquedaIndividual(String id){
+    public String[] busquedaIndividual(String id, JLabel foto){
         String [] registros = new String [29];
         
         String sql = "select e.idEmpleado, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.sexo, e.fechaNacimiento, e.curp, \n" +
                     "e.estadoCivil, e.fechaContratacion, e.salarioDiario, e.nss, e.diasVacaciones, e.diasPermiso, e.fotografia,\n" +
                     "e.direccion, e.colonia, e.codigoPostal, e.escolaridad, e.especialidad, e.email, e.pass, e.tipo, e.estatus,\n" +
-                    "d.nombre, c.nombre, s.nombre, t.nombre from empleados as e join departamentos as d\n" +
+                    "d.nombre as idDepartamento, p.nombre as idPuesto, c.nombre as idCiudad, s.nombre as idSucursal, t.nombre as idTurno from empleados as e join departamentos as d\n" +
                     "on e.idDepartamento = d.idDepartamento join puestos as  p\n" +
                     "on e.idPuesto = p.idPuesto join ciudades as c\n" +
                     "on e.idCiudad = c.idCiudad join  sucursales as s \n" +
@@ -217,6 +241,18 @@ public class EmpleadosDAO {
             ResultSet rs = st.executeQuery(sql);
             
             while( rs.next()){
+                Blob blob = rs.getBlob("fotografia");
+                byte[] data = blob.getBytes(1, (int)blob.length());
+                BufferedImage img = null;
+                try{
+                    img = ImageIO.read(new ByteArrayInputStream(data));
+                }catch(IOException e){
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                                
+                ImageIcon icon = new ImageIcon(img); 
+                foto.setIcon(icon);
+                
                 registros[0] = rs.getString("idEmpleado");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("apellidoPaterno");
@@ -254,6 +290,18 @@ public class EmpleadosDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         return registros;
+    }
+    
+    public void eliminar(String id){
+        try{
+            String sql = "update Empleados set estatus = 'I' where idEmpleado = "+id;
+            Statement st = con.createStatement();
+            st.execute(sql);
+            JOptionPane.showMessageDialog(null, "Registro eliminado");
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     
