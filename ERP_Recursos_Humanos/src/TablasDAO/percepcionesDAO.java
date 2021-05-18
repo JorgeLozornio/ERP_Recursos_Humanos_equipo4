@@ -23,15 +23,15 @@ public class percepcionesDAO {
         con = c;
     }
 
-    public void insertar(String nombre, String descripcion, int diasPagar, String estatus) {
+    public void insertar(modelo_percepcion per) {
         try {
             String SQL = "INSERT INTO Percepciones (nombre, descripcion, diasPagar ,estatus) VALUES(?, ?, ?,?)";
 
             PreparedStatement pst = con.prepareStatement(SQL);
-            pst.setString(1, nombre);
-            pst.setString(2, descripcion);
-            pst.setInt(3, diasPagar);
-            pst.setString(4, estatus);
+            pst.setString(1, per.getNombre());
+            pst.setString(2, per.getDescripcion());
+            pst.setInt(3, per.getDiasPagar());
+            pst.setString(4, per.getEstatus());
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Registro exitoso");

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.modelo_percepcion;
 
 /**
  *
@@ -41,6 +42,7 @@ public class Percepciones extends javax.swing.JFrame {
         limit = getLimit(Integer.parseInt(p.count("Percepciones")), fin);
     }
 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -252,14 +254,20 @@ public class Percepciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgregarMouseClicked
-        if (txNombre.getText().isEmpty() && txDescripcion.getText().isEmpty() && txDiaspagar.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: campos vacios");
+           if (txNombre.getText().isEmpty() && txDescripcion.getText().isEmpty() && txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
         } else {
             int seleccionEstatus = jEstatus.getSelectedIndex();
-            t.insertar(txNombre.getText(), txDescripcion.getText(), Integer.parseInt(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus));
+             modelo_percepcion per = new modelo_percepcion();
+                per.setNombre(txNombre.getText());
+                per.setDescripcion(txDescripcion.getText());
+                per.setDiasPagar(Integer.parseInt(txDiaspagar.getText()));
+                per.setEstatus(jEstatus.getItemAt(seleccionEstatus).toString());
+            t.insertar(per);
             limpiar();
-            tableP.setModel(t.mostrarDat(inicio,fin));
-        }
+            // Manda a llamar el metodo: consultaDatos()
+            tableP.setModel(t.mostrarDat(inicio, fin));
+        } 
         
     }//GEN-LAST:event_jAgregarMouseClicked
 
