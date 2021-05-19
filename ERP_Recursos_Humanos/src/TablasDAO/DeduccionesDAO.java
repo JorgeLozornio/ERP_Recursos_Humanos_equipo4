@@ -4,9 +4,11 @@ import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Modelo_Deducciones;
 
 public class DeduccionesDAO {
 
@@ -102,6 +104,30 @@ public class DeduccionesDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
         }
+    }
+    
+        public Modelo_Deducciones consultaidDeduccion(int idDeduccion) {
+        String sql = (" SELECT * "
+                + " FROM Deducciones "
+                + " WHERE idDeduccion = " + idDeduccion);
+        Modelo_Deducciones registros = new Modelo_Deducciones();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                registros.setidDeduccion(rs.getInt("idDeduccion"));
+                registros.setNombre(rs.getString("nombre"));
+                registros.setDescripcion(rs.getString("descripcion"));
+                registros.setPorcentaje(rs.getInt("porcentaje"));
+                registros.setEstatus(rs.getString("estatus"));
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e.getMessage());
+        }
+        return registros;
     }
 
 }
