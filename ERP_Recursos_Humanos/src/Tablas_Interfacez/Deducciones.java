@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Modelo_Deducciones;
 
 public class Deducciones extends javax.swing.JFrame {
 
@@ -293,11 +294,15 @@ public class Deducciones extends javax.swing.JFrame {
         // Manda llamar al metodo: limpiar()
         limpiar();
 
-        int fila = jTableD.rowAtPoint(evt.getPoint());
-        jTextFieldNombre.setText(jTableD.getValueAt(fila, 1).toString());
-        jTextFieldDescripcion.setText(jTableD.getValueAt(fila, 2).toString());
-        jTextFieldPorcentaje.setText(jTableD.getValueAt(fila, 3).toString());
-        jComboBoxEstatus.setSelectedItem(jTableD.getValueAt(fila, 4));
+        Integer idDeduccion = Integer.parseInt(jTableD.getValueAt(jTableD.getSelectedRow(), 0).toString());
+	DeduccionesDAO DAO = new DeduccionesDAO (this.con);
+        Modelo_Deducciones De = new Modelo_Deducciones();
+        De = DAO.consultaidDeduccion(idDeduccion);
+        
+        jTextFieldNombre.setText(De.getNombre());
+        //jTextFieldPorcentaje.setText(De.getPorcentaje());
+        jTextFieldDescripcion.setText(De.getDescripcion());
+        jComboBoxEstatus.setSelectedItem(De.getEstatus());
     }//GEN-LAST:event_jTableDMouseClicked
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
