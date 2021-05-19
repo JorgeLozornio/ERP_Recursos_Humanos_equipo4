@@ -300,7 +300,7 @@ public class Deducciones extends javax.swing.JFrame {
         De = DAO.consultaidDeduccion(idDeduccion);
         
         jTextFieldNombre.setText(De.getNombre());
-        //jTextFieldPorcentaje.setText(De.getPorcentaje());
+        jTextFieldPorcentaje.setText(String.valueOf(De.getPorcentaje()));
         jTextFieldDescripcion.setText(De.getDescripcion());
         jComboBoxEstatus.setSelectedItem(De.getEstatus());
     }//GEN-LAST:event_jTableDMouseClicked
