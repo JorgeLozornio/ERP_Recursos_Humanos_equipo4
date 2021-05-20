@@ -70,7 +70,7 @@ public class PeriodosDAO {
     }
     
     
-    public void actualizar(String nombre, String estatus, String fechaFin, String fechaInicio, String id) {
+    public void actualizar(String nombre, String estatus, String  fechaInicio, String fechaFin, String id) {
         try {
             String SQL = "UPDATE Periodos SET nombre = ?, fechaInicio = ?, fechaFin = ?, estatus = ? WHERE idPeriodo = ?";
 
