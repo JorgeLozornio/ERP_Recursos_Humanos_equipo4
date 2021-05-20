@@ -247,8 +247,11 @@ public class Deducciones extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRegresarMouseClicked
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
+        float por = Float.parseFloat(jTextFieldPorcentaje.getText());
         if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty() || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
+        } else if (por <= 0 || por > 100){
+            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
         } else {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
             t.insertarDatos(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus));
@@ -295,10 +298,10 @@ public class Deducciones extends javax.swing.JFrame {
         limpiar();
 
         Integer idDeduccion = Integer.parseInt(jTableD.getValueAt(jTableD.getSelectedRow(), 0).toString());
-	DeduccionesDAO DAO = new DeduccionesDAO (this.con);
+        DeduccionesDAO DAO = new DeduccionesDAO(this.con);
         Modelo_Deducciones De = new Modelo_Deducciones();
         De = DAO.consultaidDeduccion(idDeduccion);
-        
+
         jTextFieldNombre.setText(De.getNombre());
         jTextFieldPorcentaje.setText(String.valueOf(De.getPorcentaje()));
         jTextFieldDescripcion.setText(De.getDescripcion());
