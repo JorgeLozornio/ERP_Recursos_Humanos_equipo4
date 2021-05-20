@@ -146,13 +146,17 @@ ALTER TABLE DocumentacionEmpleado ADD COLUMN estatus VARCHAR (1) NOT NULL;
 Create Table NominasDeducciones(
 idNomina int NOT NULL,
 idDeduccion int not null,
-importe float NOT NULL);
+importe float NOT NULL,
+PRIMARY KEY (idNomina, idDeduccion)
+);
 
 /*Tabla NominasPercepciones*/
 Create Table NominasPercepciones(
 idNomina int NOT NULL,
 idPercepcion int NOT NULL,
-importe float NOT NULL);
+importe float NOT NULL,
+PRIMARY KEY (idNomina, idPercepcion)
+);
 
 /*Tabla Nominas*/
 Create Table Nominas(
