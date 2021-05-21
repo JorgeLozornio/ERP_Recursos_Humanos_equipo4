@@ -1,18 +1,11 @@
 
 package TablasDAO;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -91,13 +84,13 @@ public class AsistenciasDAO {
             String sql = "update Asistencias set fecha = ?, horaEntrada = ?, horaSalida = ?, dia = ?, idEmpleado = ?, estatus = ? where idAsistencia = ?";
             
             PreparedStatement pst = con.prepareStatement(sql);
-            String idE = getIdEmpleado(empleado);
+        
             pst.setString(1, fecha);
             pst.setString(2, h1);
             pst.setString(3, h2);
            
             pst.setString(4, dia);
-            pst.setString(5, idE);
+            pst.setString(5, empleado);
             pst.setString(6, estatus);
             pst.setString(7, id);
             pst.execute();
@@ -109,35 +102,6 @@ public class AsistenciasDAO {
             JOptionPane.showMessageDialog(null, e);
         }      
         
-    }
-    
-    public String[] busquedaIndividual(String id){
-        String [] registros = new String [29];
-        
-        String sql = "select e.idAsistencia, e.fecha, e.horaEntrada, e.horaSalida, e.dia, m.nombre as empleado, e.estatus from Asistencias as e join empleados as m on e.idAsistencias = m.idEmpleado where idAsistencia = "+id;
-        
-        try{
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            
-            while( rs.next()){
-                
-                registros[0] = rs.getString("idAsistencia");
-                registros[1] = rs.getString("fecha");
-                registros[2] = rs.getString("horaEntrada");
-                registros[3] = rs.getString("horaSalida");
-                registros[4] = rs.getString("dia");
-                registros[5] = rs.getString("empleado");
-                registros[6] = rs.getString("estatus");
-                
-            }
-            
-            return registros;
-            
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return registros;
     }
     
     public void eliminar(String id){        
