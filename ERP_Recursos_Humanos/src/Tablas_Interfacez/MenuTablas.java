@@ -51,12 +51,12 @@ public class MenuTablas extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnPuestos = new javax.swing.JButton();
         btnDeducciones = new javax.swing.JButton();
-        btnAusencias = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnPeriodos = new javax.swing.JButton();
         btnPercepciones = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
+        btnAsistencias = new javax.swing.JButton();
         jLabelL1 = new javax.swing.JLabel();
         jLabelL2 = new javax.swing.JLabel();
         jLabelDepartamental = new javax.swing.JLabel();
@@ -145,14 +145,6 @@ public class MenuTablas extends javax.swing.JFrame {
         });
         getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 189, -1));
 
-        btnAusencias.setText("Ausencias Justificadas");
-        btnAusencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAusenciasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAusencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 189, -1));
-
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +187,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 190, -1));
+
+        btnAsistencias.setText("Asistencias");
+        btnAsistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsistenciasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 190, -1));
 
         jLabelL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Linea.png"))); // NOI18N
         getContentPane().add(jLabelL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 140, 490));
@@ -363,21 +363,17 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnDocumentacionEmpleadosMouseClicked
 
-    private void btnAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAusenciasActionPerformed
-        AusenciasJustificadas a = null;
-        try{
-            a = new AusenciasJustificadas(con, us);
-        } catch(SQLException ex ){
-            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        a.setVisible(true);
+    private void btnAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsistenciasActionPerformed
+        Asistencias t = null;
+        t = new Asistencias(con, us);
+        t.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnAusenciasActionPerformed
+    }//GEN-LAST:event_btnAsistenciasActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAusencias;
+    private javax.swing.JButton btnAsistencias;
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnDeducciones;
     private javax.swing.JButton btnDepartamentos;
