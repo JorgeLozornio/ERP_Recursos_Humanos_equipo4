@@ -5,10 +5,15 @@
  */
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
+import TablasDAO.AsistenciasDAO;
 import TablasDAO.TurnosDAO;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,7 +22,7 @@ import java.sql.Connection;
 public class Asistencias extends javax.swing.JFrame {
 
     
-    TurnosDAO t;
+    AsistenciasDAO t;
     Connection con;
     String us;
     int i=0;
@@ -28,13 +33,14 @@ public class Asistencias extends javax.swing.JFrame {
     public Asistencias(Connection c, String u) {
         con = c;
         us = u;
-        TurnosDAO tu = new TurnosDAO(con);
+        AsistenciasDAO tu = new AsistenciasDAO(con);
         t = tu;
         initComponents();
-        //Reloj h = new Reloj(cerrarSesion, u);
-        //h.start();
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
         this.setLocationRelativeTo(null);
-        //tbTurnos.setModel(t.mostrarDatos(inicio, fin));
+        llenarCombos();
+        tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
         Paginacion p = new Paginacion(con);
         //limit = getLimit(Integer.parseInt(p.count("Turnos")), fin);
     }
@@ -48,43 +54,307 @@ public class Asistencias extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        cerrarSesion = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
+        lblCruz = new javax.swing.JLabel();
+        lblBarra = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        fecha = new com.toedter.calendar.JDateChooser();
+        cbEmpleado = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        Crear = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        txtH1 = new javax.swing.JTextField();
+        txtM1 = new javax.swing.JTextField();
+        txtH2 = new javax.swing.JTextField();
+        txtM2 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbAsistencias = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        cbEstatus = new javax.swing.JComboBox<>();
+        cbDia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1080, 600));
+        setMinimumSize(new java.awt.Dimension(1080, 600));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1080, 600));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        cerrarSesion.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
             }
         });
+        getContentPane().add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(74, 74, 74))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jButton1)
-                .addContainerGap(149, Short.MAX_VALUE))
-        );
+        lblReloj.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
+        lblReloj.setText("Lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        lblCruz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        lblCruz.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCruzMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblCruz, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 10, -1, -1));
+
+        lblBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        lblBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                lblBarraMouseDragged(evt);
+            }
+        });
+        lblBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(lblBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 18)); // NOI18N
+        jLabel1.setText("Asistencias");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel2.setText("Empleado:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel3.setText("Fecha:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel4.setText("Hora entrada:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel5.setText("Hora salida:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel6.setText("Dia:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+
+        fecha.setDateFormatString("YYYY-MM-dd");
+        getContentPane().add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 210, -1));
+
+        cbEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 180, -1));
+
+        jLabel13.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Regresar");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 80, 30));
+
+        Crear.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        Crear.setForeground(new java.awt.Color(255, 255, 255));
+        Crear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Crear.setText("Crear");
+        Crear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearMouseClicked(evt);
+            }
+        });
+        getContentPane().add(Crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 80, 30));
+
+        jLabel15.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Eliminar");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 80, 30));
+
+        jLabel16.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Modificar");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 80, 30));
+        getContentPane().add(txtH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 60, -1));
+
+        txtM1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtM1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 60, -1));
+        getContentPane().add(txtH2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 60, -1));
+        getContentPane().add(txtM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 60, -1));
+
+        jLabel7.setText(":");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 30, -1));
+
+        jLabel8.setText(":");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 30, -1));
+
+        tbAsistencias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "idAsistencia", "HoraEntrada", "HoraSalida", "Dia", "Empleado"
+            }
+        ));
+        jScrollPane1.setViewportView(tbAsistencias);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, 360));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRojo.png"))); // NOI18N
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel17.setText("Empleado:");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+
+        cbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        getContentPane().add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 180, -1));
+
+        cbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
+        getContentPane().add(cbDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void lblBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBarraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_lblBarraMousePressed
+   
+    private void lblBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBarraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
 
+        this.setLocation(x-xx, y-xy);
+    }//GEN-LAST:event_lblBarraMouseDragged
+
+    private void lblCruzMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCruzMouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_lblCruzMouseClicked
+
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_cerrarSesionMouseClicked
+
+    private void txtM1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtM1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtM1ActionPerformed
+
+    private void CrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearMouseClicked
+        String h1, h2;
+        h1 = txtH1.getText() + ":" +txtM1.getText()+":00";
+        h2 = txtH1.getText() + ":" +txtM1.getText()+":00";
+        if(verificar(h1, h2)){
+            System.out.println(((JTextField)fecha.getDateEditor().getUiComponent()).getText());
+            t.insertar(((JTextField)fecha.getDateEditor().getUiComponent()).getText(), h1, h2, cbDia.getSelectedItem().toString(), cbEmpleado.getSelectedItem().toString(), cbEstatus.getSelectedItem().toString());
+            tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
+        }
+        
+    }//GEN-LAST:event_CrearMouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        MenuTablas m = new MenuTablas(con, us);
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel13MouseClicked
+    int xx, xy;
+    
+    
+    public boolean verificar(String h1, String h2){
+        if(fecha.equals(null) | h1.equals("") | h2.equals("")){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public void limpiar(){
+        fecha.setDate(null);
+        txtH1.setText("");
+        txtH2.setText("");
+        txtM1.setText("");
+        txtM2.setText("");
+    }
+    
+    public void llenarCombos() {
+        t.combo(cbEmpleado, 1, "Empleados");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel Crear;
+    private javax.swing.JComboBox<String> cbDia;
+    private javax.swing.JComboBox<String> cbEmpleado;
+    private javax.swing.JComboBox<String> cbEstatus;
+    private javax.swing.JLabel cerrarSesion;
+    private com.toedter.calendar.JDateChooser fecha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBarra;
+    private javax.swing.JLabel lblCruz;
+    private javax.swing.JLabel lblReloj;
+    private javax.swing.JTable tbAsistencias;
+    private javax.swing.JTextField txtH1;
+    private javax.swing.JTextField txtH2;
+    private javax.swing.JTextField txtM1;
+    private javax.swing.JTextField txtM2;
     // End of variables declaration//GEN-END:variables
 }
