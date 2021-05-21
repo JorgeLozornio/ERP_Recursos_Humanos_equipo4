@@ -51,6 +51,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnPuestos = new javax.swing.JButton();
         btnDeducciones = new javax.swing.JButton();
+        btnAusencias = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnPeriodos = new javax.swing.JButton();
@@ -143,6 +144,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 189, -1));
+
+        btnAusencias.setText("Ausencias Justificadas");
+        btnAusencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAusenciasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAusencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 189, -1));
 
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -354,9 +363,21 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnDocumentacionEmpleadosMouseClicked
 
+    private void btnAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAusenciasActionPerformed
+        AusenciasJustificadas a = null;
+        try{
+            a = new AusenciasJustificadas(con, us);
+        } catch(SQLException ex ){
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAusenciasActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAusencias;
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnDeducciones;
     private javax.swing.JButton btnDepartamentos;
