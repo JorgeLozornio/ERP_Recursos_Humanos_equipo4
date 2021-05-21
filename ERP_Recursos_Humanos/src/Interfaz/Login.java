@@ -35,7 +35,7 @@ public class Login extends javax.swing.JFrame {
         txtContra = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblContinuar = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -79,13 +79,13 @@ public class Login extends javax.swing.JFrame {
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 484, 140, 30));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/BotonLogin.png"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblContinuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/BotonLogin.png"))); // NOI18N
+        lblContinuar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                lblContinuarMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, -1, -1));
+        getContentPane().add(lblContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, -1, -1));
 
         jLabel7.setText("______________________________________");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 310, 50));
@@ -154,7 +154,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContraActionPerformed
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+    private void lblContinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContinuarMouseClicked
         Conexion c = new Conexion();
         if(c.probarConexion(txtUsuario.getText(), txtContra.getText())==true){
             Connection con = c.conexion(txtUsuario.getText(), txtContra.getText());
@@ -164,7 +164,7 @@ public class Login extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
         }
-    }//GEN-LAST:event_jLabel9MouseClicked
+    }//GEN-LAST:event_lblContinuarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblContinuar;
     private javax.swing.JPasswordField txtContra;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

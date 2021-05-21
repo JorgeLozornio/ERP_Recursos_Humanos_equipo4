@@ -68,7 +68,7 @@ public class Asistencias extends javax.swing.JFrame {
         cbEmpleado = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         Crear = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lblEliminar = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtH1 = new javax.swing.JTextField();
         txtM1 = new javax.swing.JTextField();
@@ -182,11 +182,16 @@ public class Asistencias extends javax.swing.JFrame {
         });
         getContentPane().add(Crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 80, 30));
 
-        jLabel15.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Eliminar");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 80, 30));
+        lblEliminar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        lblEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        lblEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEliminar.setText("Eliminar");
+        lblEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEliminarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 80, 30));
 
         jLabel16.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -301,6 +306,27 @@ public class Asistencias extends javax.swing.JFrame {
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
+        String h1, h2;
+        h1 = txtH1.getText() + ":" +txtM1.getText()+":00";
+        h2 = txtH1.getText() + ":" +txtM1.getText()+":00";
+        if(verificar(h1,h2)){ 
+            int fila = tbAsistencias.getSelectedRow();
+            String [] op = {"Si","No"};
+            String id = ""+tbAsistencias.getValueAt(fila, 0);
+            int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
+                    "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, op,op[0]);
+            if(b == 0){
+                t.eliminar(id);
+            }        
+            limpiar();
+            tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun registro");
+        }
+    }//GEN-LAST:event_lblEliminarMouseClicked
     int xx, xy;
     
     
@@ -336,7 +362,6 @@ public class Asistencias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
@@ -350,6 +375,7 @@ public class Asistencias extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBarra;
     private javax.swing.JLabel lblCruz;
+    private javax.swing.JLabel lblEliminar;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JTable tbAsistencias;
     private javax.swing.JTextField txtH1;
