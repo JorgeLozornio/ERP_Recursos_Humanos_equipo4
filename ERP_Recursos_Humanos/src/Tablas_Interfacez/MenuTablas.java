@@ -43,7 +43,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelMP = new javax.swing.JLabel();
         btnDocumentacionEmpleados = new javax.swing.JButton();
         btnCiudades = new javax.swing.JButton();
         btnTurnos = new javax.swing.JButton();
@@ -56,6 +56,12 @@ public class MenuTablas extends javax.swing.JFrame {
         btnPeriodos = new javax.swing.JButton();
         btnPercepciones = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
+        jLabelL1 = new javax.swing.JLabel();
+        jLabelL2 = new javax.swing.JLabel();
+        jLabelDepartamental = new javax.swing.JLabel();
+        jLabelSalarial = new javax.swing.JLabel();
+        jLabelMoney = new javax.swing.JLabel();
+        jLabelT = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -72,9 +78,9 @@ public class MenuTablas extends javax.swing.JFrame {
         jLabel2.setMinimumSize(new java.awt.Dimension(1080, 600));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 480, 140, 40));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("MENU");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, -1, -1));
+        jLabelMP.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelMP.setText("MENU PRINCIPAL");
+        getContentPane().add(jLabelMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, -1, -1));
 
         btnDocumentacionEmpleados.setText("Documentacion empleados");
         btnDocumentacionEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,7 +88,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDocumentacionEmpleadosMouseClicked(evt);
             }
         });
-        getContentPane().add(btnDocumentacionEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 190, -1));
+        getContentPane().add(btnDocumentacionEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 190, -1));
 
         btnCiudades.setText("Ciudades");
         btnCiudades.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +96,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnCiudadesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 189, -1));
+        getContentPane().add(btnCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 189, -1));
 
         btnTurnos.setText("Turnos");
         btnTurnos.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +104,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnTurnosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 189, -1));
+        getContentPane().add(btnTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 189, -1));
 
         btnestados.setText("Estados");
         btnestados.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +112,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnestadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 189, -1));
+        getContentPane().add(btnestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 189, -1));
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/BotonLogin.png"))); // NOI18N
         btnLogin.setBorder(null);
@@ -128,7 +134,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPuestosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 189, -1));
+        getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 189, -1));
 
         btnDeducciones.setText("Deducciones");
         btnDeducciones.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +142,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDeduccionesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 189, -1));
+        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 189, -1));
 
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +150,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDepartamentosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 189, -1));
+        getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 189, -1));
 
         jLabel5.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,7 +169,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPeriodosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 190, -1));
+        getContentPane().add(btnPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, 190, -1));
 
         btnPercepciones.setText("Percepciones");
         btnPercepciones.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +177,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPercepcionesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPercepciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 190, -1));
+        getContentPane().add(btnPercepciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 190, -1));
 
         btnEmpleados.setText("Empleados");
         btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +185,28 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnEmpleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 190, -1));
+        getContentPane().add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 190, -1));
+
+        jLabelL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Linea.png"))); // NOI18N
+        getContentPane().add(jLabelL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 140, 490));
+
+        jLabelL2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Linea.png"))); // NOI18N
+        getContentPane().add(jLabelL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 140, 490));
+
+        jLabelDepartamental.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelDepartamental.setText("DEPARTAMENTAL");
+        getContentPane().add(jLabelDepartamental, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+
+        jLabelSalarial.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelSalarial.setText("SALARIAL");
+        getContentPane().add(jLabelSalarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+
+        jLabelMoney.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Money.png"))); // NOI18N
+        getContentPane().add(jLabelMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 190, 190));
+
+        jLabelT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Tablas.png"))); // NOI18N
+        jLabelT.setText("jLabel1");
+        getContentPane().add(jLabelT, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 200, 180));
 
         lblReloj.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
         lblReloj.setForeground(new java.awt.Color(255, 255, 255));
@@ -341,11 +368,17 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JButton btnPuestos;
     private javax.swing.JButton btnTurnos;
     private javax.swing.JButton btnestados;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelDepartamental;
+    private javax.swing.JLabel jLabelL1;
+    private javax.swing.JLabel jLabelL2;
+    private javax.swing.JLabel jLabelMP;
+    private javax.swing.JLabel jLabelMoney;
+    private javax.swing.JLabel jLabelSalarial;
+    private javax.swing.JLabel jLabelT;
     private javax.swing.JLabel lblReloj;
     // End of variables declaration//GEN-END:variables
 }
