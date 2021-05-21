@@ -65,17 +65,17 @@ public class percepcionesDAO {
 
     }
 
-    public void actualizar(String nombre, String descripcion, int diasPagar, String estatus, String id) {
+    public void actualizar(modelo_percepcion per) {
         try {
             String SQL = "UPDATE Percepciones SET nombre = ?, descripcion = ?, diasPagar = ?, estatus = ? WHERE idPercepcion = ?";
 
             PreparedStatement pst = con.prepareStatement(SQL);
 
-            pst.setString(1, nombre);
-            pst.setString(2, descripcion);
-            pst.setInt(3, diasPagar);
-            pst.setString(4, estatus);
-            pst.setString(5, id);
+            pst.setString(1, per.getNombre() );
+            pst.setString(2, per.getDescripcion());
+            pst.setInt(3, per.getDiasPagar());
+            pst.setString(4, per.getEstatus());
+            pst.setInt(5, per.getIdPercep());
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Actualización exitosa");

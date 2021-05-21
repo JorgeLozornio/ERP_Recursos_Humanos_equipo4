@@ -254,9 +254,12 @@ public class Percepciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgregarMouseClicked
-           if (txNombre.getText().isEmpty() && txDescripcion.getText().isEmpty() && txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
+        int num = Integer.parseInt(txDiaspagar.getText()) ;   
+        if (txNombre.getText().isEmpty() && txDescripcion.getText().isEmpty() && txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
-        } else {
+        } else if (num <= 0||num > 15){
+            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
+        }else {
             int seleccionEstatus = jEstatus.getSelectedIndex();
              modelo_percepcion per = new modelo_percepcion();
                 per.setNombre(txNombre.getText());
@@ -279,13 +282,22 @@ public class Percepciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jRegrasarMouseClicked
 
     private void jActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jActualizarMouseClicked
+       if (txNombre.getText().isEmpty() || txDescripcion.getText().isEmpty() || txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Error: Debes llenar todos los campos");
+        } else {
         int seleccionEstatus = jEstatus.getSelectedIndex();
         int fila = tableP.getSelectedRow();
-        String m = (String) tableP.getValueAt(fila, 0);
-        t.actualizar(txNombre.getText(), txDescripcion.getText(),Integer.parseInt(txDiaspagar.getText()), jEstatus.getItemAt(seleccionEstatus), m);
+        Integer idP = Integer.parseInt(tableP.getValueAt(tableP.getSelectedRow(), 0).toString());
+        modelo_percepcion per = new modelo_percepcion();
+        per.setIdPercep(idP);
+        per.setDescripcion(txDescripcion.getText());
+        per.setNombre(txNombre.getText());
+        per.setDiasPagar(Integer.parseInt(txDiaspagar.getText()));
+        per.setEstatus(jEstatus.getItemAt(seleccionEstatus).toString());
+        t.actualizar(per);
         tableP.setModel(t.mostrarDat(inicio,fin));
         limpiar();
-        
+       }
     }//GEN-LAST:event_jActualizarMouseClicked
 
     private void jElimianarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jElimianarMouseClicked
