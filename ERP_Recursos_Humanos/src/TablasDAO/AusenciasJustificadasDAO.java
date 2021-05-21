@@ -18,7 +18,6 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Modelo_AusenciasJustificadas;
-import Tablas_Interfacez.AusenciasJustificadas;
         
 
 public class AusenciasJustificadasDAO {
@@ -94,7 +93,7 @@ public class AusenciasJustificadasDAO {
 
     public void actualizar(Modelo_AusenciasJustificadas AusenciasJ) {
         try {
-            String SQL = "UPDATE AusenciasJustificadas SET fechaSolicitud=?, fechaInicio = ?, fechaFin = ?, tipo=?, idEmpleadoSolicita=?, idEmpleadoAutoriza=?, evidencia=?, estatus = ?, motivo=? WHERE idAusencia = ?";
+            String SQL = "UPDATE AusenciasJustificadas SET fechaSolicitud=?, fechaInicio = ?, fechaFin = ?, tipo=?, idEmpleadoSolicita=?, idEmpleadoAutoriza=?, evidencia=?, estatus = ?, motivo=? WHERE idAusencia = "+AusenciasJ.getId();
             PreparedStatement pst = con.prepareStatement(SQL);
             
             Date fechaSolicitud = AusenciasJ.getFechaSolicitud();
@@ -105,10 +104,6 @@ public class AusenciasJustificadasDAO {
 
             Date fechaFin = AusenciasJ.getFechaFin();
             java.sql.Date fin = new java.sql.Date(fechaFin.getTime());
-            
-            AusenciasJustificadas a = new AusenciasJustificadas(con, SQL);
-            int filaSeleccionado = a.jTable.getSelectedRow();
-            String dao = (String)a.jTable.getValueAt(filaSeleccionado, 0);
             pst.setDate(1, solicitud);
             pst.setDate(2, inicio);
             pst.setDate(3, fin);
@@ -118,7 +113,6 @@ public class AusenciasJustificadasDAO {
             pst.setString(7, AusenciasJ.getEvidencia());
             pst.setString(8, AusenciasJ.getEstatus());
             pst.setString(9, AusenciasJ.getMotivo());
-            pst.setString(10, dao);
             pst.execute();
 
             JOptionPane.showMessageDialog(null, "Actualización exitosa");
