@@ -173,6 +173,11 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         jComboBoxEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
         getContentPane().add(jComboBoxEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 160, -1));
 
+        jTextFieldBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBuscarActionPerformed(evt);
+            }
+        });
         jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldBuscarKeyReleased(evt);
@@ -431,7 +436,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
 
     private void btnAtras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtras2ActionPerformed
         if (inicio == 0) {
-            btnAtras.setEnabled(false);
+            btnAtras2.setEnabled(false);
         } else {
             btnSiguiente.setEnabled(true);
             inicio = inicio - 5;
@@ -443,7 +448,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         if (inicio == limit * 5) {
             btnSiguiente.setEnabled(false);
         } else {
-            btnAtras.setEnabled(true);
+            btnAtras2.setEnabled(true);
             inicio = inicio + 5;
             jTable.setModel(p.consultaDatos(inicio, fin));
         }
@@ -482,6 +487,10 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BuscarMouseClicked
 
+    private void jTextFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldBuscarActionPerformed
+
     public void limpiar() {
         fechaInicio.setDate(null);
         fechaFin.setDate(null);
@@ -504,7 +513,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         String[] titulos = {"idAusencia", "fechaSolicitud", "fechaInicio", "fechaFin", "tipo", "idEmpleadoSolicita", "idEmpleadoAutoriza", "evidencia", "estatus", "motivo"};
         String[] registros = new String[10];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM AusenciasJustificadas WHERE nombre LIKE '%" + valor + "%' AND estatus = 'A'";
+        String SQL = "SELECT * FROM AusenciasJustificadas WHERE idAusencia LIKE '%" + valor + "%' AND estatus = 'A'";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -533,8 +542,6 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Buscar;
     private javax.swing.JLabel Regresar;
-    private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnAtras1;
     private javax.swing.JButton btnAtras2;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox cbAutorizo;
