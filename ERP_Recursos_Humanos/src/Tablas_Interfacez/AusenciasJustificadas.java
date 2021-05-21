@@ -402,6 +402,8 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
             int Empleado = cbEmpleado.getSelectedIndex();
             int Autorizo = cbAutorizo.getSelectedIndex();
             Modelo_AusenciasJustificadas ausencias = new Modelo_AusenciasJustificadas();
+            Integer idDE = Integer.parseInt(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
+            ausencias.setId(idDE);
             ausencias.setFechaInicio(fechaInicio.getDate());
             ausencias.setFechaFin(fechaFin.getDate());
             ausencias.setFechaSolicitud(fecha);
