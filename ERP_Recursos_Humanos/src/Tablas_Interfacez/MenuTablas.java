@@ -56,6 +56,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnPeriodos = new javax.swing.JButton();
         btnPercepciones = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
+        btnAusenciasJ = new javax.swing.JButton();
         btnAsistencias = new javax.swing.JButton();
         jLabelL1 = new javax.swing.JLabel();
         jLabelL2 = new javax.swing.JLabel();
@@ -187,6 +188,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 190, -1));
+
+        btnAusenciasJ.setText("Ausencias Justificadas");
+        btnAusenciasJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAusenciasJActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAusenciasJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 190, -1));
 
         btnAsistencias.setText("Asistencias");
         btnAsistencias.addActionListener(new java.awt.event.ActionListener() {
@@ -370,10 +379,22 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAsistenciasActionPerformed
 
+    private void btnAusenciasJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAusenciasJActionPerformed
+        AusenciasJustificadas a = null;
+        try{
+            a = new AusenciasJustificadas(con, us);
+        } catch(SQLException ex ){
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAusenciasJActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsistencias;
+    private javax.swing.JButton btnAusenciasJ;
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnDeducciones;
     private javax.swing.JButton btnDepartamentos;
