@@ -31,10 +31,11 @@ estatus char);
 create table Asistencias(
 idAsistencia int not null primary key auto_increment,
 fecha date,
-horaEntrada date,
-horaSalida date,
+horaEntrada time,
+horaSalida time,
 dia varchar(10),
-idEmpleado int);
+idEmpleado int,
+estatus char);
 
 /*Tabla Turnos -- A*/
 Create Table Turnos(
@@ -84,7 +85,7 @@ idTurno int NOT NULL);
 
 /*Tabla AusenciasJustificadas*/
 Create Table AusenciasJustificadas(
-idAudsencia int not null primary key auto_increment,
+idAusencia int not null primary key auto_increment,
 fechaSolicitud date NOT NULL,
 fechaInicio date NOT NULL,
 fechaFin date NOT NULL,
