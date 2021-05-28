@@ -58,6 +58,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnEmpleados = new javax.swing.JButton();
         btnAusenciasJ = new javax.swing.JButton();
         btnAsistencias = new javax.swing.JButton();
+        nomina = new javax.swing.JButton();
         jLabelL1 = new javax.swing.JLabel();
         jLabelL2 = new javax.swing.JLabel();
         jLabelDepartamental = new javax.swing.JLabel();
@@ -144,7 +145,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDeduccionesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 189, -1));
+        getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 189, -1));
 
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +205,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 190, -1));
+
+        nomina.setText("nomina");
+        nomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nominaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 189, -1));
 
         jLabelL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Linea.png"))); // NOI18N
         getContentPane().add(jLabelL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 140, 490));
@@ -390,6 +399,17 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAusenciasJActionPerformed
 
+    private void nominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nominaActionPerformed
+         Nominas a = null;
+        try{
+            a = new Nominas(con, us);
+        } catch(SQLException ex ){
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_nominaActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -418,5 +438,6 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSalarial;
     private javax.swing.JLabel jLabelT;
     private javax.swing.JLabel lblReloj;
+    private javax.swing.JButton nomina;
     // End of variables declaration//GEN-END:variables
 }
