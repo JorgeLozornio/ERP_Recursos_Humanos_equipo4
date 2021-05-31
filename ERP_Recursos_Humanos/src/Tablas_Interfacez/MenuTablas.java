@@ -22,15 +22,15 @@ public class MenuTablas extends javax.swing.JFrame {
 
     Connection con;
     String us;
-    
+
     public MenuTablas(Connection c, String u) {
         initComponents();
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         con = c;
-        us = u;        
+        us = u;
         this.setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -51,6 +51,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnPuestos = new javax.swing.JButton();
         btnDeducciones = new javax.swing.JButton();
+        btnFormasPago = new javax.swing.JButton();
         btnDepartamentos = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnPeriodos = new javax.swing.JButton();
@@ -146,6 +147,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeducciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 189, -1));
+
+        btnFormasPago.setText("Formas de pago");
+        btnFormasPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFormasPagoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFormasPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 490, 189, -1));
 
         btnDepartamentos.setText("Departamentos");
         btnDepartamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +282,7 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTurnosActionPerformed
 
     private void btnestadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadosActionPerformed
-   Estados t = null;
+        Estados t = null;
         try {
             t = new Estados(con, us);
         } catch (SQLException ex) {
@@ -284,15 +293,15 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnestadosActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        
-  
+
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
         Puestos t = null;
-        try{
+        try {
             t = new Puestos(con, us);
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         t.setVisible(true);
@@ -301,9 +310,9 @@ public class MenuTablas extends javax.swing.JFrame {
 
     private void btnDeduccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeduccionesActionPerformed
         Deducciones t = null;
-        try{
+        try {
             t = new Deducciones(con, us);
-        } catch(SQLException ex ){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         t.setVisible(true);
@@ -317,10 +326,10 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void btnDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepartamentosActionPerformed
-                Departamentos t = null;
-        try{
+        Departamentos t = null;
+        try {
             t = new Departamentos(con, us);
-        } catch(SQLException ex ){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         t.setVisible(true);
@@ -328,9 +337,9 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDepartamentosActionPerformed
 
     private void btnPercepcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPercepcionesActionPerformed
-   Percepciones t = null;
+        Percepciones t = null;
         try {
-            t = new Percepciones  (con, us);
+            t = new Percepciones(con, us);
         } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -340,9 +349,9 @@ public class MenuTablas extends javax.swing.JFrame {
 
     private void btnPeriodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriodosActionPerformed
         Periodos p = null;
-        try{
+        try {
             p = new Periodos(con, us);
-        } catch(SQLException ex ){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         p.setVisible(true);
@@ -351,9 +360,9 @@ public class MenuTablas extends javax.swing.JFrame {
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
         Empleados t = null;
-        try{
+        try {
             t = new Empleados(con, us);
-        } catch(SQLException ex ){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         t.setVisible(true);
@@ -362,7 +371,7 @@ public class MenuTablas extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         Sesion s = new Sesion(con);
-        if(s.cerrarSesion()){
+        if (s.cerrarSesion()) {
             Login l = new Login();
             l.setVisible(true);
             this.setVisible(false);
@@ -371,9 +380,9 @@ public class MenuTablas extends javax.swing.JFrame {
 
     private void btnDocumentacionEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDocumentacionEmpleadosMouseClicked
         // TODO add your handling code here:
-         DocumentacionEmpleado t = null;
+        DocumentacionEmpleado t = null;
         try {
-            t = new DocumentacionEmpleado  (con, us);
+            t = new DocumentacionEmpleado(con, us);
         } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -390,9 +399,9 @@ public class MenuTablas extends javax.swing.JFrame {
 
     private void btnAusenciasJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAusenciasJActionPerformed
         AusenciasJustificadas a = null;
-        try{
+        try {
             a = new AusenciasJustificadas(con, us);
-        } catch(SQLException ex ){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         a.setVisible(true);
@@ -400,16 +409,26 @@ public class MenuTablas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAusenciasJActionPerformed
 
     private void nominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nominaActionPerformed
-         Nominas a = null;
-        try{
+        Nominas a = null;
+        try {
             a = new Nominas(con, us);
-        } catch(SQLException ex ){
+        } catch (SQLException ex) {
             Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
         }
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_nominaActionPerformed
 
+    private void btnFormasPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormasPagoActionPerformed
+        FormasPago t = null;
+        try {
+            t = new FormasPago(con, us);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnFormasPagoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -420,6 +439,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JButton btnDepartamentos;
     private javax.swing.JButton btnDocumentacionEmpleados;
     private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnFormasPago;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnPercepciones;
     private javax.swing.JButton btnPeriodos;

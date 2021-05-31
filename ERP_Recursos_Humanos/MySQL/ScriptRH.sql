@@ -615,6 +615,9 @@ ADD CHECK (estatus = 'A' or estatus = 'I');
 ALTER TABLE Deducciones
 ADD CHECK (porcentaje > 0 AND porcentaje < 100);
 
+ALTER TABLE FormasPago
+ADD CHECK (estatus = 'A' or estatus = 'I');
+
 /* Creación de usuarios */
 CREATE USER Victor IDENTIFIED BY 'ERP123';
 GRANT ALL PRIVILEGES ON Turnos TO 'Victor';
@@ -629,4 +632,5 @@ GRANT ALL PRIVILEGES ON Deducciones TO 'Victor';
 GRANT ALL PRIVILEGES ON Periodos TO 'Victor';
 GRANT ALL PRIVILEGES ON Sucursales TO 'Victor';
 GRANT ALL PRIVILEGES ON Nominas TO 'Victor';
+GRANT ALL PRIVILEGES ON FormasPago TO 'Victor';
 FLUSH PRIVILEGES;
