@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Modelo_Ciudades;
 
 public class Ciudades extends javax.swing.JFrame {
 
@@ -232,11 +233,14 @@ public class Ciudades extends javax.swing.JFrame {
         // Manda llamar al metodo: limpiar()
         limpiar();
 
-        int fila = jTable.rowAtPoint(evt.getPoint());
+        Integer idCiudad = Integer.parseInt(jTable.getValueAt(jTable.getSelectedRow(), 0).toString());
+        CiudadesDAO DAO = new CiudadesDAO(this.con);
+        Modelo_Ciudades Ciu = new Modelo_Ciudades();
+        Ciu = DAO.consultaidCiudad(idCiudad);
 
-        jTextFieldCiudad.setText(jTable.getValueAt(fila, 1).toString());
-        jComboBoxEstado.setSelectedItem(jTable.getValueAt(fila, 2));
-        jComboBoxEstatus.setSelectedItem(jTable.getValueAt(fila, 3));
+        jTextFieldCiudad.setText(Ciu.getNombre());
+        jComboBoxEstado.setSelectedItem(Ciu.getidEstado());
+        jComboBoxEstatus.setSelectedItem(Ciu.getEstatus());
     }//GEN-LAST:event_jTableMouseClicked
 
     private void jTextFieldBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyReleased

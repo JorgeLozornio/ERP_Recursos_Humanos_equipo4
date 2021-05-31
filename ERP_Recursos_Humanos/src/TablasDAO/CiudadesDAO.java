@@ -4,10 +4,12 @@ import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Modelo_Ciudades;
 
 public class CiudadesDAO {
 
@@ -42,7 +44,7 @@ public class CiudadesDAO {
         String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Ciudades WHERE estatus = 'A' limit "+inicio+", "+fin;
+        String SQL = "SELECT * FROM Ciudades WHERE estatus = 'A' limit " + inicio + ", " + fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -120,5 +122,28 @@ public class CiudadesDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Modelo_Ciudades consultaidCiudad(int idCiudad) {
+        String sql = (" SELECT * "
+                + " FROM Ciudades "
+                + " WHERE idCiudad = " + idCiudad);
+        Modelo_Ciudades registros = new Modelo_Ciudades();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                registros.setidCiudad(rs.getInt("idCiudad"));
+                registros.setNombre(rs.getString("nombre"));
+                registros.setidEstado(rs.getInt("idEstado"));
+                registros.setEstatus(rs.getString("estatus"));
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e.getMessage());
+        }
+        return registros;
     }
 }
