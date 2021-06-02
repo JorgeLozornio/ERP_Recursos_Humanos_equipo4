@@ -1,11 +1,18 @@
 
 package TablasDAO;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,13 +36,11 @@ public class AsistenciasDAO {
             String sql = "insert into Asistencias (fecha, horaEntrada, horaSalida, dia, idEmpleado, estatus) values (?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             
-            String idE = getIdEmpleado(empleado);
-            
             pst.setString(1, fecha);
             pst.setString(2, h1);
             pst.setString(3, h2);            
             pst.setString(4, dia);
-            pst.setString(5, idE);
+            pst.setString(5, empleado);
             pst.setString(6, estatus);
             pst.execute();
             
@@ -47,11 +52,12 @@ public class AsistenciasDAO {
     }
     
     public DefaultTableModel mostrarDatos(int inicio, int fin){
-        String [] titulos = {"idAsistencia","fecha", "horaEntrada", "horaSalida", "dia", "empleado","estatus"};
-        String [] registros = new String [8];
+        String [] titulos = {"idAsistencia","fecha", "horaEntrada", "horaSalida", "dia", "nombre", "apellidoPaterno", "apellidoMaterno", "estatus"};
+        String [] registros = new String [9];
         
         DefaultTableModel modelo = new DefaultTableModel (null,titulos);
-        String sql = "select * from Asistencias where estatus = 'A' limit "+inicio+", "+fin;
+        String sql = "select a.idAsistencia, a.fecha, a.horaEntrada, a.horaSalida, a.dia, e.nombre, e.apellidoPaterno, e.apellidoMaterno, a.estatus"
+                    + " from Asistencias as a join Empleados as e on a.idempleado = e.idEmpleado where a.estatus = 'A' limit "+inicio+", "+fin;
         
         try{
             Statement st = con.createStatement();
@@ -63,8 +69,10 @@ public class AsistenciasDAO {
                 registros[2] = rs.getString("horaEntrada");
                 registros[3] = rs.getString("horaSalida");
                 registros[4] = rs.getString("dia");
-                registros[5] = rs.getString("idEmpleado");
-                registros[6] = rs.getString("estatus");
+                registros[5] = rs.getString("nombre");
+                registros[6] = rs.getString("apellidoPaterno");
+                registros[7] = rs.getString("apellidoMaterno");
+                registros[8] = rs.getString("estatus");
                 
                 modelo.addRow(registros);
                 
@@ -118,17 +126,48 @@ public class AsistenciasDAO {
         
     }
     
+     public String[] busquedaIndividual(String id){
+        String [] registros = new String [7];
+        
+        String sql = "select a.idAsistencia, a.fecha, a.horaEntrada, a.horaSalida, a.dia, e.idEmpleado, a.estatus "
+                    + "from asistencias as a join empleados as e\n" +
+                    "on a.idEmpleado = e.idEmpleado where idAsistencia = "+id;
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){                
+                
+                registros[0] = rs.getString("idAsistencia");
+                registros[1] = rs.getString("fecha");
+                registros[2] = rs.getString("horaEntrada");
+                registros[3] = rs.getString("horaSalida");
+                registros[4] = rs.getString("dia");
+                registros[5] = rs.getString("idEmpleado");
+                registros[6] = rs.getString("estatus");
+                
+            }
+            
+            return registros;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return registros;
+    }
+    
     public void combo(JComboBox cbo, int columna, String tabla){
         try {
             //Siempre que queremos llenar algo tenemos que limpiarlo
             cbo.removeAllItems();
-            String SQL = "SELECT nombre FROM "+tabla+" where estatus = 'A'";
+            String SQL = "select concat(idEmpleado, '. ') as idEmpleado, concat(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno) as nombre from empleados where estatus = 'A'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             //Recorremos el ResultSet, nos devuelve verdadero cuando tiene un registro
             while (rs.next()) {
                 //Al método getString le pasamos como argumento el nombre de la columna o número de la columna de la tabla que queremos que nos devuelva.
-                cbo.addItem(rs.getString(columna));
+                cbo.addItem(rs.getString(1)+" " + rs.getString(2));
             }
             //Limpiamos la memoria
             rs.close();

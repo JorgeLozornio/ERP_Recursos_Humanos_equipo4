@@ -12,8 +12,17 @@ import Reloj.Reloj;
 import TablasDAO.AsistenciasDAO;
 import TablasDAO.TurnosDAO;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -36,13 +45,31 @@ public class Asistencias extends javax.swing.JFrame {
         AsistenciasDAO tu = new AsistenciasDAO(con);
         t = tu;
         initComponents();
+        Date date = new Date();
+        fecha.setDate(date);
+        SpinnerNumberModel nmH1 = new SpinnerNumberModel();
+        SpinnerNumberModel nmH2 = new SpinnerNumberModel();
+        SpinnerNumberModel nmM1 = new SpinnerNumberModel();
+        SpinnerNumberModel nmM2 = new SpinnerNumberModel();
+        nmH1.setMaximum(23);
+        nmH1.setMinimum(0);
+        nmH2.setMaximum(23);
+        nmH2.setMinimum(0);
+        spH1.setModel(nmH1);
+        spH2.setModel(nmH2);
+        nmM1.setMaximum(59);
+        nmM1.setMinimum(0);
+        nmM2.setMaximum(59);
+        nmM2.setMinimum(0);
+        spM1.setModel(nmM1);
+        spM2.setModel(nmM2);
         Reloj h = new Reloj(lblReloj, u);
         h.start();
         this.setLocationRelativeTo(null);
         llenarCombos();
         tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
         Paginacion p = new Paginacion(con);
-        //limit = getLimit(Integer.parseInt(p.count("Turnos")), fin);
+        limit = getLimit(Integer.parseInt(p.count("Asistencias")), fin);
     }
 
     /**
@@ -63,17 +90,12 @@ public class Asistencias extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         fecha = new com.toedter.calendar.JDateChooser();
         cbEmpleado = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         Crear = new javax.swing.JLabel();
         lblEliminar = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        txtH1 = new javax.swing.JTextField();
-        txtM1 = new javax.swing.JTextField();
-        txtH2 = new javax.swing.JTextField();
-        txtM2 = new javax.swing.JTextField();
+        lblModificar = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -84,13 +106,17 @@ public class Asistencias extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         cbEstatus = new javax.swing.JComboBox<>();
-        cbDia = new javax.swing.JComboBox<>();
+        spM2 = new javax.swing.JSpinner();
+        spH1 = new javax.swing.JSpinner();
+        spM1 = new javax.swing.JSpinner();
+        spH2 = new javax.swing.JSpinner();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
+        lblDia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1080, 600));
         setMinimumSize(new java.awt.Dimension(1080, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1080, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cerrarSesion.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
@@ -135,8 +161,8 @@ public class Asistencias extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
-        jLabel2.setText("Empleado:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        jLabel2.setText("Estatus:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel3.setText("Fecha:");
@@ -150,15 +176,38 @@ public class Asistencias extends javax.swing.JFrame {
         jLabel5.setText("Hora salida:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
-        jLabel6.setText("Dia:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
-
-        fecha.setDateFormatString("YYYY-MM-dd");
+        fecha.setDateFormatString("yyyy-MM-dd");
+        fecha.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                fechaAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        fecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fechaMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                fechaMouseExited(evt);
+            }
+        });
+        fecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                fechaPropertyChange(evt);
+            }
+        });
+        fecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fechaKeyReleased(evt);
+            }
+        });
         getContentPane().add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 210, -1));
 
         cbEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cbEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 180, -1));
+        getContentPane().add(cbEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 180, -1));
 
         jLabel13.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,21 +242,16 @@ public class Asistencias extends javax.swing.JFrame {
         });
         getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 80, 30));
 
-        jLabel16.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Modificar");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 80, 30));
-        getContentPane().add(txtH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 60, -1));
-
-        txtM1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtM1ActionPerformed(evt);
+        lblModificar.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        lblModificar.setForeground(new java.awt.Color(255, 255, 255));
+        lblModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModificar.setText("Modificar");
+        lblModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblModificarMouseClicked(evt);
             }
         });
-        getContentPane().add(txtM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 60, -1));
-        getContentPane().add(txtH2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 60, -1));
-        getContentPane().add(txtM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 60, -1));
+        getContentPane().add(lblModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 80, 30));
 
         jLabel7.setText(":");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 30, -1));
@@ -226,9 +270,14 @@ public class Asistencias extends javax.swing.JFrame {
                 "idAsistencia", "HoraEntrada", "HoraSalida", "Dia", "Empleado"
             }
         ));
+        tbAsistencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbAsistenciasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbAsistencias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, 360));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 640, 220));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
@@ -244,13 +293,33 @@ public class Asistencias extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel17.setText("Empleado:");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         cbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
-        getContentPane().add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 180, -1));
+        getContentPane().add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 180, -1));
+        getContentPane().add(spM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 60, -1));
+        getContentPane().add(spH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 60, -1));
+        getContentPane().add(spM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 60, -1));
+        getContentPane().add(spH2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 60, -1));
 
-        cbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
-        getContentPane().add(cbDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 220, -1));
+        btnAtras.setText("<");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, -1, -1));
+
+        lblDia.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        getContentPane().add(lblDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -282,17 +351,19 @@ public class Asistencias extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cerrarSesionMouseClicked
 
-    private void txtM1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtM1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtM1ActionPerformed
-
     private void CrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearMouseClicked
-        String h1, h2;
-        h1 = txtH1.getText() + ":" +txtM1.getText()+":00";
-        h2 = txtH1.getText() + ":" +txtM1.getText()+":00";
-        if(verificar(h1, h2)){
+       
+        String ca[] = cbEmpleado.getSelectedItem().toString().split("\\.");
+        vHora();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dia = new SimpleDateFormat("EEEE");
+        String d = dia.format(fecha.getDate());
+        System.out.println(spH1.getValue()+":"+spM1.getValue()+":00");
+        System.out.println(spH2.getValue()+":"+spM2.getValue()+":00");
+        System.out.println(d);
+        if(verificar()){
             System.out.println(((JTextField)fecha.getDateEditor().getUiComponent()).getText());
-            t.insertar(((JTextField)fecha.getDateEditor().getUiComponent()).getText(), h1, h2, cbDia.getSelectedItem().toString(), cbEmpleado.getSelectedItem().toString(), cbEstatus.getSelectedItem().toString());
+            t.insertar(((JTextField)fecha.getDateEditor().getUiComponent()).getText(), spH1.getValue()+":"+spM1.getValue()+":00", spH2.getValue()+":"+spM2.getValue()+":00", d, ca[0], cbEstatus.getSelectedItem().toString());
             tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
             limpiar();
         }else{
@@ -308,10 +379,8 @@ public class Asistencias extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
-        String h1, h2;
-        h1 = txtH1.getText() + ":" +txtM1.getText()+":00";
-        h2 = txtH1.getText() + ":" +txtM1.getText()+":00";
-        if(verificar(h1,h2)){ 
+        
+        if(verificar()){ 
             int fila = tbAsistencias.getSelectedRow();
             String [] op = {"Si","No"};
             String id = ""+tbAsistencias.getValueAt(fila, 0);
@@ -327,11 +396,111 @@ public class Asistencias extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun registro");
         }
     }//GEN-LAST:event_lblEliminarMouseClicked
+
+    private void lblModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblModificarMouseClicked
+        
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dia = new SimpleDateFormat("EEEE");
+        String d = dia.format(fecha.getDate());
+        String ca[] = cbEmpleado.getSelectedItem().toString().split("\\.");
+        int fila = tbAsistencias.getSelectedRow();
+        String m = (String)tbAsistencias.getValueAt(fila, 0);
+        if(verificar()){
+            System.out.println(((JTextField)fecha.getDateEditor().getUiComponent()).getText());
+            t.actualizar(((JTextField)fecha.getDateEditor().getUiComponent()).getText(), spH1.getValue()+":"+spM1.getValue()+":00", spH2.getValue()+":"+spM2.getValue()+":00", d, ca[0], cbEstatus.getSelectedItem().toString(),m);
+            tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
+        }
+    }//GEN-LAST:event_lblModificarMouseClicked
+
+    private void tbAsistenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAsistenciasMouseClicked
+        int fila = tbAsistencias.getSelectedRow();
+        String r[];
+        String m = (String)tbAsistencias.getValueAt(fila, 0);
+        r = t.busquedaIndividual(m);
+        String c1[] = r[2].split(":");
+        System.out.println(c1[0]);
+        spH1.setValue(Integer.parseInt(c1[0]));
+        spM1.setValue(Integer.parseInt(c1[1]));
+        String c2[] = r[3].split(":");
+        System.out.println(c2[0]);
+        spH2.setValue(Integer.parseInt(c2[0]));
+        spM2.setValue(Integer.parseInt(c2[1]));
+        
+        for(int i = 0; i < cbEmpleado.getItemCount(); i++){
+            System.out.println(cbEmpleado.getItemAt(i)+" "+r[5]);
+            String ca[] = cbEmpleado.getItemAt(i).toString().split("\\.");
+
+            if(ca[0].equals(r[5])){
+                cbEmpleado.setSelectedIndex(i);
+            }            
+        }
+        
+        for(int i = 0; i < cbEstatus.getItemCount(); i++){
+            System.out.println(cbEstatus.getItemAt(i)+" "+r[6]);
+            if(cbEstatus.getItemAt(i).equals(r[6])){
+                cbEstatus.setSelectedIndex(i);
+            }            
+        }
+        
+        
+        try{
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)tbAsistencias.getValueAt(fila,1));          
+            fecha.setDate(date);
+        }catch(ParseException ex){
+            
+        }
+    }//GEN-LAST:event_tbAsistenciasMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if(inicio == 0){
+            btnAtras.setEnabled(false);
+        }else{
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if(inicio == limit*5){
+           btnSiguiente.setEnabled(false);
+       }else{
+           btnAtras.setEnabled(true);
+           inicio = inicio+5;
+           tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
+       }   
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void fechaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechaMouseExited
+        
+    }//GEN-LAST:event_fechaMouseExited
+
+    private void fechaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_fechaAncestorAdded
+        
+    }//GEN-LAST:event_fechaAncestorAdded
+
+    private void fechaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaKeyReleased
+        
+    }//GEN-LAST:event_fechaKeyReleased
+
+    private void fechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaPropertyChange
+        
+    }//GEN-LAST:event_fechaPropertyChange
+
+    private void fechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechaMouseClicked
+        
+    }//GEN-LAST:event_fechaMouseClicked
     int xx, xy;
     
     
-    public boolean verificar(String h1, String h2){
-        if(fecha.equals(null) | h1.equals("") | h2.equals("")){
+    public boolean verificar(){
+        if(fecha.equals(null) | vHora() == false){
+            if(vHora() == false){
+                JOptionPane.showMessageDialog(null, "Horario invalido");
+            }
             return false;
         }else{
             return true;
@@ -340,19 +509,42 @@ public class Asistencias extends javax.swing.JFrame {
     
     public void limpiar(){
         fecha.setDate(null);
-        txtH1.setText("");
-        txtH2.setText("");
-        txtM1.setText("");
-        txtM2.setText("");
+        spH1.setValue(0);
+        spH2.setValue(0);
+        spM1.setValue(0);
+        spM1.setValue(0);
+    }
+    
+    public boolean vHora(){
+        // 12:00    8:45
+        int a1 = (int) spH1.getValue();
+        int a2 = (int) spM1.getValue();
+        int b1 = (int) spH2.getValue();
+        int b2 = (int) spM2.getValue();
+        System.out.println(Math.abs(a1-b1) + " "+Math.abs(a2-b2) );
+        if(Math.abs(a1-b1) < 8 | Math.abs(a1-b1) > 12){
+            System.out.println("Hola");
+            return false;
+        }else{
+            System.out.println("Adios");
+            return true;
+        }
     }
     
     public void llenarCombos() {
         t.combo(cbEmpleado, 1, "Empleados");
     }
+    
+    public int getLimit(int n, int lim){        
+        limit = (int) Math.ceil(n/lim);
+        System.out.println(n +" "+ limit);
+        return limit;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Crear;
-    private javax.swing.JComboBox<String> cbDia;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cbEmpleado;
     private javax.swing.JComboBox<String> cbEstatus;
     private javax.swing.JLabel cerrarSesion;
@@ -362,25 +554,25 @@ public class Asistencias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBarra;
     private javax.swing.JLabel lblCruz;
+    private javax.swing.JLabel lblDia;
     private javax.swing.JLabel lblEliminar;
+    private javax.swing.JLabel lblModificar;
     private javax.swing.JLabel lblReloj;
+    private javax.swing.JSpinner spH1;
+    private javax.swing.JSpinner spH2;
+    private javax.swing.JSpinner spM1;
+    private javax.swing.JSpinner spM2;
     private javax.swing.JTable tbAsistencias;
-    private javax.swing.JTextField txtH1;
-    private javax.swing.JTextField txtH2;
-    private javax.swing.JTextField txtM1;
-    private javax.swing.JTextField txtM2;
     // End of variables declaration//GEN-END:variables
 }
