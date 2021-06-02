@@ -1,6 +1,7 @@
 
 package TablasDAO;
 
+import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -155,6 +157,30 @@ public class AsistenciasDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         return registros;
+    }
+     
+    public ArrayList<String> verificarFecha(String id){
+        String [] registros = new String [1];
+        ArrayList<String> r = new ArrayList<String>();
+        String sql = "select fecha from asistencias where idEmpleado = "+id+" and estatus = 'A'";
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){                
+                
+                registros[0] = rs.getString("fecha");
+                r.add(registros[0]);
+                
+            }
+            
+            return r;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return r;
     }
     
     public void combo(JComboBox cbo, int columna, String tabla){

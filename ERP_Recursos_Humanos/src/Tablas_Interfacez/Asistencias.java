@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -354,14 +355,13 @@ public class Asistencias extends javax.swing.JFrame {
     private void CrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearMouseClicked
        
         String ca[] = cbEmpleado.getSelectedItem().toString().split("\\.");
-        vHora();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat dia = new SimpleDateFormat("EEEE");
         String d = dia.format(fecha.getDate());
         System.out.println(spH1.getValue()+":"+spM1.getValue()+":00");
         System.out.println(spH2.getValue()+":"+spM2.getValue()+":00");
         System.out.println(d);
-        if(verificar()){
+        if(verificar(ca[0])){
             System.out.println(((JTextField)fecha.getDateEditor().getUiComponent()).getText());
             t.insertar(((JTextField)fecha.getDateEditor().getUiComponent()).getText(), spH1.getValue()+":"+spM1.getValue()+":00", spH2.getValue()+":"+spM2.getValue()+":00", d, ca[0], cbEstatus.getSelectedItem().toString());
             tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
@@ -379,11 +379,11 @@ public class Asistencias extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
-        
-        if(verificar()){ 
-            int fila = tbAsistencias.getSelectedRow();
-            String [] op = {"Si","No"};
-            String id = ""+tbAsistencias.getValueAt(fila, 0);
+        int fila = tbAsistencias.getSelectedRow();
+        String [] op = {"Si","No"};
+        String id = ""+tbAsistencias.getValueAt(fila, 0);
+        if(verificar(id)){ 
+            
             int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
                     "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, op,op[0]);
@@ -405,7 +405,7 @@ public class Asistencias extends javax.swing.JFrame {
         String ca[] = cbEmpleado.getSelectedItem().toString().split("\\.");
         int fila = tbAsistencias.getSelectedRow();
         String m = (String)tbAsistencias.getValueAt(fila, 0);
-        if(verificar()){
+        if(verificar(ca[0])){
             System.out.println(((JTextField)fecha.getDateEditor().getUiComponent()).getText());
             t.actualizar(((JTextField)fecha.getDateEditor().getUiComponent()).getText(), spH1.getValue()+":"+spM1.getValue()+":00", spH2.getValue()+":"+spM2.getValue()+":00", d, ca[0], cbEstatus.getSelectedItem().toString(),m);
             tbAsistencias.setModel(t.mostrarDatos(inicio, fin));
@@ -496,10 +496,24 @@ public class Asistencias extends javax.swing.JFrame {
     int xx, xy;
     
     
-    public boolean verificar(){
-        if(fecha.equals(null) | vHora() == false){
+    public boolean verificar(String id){
+        
+        ArrayList<String> l = t.verificarFecha(id);
+        boolean f = true;
+        for (int i = 0; i < l.size(); i++) {
+            if(((JTextField)fecha.getDateEditor().getUiComponent()).getText().equals(l.get(i))){
+                f = false;
+            }else{
+                f = true;
+            }
+        }
+        
+        if(fecha.equals(null) | vHora() == false | f == false){
             if(vHora() == false){
                 JOptionPane.showMessageDialog(null, "Horario invalido");
+            }
+            if(f == false){
+                JOptionPane.showMessageDialog(null, "El usuario no puede repetir la fecha de asistencia");
             }
             return false;
         }else{
