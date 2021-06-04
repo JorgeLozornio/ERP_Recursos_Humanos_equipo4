@@ -633,4 +633,7 @@ GRANT ALL PRIVILEGES ON Periodos TO 'Victor';
 GRANT ALL PRIVILEGES ON Sucursales TO 'Victor';
 GRANT ALL PRIVILEGES ON Nominas TO 'Victor';
 GRANT ALL PRIVILEGES ON FormasPago TO 'Victor';
+GRANT ALL PRIVILEGES ON NominasPercepciones TO 'Victor';
+GRANT ALL PRIVILEGES ON NominasDeducciones TO 'Victor';
+GRANT ALL PRIVILEGES ON Asistencias TO 'Victor';
 FLUSH PRIVILEGES;
