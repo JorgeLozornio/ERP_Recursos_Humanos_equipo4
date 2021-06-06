@@ -215,7 +215,7 @@ public class MenuTablas extends javax.swing.JFrame {
         });
         getContentPane().add(btnAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 190, -1));
 
-        nomina.setText("nomina");
+        nomina.setText("Nominas");
         nomina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nominaActionPerformed(evt);
