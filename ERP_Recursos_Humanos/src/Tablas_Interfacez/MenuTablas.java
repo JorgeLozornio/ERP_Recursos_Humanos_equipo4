@@ -60,6 +60,7 @@ public class MenuTablas extends javax.swing.JFrame {
         btnAusenciasJ = new javax.swing.JButton();
         btnAsistencias = new javax.swing.JButton();
         nomina = new javax.swing.JButton();
+        btnHistorialPuestos = new javax.swing.JButton();
         jLabelL1 = new javax.swing.JLabel();
         jLabelL2 = new javax.swing.JLabel();
         jLabelDepartamental = new javax.swing.JLabel();
@@ -100,7 +101,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnCiudadesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 189, -1));
+        getContentPane().add(btnCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 189, -1));
 
         btnTurnos.setText("Turnos");
         btnTurnos.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +109,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnTurnosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 189, -1));
+        getContentPane().add(btnTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 189, -1));
 
         btnestados.setText("Estados");
         btnestados.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +117,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnestadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 189, -1));
+        getContentPane().add(btnestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 189, -1));
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/BotonLogin.png"))); // NOI18N
         btnLogin.setBorder(null);
@@ -138,7 +139,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnPuestosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 189, -1));
+        getContentPane().add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 189, -1));
 
         btnDeducciones.setText("Deducciones");
         btnDeducciones.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +163,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnDepartamentosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 189, -1));
+        getContentPane().add(btnDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 189, -1));
 
         jLabel5.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -205,7 +206,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnAusenciasJActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAusenciasJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 190, -1));
+        getContentPane().add(btnAusenciasJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 190, -1));
 
         btnAsistencias.setText("Asistencias");
         btnAsistencias.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +214,7 @@ public class MenuTablas extends javax.swing.JFrame {
                 btnAsistenciasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 190, -1));
+        getContentPane().add(btnAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 190, -1));
 
         nomina.setText("Nominas");
         nomina.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +223,14 @@ public class MenuTablas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 189, -1));
+
+        btnHistorialPuestos.setText("Historial Puestos");
+        btnHistorialPuestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialPuestosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHistorialPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 189, -1));
 
         jLabelL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Linea.png"))); // NOI18N
         getContentPane().add(jLabelL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 140, 490));
@@ -430,6 +439,18 @@ public class MenuTablas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnFormasPagoActionPerformed
 
+    private void btnHistorialPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPuestosActionPerformed
+        HistorialPuestos HP = null;
+        try {
+            HP = new HistorialPuestos(con, us);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        HP.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHistorialPuestosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsistencias;
@@ -440,6 +461,7 @@ public class MenuTablas extends javax.swing.JFrame {
     private javax.swing.JButton btnDocumentacionEmpleados;
     private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton btnFormasPago;
+    private javax.swing.JButton btnHistorialPuestos;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnPercepciones;
     private javax.swing.JButton btnPeriodos;

@@ -98,11 +98,12 @@ motivo varchar(100) NOT NULL);
 
 /*Tabla HistorialPuestos*/
 Create Table HistorialPuestos(
-idEmpleado int not null primary key auto_increment,
+idEmpleado int NOT NULL,
 idPuesto int NOT NULL,
 idDepartamento int NOT NULL,
 fechaInicio date NOT NULL,
 fechaFin date NOT NULL);
+ALTER TABLE HistorialPuestos ADD PRIMARY KEY (idEmpleado, idPuesto, idDepartamento);
 
 /*Tabla FormasPago*/
 Create Table FormasPago(
@@ -636,4 +637,5 @@ GRANT ALL PRIVILEGES ON FormasPago TO 'Victor';
 GRANT ALL PRIVILEGES ON NominasPercepciones TO 'Victor';
 GRANT ALL PRIVILEGES ON NominasDeducciones TO 'Victor';
 GRANT ALL PRIVILEGES ON Asistencias TO 'Victor';
+GRANT ALL PRIVILEGES ON HistorialPuestos TO 'Victor';
 FLUSH PRIVILEGES;
