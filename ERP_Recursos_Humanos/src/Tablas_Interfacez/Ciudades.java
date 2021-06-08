@@ -72,6 +72,8 @@ public class Ciudades extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 450));
+        setPreferredSize(new java.awt.Dimension(800, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelCiudad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -249,7 +251,7 @@ public class Ciudades extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldBuscarKeyReleased
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
-        if (jTextFieldCiudad.getText().isEmpty()) {
+        if (jTextFieldCiudad.getText().isEmpty() || jComboBoxEstado.getSelectedIndex() == -1 || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
         } else {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
@@ -263,7 +265,7 @@ public class Ciudades extends javax.swing.JFrame {
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
         // Manda llamar al metodo: actalizar();
-        if (jTextFieldCiudad.getText().isEmpty()) {
+        if (jTextFieldCiudad.getText().isEmpty() || jComboBoxEstado.getSelectedIndex() == -1 || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
         } else {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();

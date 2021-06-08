@@ -69,6 +69,8 @@ public class Deducciones extends javax.swing.JFrame {
         jTextFieldBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1020, 580));
+        setPreferredSize(new java.awt.Dimension(1020, 580));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -130,7 +132,7 @@ public class Deducciones extends javax.swing.JFrame {
                 lblRegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 80, 30));
+        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 80, 30));
 
         txtAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtAgregar.setForeground(new java.awt.Color(255, 255, 255));
