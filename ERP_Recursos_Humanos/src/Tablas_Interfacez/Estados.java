@@ -286,9 +286,9 @@ public class Estados extends javax.swing.JFrame {
 
     private void jLabelactuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelactuMouseClicked
         // 
-          if (texnombre.getText().isEmpty()) {
-             JOptionPane.showMessageDialog(null,"Error: Campo vacío");
-        }else{
+if (texnombre.getText().isEmpty() || texsiglas.getText().isEmpty() || boxestatus.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
+        } else {
         int seleccionEs=boxestatus.getSelectedIndex();
         int fila=Table1.getSelectedRow();
         String m=(String) Table1.getValueAt(fila, 0);
@@ -301,21 +301,22 @@ public class Estados extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelactuMouseClicked
 
     private void jLabelelimiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelelimiMouseClicked
+        if (texnombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de seleccionar el valor a eliminar");
+        } else {
         int filaSele = Table1.getSelectedRow();
         String id = "" + Table1.getValueAt(filaSele, 0);
         t.eliminar(id);
         Table1.setModel(t.mostrarDat(inicio,fin));
         
-        limpiar();
+        limpiar();}
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabelelimiMouseClicked
 
     private void jLabelagreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelagreMouseClicked
 
-        if (texnombre.getText().isEmpty() ) {
-             JOptionPane.showMessageDialog(null,"Error: Campo vacío");
-        }else if (texsiglas.getText().isEmpty() ) {
-             JOptionPane.showMessageDialog(null,"Error: Campo vacío");
+       if (texnombre.getText().isEmpty() || texsiglas.getText().isEmpty() || boxestatus.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
         
         }else{
                 int seleccionEs=boxestatus.getSelectedIndex();

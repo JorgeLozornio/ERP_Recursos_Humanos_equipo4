@@ -255,9 +255,9 @@ public class Percepciones extends javax.swing.JFrame {
 
     private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgregarMouseClicked
         int num = Integer.parseInt(txDiaspagar.getText()) ;   
-        if (txNombre.getText().isEmpty() && txDescripcion.getText().isEmpty() && txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
+        if (txNombre.getText().isEmpty() || txDescripcion.getText().isEmpty() || txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
-        } else if (num <= 0||num > 15){
+        } else if (num <= 0||num > 30){
             JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
         }else {
             int seleccionEstatus = jEstatus.getSelectedIndex();

@@ -4,9 +4,11 @@ package TablasDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.modelo_Estado;
 
 /**
  *
@@ -97,6 +99,28 @@ public class EstadosDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         
+    }
+                    public modelo_Estado consultaidEstado(int idEstado) {
+        String sql = (" SELECT * "
+                + " FROM Estados "
+                + " WHERE idEstado = " + idEstado);
+        modelo_Estado registros = new modelo_Estado();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                registros.setidEstado(rs.getInt("idEstado"));
+                registros.setNombre(rs.getString("nombre"));
+                registros.setSiglas(rs.getString("siglas"));
+                registros.setEstatus(rs.getString("estatus"));
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e.getMessage());
+        }
+        return registros;
     }
     
 }
