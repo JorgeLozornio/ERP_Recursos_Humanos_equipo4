@@ -116,6 +116,7 @@ public class Asistencias extends javax.swing.JFrame {
         lblDia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1080, 600));
         setMinimumSize(new java.awt.Dimension(1080, 600));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
