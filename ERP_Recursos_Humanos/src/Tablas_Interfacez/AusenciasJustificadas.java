@@ -61,7 +61,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     }
     
     public void llenarComboAutorizo() {
-        p.llenarCombo(cbAutorizo, 1);
+        p.llenarComboAutorizo(cbAutorizo, 1);
         int num = cbAutorizo.getItemCount();
         aE = new int[num];
         p.llenarArreglo(aE, 1, num);
@@ -76,6 +76,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         jLabelMotivo = new javax.swing.JLabel();
         jLabelFin = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
         btnSiguiente = new javax.swing.JButton();
         btnAtras2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -95,7 +96,6 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         Regresar = new javax.swing.JLabel();
         jLabelTipo = new javax.swing.JLabel();
         jLabelAutorizo = new javax.swing.JLabel();
-        jTextFieldTipo = new javax.swing.JTextField();
         fechaInicio = new com.toedter.calendar.JDateChooser();
         fechaFin = new com.toedter.calendar.JDateChooser();
         cbEmpleado = new javax.swing.JComboBox();
@@ -133,13 +133,16 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         jLabelTitulo.setText("Ausencias Justificadas");
         getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 540, 45));
 
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V", "P", "I" }));
+        getContentPane().add(jComboBoxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 160, -1));
+
         btnSiguiente.setText(">");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, -1, -1));
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, -1, -1));
 
         btnAtras2.setText("<");
         btnAtras2.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +150,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
                 btnAtras2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAtras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, -1, -1));
+        getContentPane().add(btnAtras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, -1, -1));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,9 +171,9 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 388, 330));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 620, 330));
 
-        jComboBoxEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        jComboBoxEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "P", "I" }));
         getContentPane().add(jComboBoxEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 160, -1));
 
         jTextFieldBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +236,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         txtEliminar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtEliminar2.setText("Limpiar");
         txtEliminar2.setAlignmentY(1.0F);
-        getContentPane().add(txtEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 60, 30));
+        getContentPane().add(txtEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, 60, 30));
 
         txtEliminar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtEliminar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,13 +271,6 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         jLabelAutorizo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelAutorizo.setText("Autorizo:");
         getContentPane().add(jLabelAutorizo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 130, -1));
-
-        jTextFieldTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTipoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 160, -1));
 
         fechaInicio.setDateFormatString("yyyy/MM/dd");
         getContentPane().add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 160, -1));
@@ -329,7 +325,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
                 jButtonLimpiarMouseClicked(evt);
             }
         });
-        getContentPane().add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
+        getContentPane().add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, -1, -1));
 
         getContentPane().add(cbEmpleado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 180, -1));
 
@@ -347,7 +343,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         limpiar();
         
         cbEmpleado.setSelectedItem(ausencias.getidEmpleadoSolicita());
-        jTextFieldTipo.setText(ausencias.getTipo());
+        jComboBoxTipo.setSelectedItem(ausencias.getTipo());
         fechaInicio.setDate(ausencias.getFechaInicio());
         fechaFin.setDate(ausencias.getFechaFin());
         txfEvidencia.setText(ausencias.getEvidencia());
@@ -368,6 +364,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         String ff = dFormat.format(fechaFin.getDate());
         if (fi.compareTo(ff) < 0 && !(cbEmpleado.getSelectedIndex() == -1)) {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            int SeleccionTipo = jComboBoxTipo.getSelectedIndex();
             int Empleado = cbEmpleado.getSelectedIndex();
             int Autorizo = cbAutorizo.getSelectedIndex();
             Modelo_AusenciasJustificadas ausencias = new Modelo_AusenciasJustificadas();
@@ -375,7 +372,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
             ausencias.setFechaInicio(fechaInicio.getDate());
             ausencias.setFechaFin(fechaFin.getDate());
             ausencias.setFechaSolicitud(fecha);
-            ausencias.setTipo(jTextFieldTipo.getText());
+            ausencias.setTipo(jComboBoxTipo.getItemAt(SeleccionTipo));
             ausencias.setidEmpleadoSolicita(aE[Empleado] + 1);
             ausencias.setidEmpleadoAutoriza(aE[Autorizo] + 1);
             ausencias.setEvidencia(txfEvidencia.getText());
@@ -399,6 +396,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         if(fi.compareTo(ff) < 0){
             if (fi.compareTo(ff) < 0 && !(cbEmpleado.getSelectedIndex() == -1)) {
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+            int seleccionTipo = jComboBoxTipo.getSelectedIndex();
             int Empleado = cbEmpleado.getSelectedIndex();
             int Autorizo = cbAutorizo.getSelectedIndex();
             Modelo_AusenciasJustificadas ausencias = new Modelo_AusenciasJustificadas();
@@ -407,7 +405,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
             ausencias.setFechaInicio(fechaInicio.getDate());
             ausencias.setFechaFin(fechaFin.getDate());
             ausencias.setFechaSolicitud(fecha);
-            ausencias.setTipo(jTextFieldTipo.getText());
+            ausencias.setTipo(jComboBoxTipo.getItemAt(seleccionTipo));
             ausencias.setidEmpleadoSolicita(aE[Empleado] + 1);
             ausencias.setidEmpleadoAutoriza(aE[Autorizo] + 1);
             ausencias.setEvidencia(txfEvidencia.getText());
@@ -427,10 +425,6 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     private void jButtonLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLimpiarMouseClicked
         limpiar();
     }//GEN-LAST:event_jButtonLimpiarMouseClicked
-
-    private void jTextFieldTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTipoActionPerformed
 
     private void jTextFieldMotivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMotivoActionPerformed
         // TODO add your handling code here:
@@ -496,8 +490,8 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     public void limpiar() {
         fechaInicio.setDate(null);
         fechaFin.setDate(null);
-        jTextFieldTipo.setText("");
         jTextFieldMotivo.setText("");
+        jComboBoxTipo.setSelectedItem(null);
         jComboBoxEstatus.setSelectedItem(null);
         cbAutorizo.setSelectedItem(null);
         cbEmpleado.setSelectedItem(null);
@@ -515,7 +509,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         String[] titulos = {"idAusencia", "fechaSolicitud", "fechaInicio", "fechaFin", "tipo", "idEmpleadoSolicita", "idEmpleadoAutoriza", "evidencia", "estatus", "motivo"};
         String[] registros = new String[10];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM AusenciasJustificadas WHERE idAusencia LIKE '%" + valor + "%' AND estatus = 'A'";
+        String SQL = "SELECT * FROM AusenciasJustificadas WHERE idAusencia LIKE '%" + valor + "%' and (estatus = 'P' or estatus = 'A' )";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -556,6 +550,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     private javax.swing.JLabel jButtonLimpiar;
     private javax.swing.JLabel jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabelAgregar;
     private javax.swing.JLabel jLabelAutorizo;
     private javax.swing.JLabel jLabelBuscar;
@@ -573,7 +568,6 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     public javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextField jTextFieldMotivo;
-    private javax.swing.JTextField jTextFieldTipo;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JTextField txfEvidencia;
     private javax.swing.JLabel txtEliminar;
