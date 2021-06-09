@@ -28,6 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.JFileChooser;
 
 public class Nominas extends javax.swing.JFrame {
 
@@ -1208,27 +1209,37 @@ public class Nominas extends javax.swing.JFrame {
 
     private void TxtExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtExcelMouseClicked
         try {
-            Workbook wb = new XSSFWorkbook();
-            Sheet sheet = wb.createSheet("Nominas");
-            Row rowCol = sheet.createRow(0);
-            for (int i = 0; i < tbNominas.getColumnCount(); i++) {
-                Cell cell = rowCol.createCell(i);
-                cell.setCellValue(tbNominas.getColumnName(i));
-            }
-            for (int j = 0; j < tbNominas.getRowCount(); j++) {
-                Row row = sheet.createRow(j + 1);
-                for (int k = 0; k < tbNominas.getColumnCount(); k++) {
-                    Cell cell = row.createCell(k);
-                    if (tbNominas.getValueAt(j, k) != null) {
-                        cell.setCellValue(tbNominas.getValueAt(j, k).toString());
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Nominas");
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < tbNominas.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(tbNominas.getColumnName(i));
+                }
+                for (int j = 0; j < tbNominas.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 1);
+                    for (int k = 0; k < tbNominas.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (tbNominas.getValueAt(j, k) != null) {
+                            cell.setCellValue(tbNominas.getValueAt(j, k).toString());
+                        }
                     }
                 }
+
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                System.err.println("Archivo creado");
+            } else{
+                JOptionPane.showMessageDialog(null, "Error al generar el archivo");
             }
-            FileOutputStream out = new FileOutputStream(new File("Nominas.xlsx"));
-            wb.write(out);
-            wb.close();
-            out.close();
-            System.err.println(out);
         } catch (FileNotFoundException e) {
             System.out.println(e);
         } catch (IOException io) {
