@@ -61,12 +61,18 @@ public class AusenciasJustificadasDAO {
             JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
         }
     }
-
+    
+    public DefaultTableModel diasDisponibles(int dias, int id)
+    {
+        
+    }
+    
+    
     public DefaultTableModel consultaDatos(int inicio, int fin) {
         String[] titulos = {"idAusencia", "fechaSolicitud", "fechaInicio", "fechaFin", "tipo", "idEmpleadoSolicita", "idEmpleadoAutoriza", "evidencia", "estatus", "motivo"};
         String[] registros = new String[10];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "select * from AusenciasJustificadas where estatus = 'A' limit " + inicio + ", " + fin;
+        String SQL = "select * from AusenciasJustificadas where estatus = 'A' or estatus = 'P' limit " + inicio + ", " + fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -172,6 +178,28 @@ public class AusenciasJustificadasDAO {
             //Siempre que queremos llenar algo tenemos que limpiarlo
             cbo.removeAllItems();
             String SQL = "SELECT nombre FROM empleados";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            //Recorremos el ResultSet, nos devuelve verdadero cuando tiene un registro
+            while (rs.next()) {
+                //Al método getString le pasamos como argumento el nombre de la columna o número de la columna de la tabla que queremos que nos devuelva.
+                cbo.addItem(rs.getString(columna));
+            }
+            //Para que no se seleccione ninguno en el combobox
+            cbo.setSelectedIndex(-1);
+            //Limpiamos la memoria
+            rs.close();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void llenarComboAutorizo(JComboBox cbo, int columna) {
+        try {
+            //Siempre que queremos llenar algo tenemos que limpiarlo
+            cbo.removeAllItems();
+            String SQL = "SELECT nombre FROM empleados where idDepartamento =2";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             //Recorremos el ResultSet, nos devuelve verdadero cuando tiene un registro
