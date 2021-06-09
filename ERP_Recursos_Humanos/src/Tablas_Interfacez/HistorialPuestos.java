@@ -4,6 +4,7 @@ import TablasDAO.HistorialPuestosDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 public class HistorialPuestos extends javax.swing.JFrame {
 
@@ -188,11 +189,15 @@ public class HistorialPuestos extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
         String fi = dFormat.format(fechaInicio.getDate());
         String ff = dFormat.format(fechaFin.getDate());
-        t.insertarDatos(jComboBoxEmpleado.getSelectedIndex(), jComboBoxPuesto.getSelectedIndex(), jComboBoxDepartamento.getSelectedIndex(), fi, ff);
-        // Manda a llamar el metodo: limpiar()
-        limpiar();
-        //Ejecute el metodo: consultaDatos, para cuando se agrega un campo
-        jTableHP.setModel(t.consultaDatos());
+        if (jComboBoxEmpleado.getSelectedIndex() == -1 || jComboBoxPuesto.getSelectedIndex() == -1 || jComboBoxDepartamento.getSelectedIndex() == -1 || fechaInicio.getDate() == null || fechaFin.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos");
+        } else {
+            t.insertarDatos(jComboBoxEmpleado.getSelectedIndex(), jComboBoxPuesto.getSelectedIndex(), jComboBoxDepartamento.getSelectedIndex(), fi, ff);
+            // Manda a llamar el metodo: limpiar()
+            limpiar();
+            //Ejecute el metodo: consultaDatos, para cuando se agrega un campo
+            jTableHP.setModel(t.consultaDatos());
+        }
     }//GEN-LAST:event_jTxtAgregarMouseClicked
 
     private void jTxtActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTxtActualizarMouseClicked
@@ -201,11 +206,15 @@ public class HistorialPuestos extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
         String fi = dFormat.format(fechaInicio.getDate());
         String ff = dFormat.format(fechaFin.getDate());
+        if(jComboBoxEmpleado.getSelectedIndex() == -1 || jComboBoxPuesto.getSelectedIndex() == -1 || jComboBoxDepartamento.getSelectedIndex() == -1 || fechaInicio.getDate() == null || fechaFin.getDate() == null){
+           JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos"); 
+        } else {
         t.actualizar(jComboBoxEmpleado.getSelectedIndex(), jComboBoxPuesto.getSelectedIndex(), jComboBoxDepartamento.getSelectedIndex(), fi, ff, m);
         // Manda a llamar el metodo: limpiar()
         limpiar();
         //Ejecute el metodo: consultaDatos, para cuando se agrega un campo
         jTableHP.setModel(t.consultaDatos());
+        }
     }//GEN-LAST:event_jTxtActualizarMouseClicked
 
     public void limpiar() {
