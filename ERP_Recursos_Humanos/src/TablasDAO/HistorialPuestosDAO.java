@@ -22,14 +22,14 @@ public class HistorialPuestosDAO {
 
             PreparedStatement pst = con.prepareStatement(SQL);
 
-            pst.setInt(1, idE);
+            pst.setInt(1, idE + 1);
 
-            pst.setInt(2, idP);
-            
-            pst.setInt(3, idD);
-            
+            pst.setInt(2, idP + 1);
+
+            pst.setInt(3, idD + 1);
+
             pst.setString(4, fechaInicio);
-            
+
             pst.setString(5, fechaFin);
 
             pst.execute();
@@ -40,8 +40,8 @@ public class HistorialPuestosDAO {
             JOptionPane.showMessageDialog(null, "Error al registrar: " + e.getMessage());
         }
     }
-    
-        public DefaultTableModel consultaDatos() {
+
+    public DefaultTableModel consultaDatos() {
         String[] titulos = {"idEmpleado", "idPuesto", "idDepartamento", "fechaInicio", "fechaFin"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
@@ -63,6 +63,31 @@ public class HistorialPuestosDAO {
             JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
         }
         return model;
+    }
+
+    public void actualizar(int idE, int idP, int idD, String fechaInicio, String fechaFin, String id) {
+        try {
+            String SQL = "UPDATE HistorialPuestos SET idEmpleado = ?, idPuesto = ?, idDepartamento = ?, fechaInicio = ?, fechaFin = ? WHERE idEmpleado = ?, idPuesto = ?, idDepartamento = ?";
+
+            PreparedStatement pst = con.prepareStatement(SQL);
+
+            pst.setInt(1, idE + 1);
+
+            pst.setInt(2, idP + 1);
+
+            pst.setInt(3, idD + 1);
+
+            pst.setString(4, fechaInicio);
+
+            pst.setString(5, fechaFin);
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Actualización exitosa");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar: " + e.getMessage());
+        }
     }
 
     public void llenarComboE(JComboBox cbo, int columna) {

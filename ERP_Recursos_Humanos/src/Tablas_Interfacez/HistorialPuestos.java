@@ -121,6 +121,11 @@ public class HistorialPuestos extends javax.swing.JFrame {
         jTxtActualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTxtActualizar.setForeground(new java.awt.Color(255, 255, 255));
         jTxtActualizar.setText("Actualizar");
+        jTxtActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTxtActualizarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jTxtActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 300, 100, 50));
 
         jLabelActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
@@ -185,9 +190,31 @@ public class HistorialPuestos extends javax.swing.JFrame {
         String ff = dFormat.format(fechaFin.getDate());
         t.insertarDatos(jComboBoxEmpleado.getSelectedIndex(), jComboBoxPuesto.getSelectedIndex(), jComboBoxDepartamento.getSelectedIndex(), fi, ff);
         // Manda a llamar el metodo: limpiar()
-        //limpiar();
+        limpiar();
+        //Ejecute el metodo: consultaDatos, para cuando se agrega un campo
+        jTableHP.setModel(t.consultaDatos());
     }//GEN-LAST:event_jTxtAgregarMouseClicked
 
+    private void jTxtActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTxtActualizarMouseClicked
+        int fila = jTableHP.getSelectedRow();
+        String m = (String) jTableHP.getValueAt(fila, 0);
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String fi = dFormat.format(fechaInicio.getDate());
+        String ff = dFormat.format(fechaFin.getDate());
+        t.actualizar(jComboBoxEmpleado.getSelectedIndex(), jComboBoxPuesto.getSelectedIndex(), jComboBoxDepartamento.getSelectedIndex(), fi, ff, m);
+        // Manda a llamar el metodo: limpiar()
+        limpiar();
+        //Ejecute el metodo: consultaDatos, para cuando se agrega un campo
+        jTableHP.setModel(t.consultaDatos());
+    }//GEN-LAST:event_jTxtActualizarMouseClicked
+
+    public void limpiar() {
+        jComboBoxEmpleado.setSelectedItem(null);
+        jComboBoxPuesto.setSelectedItem(null);
+        jComboBoxDepartamento.setSelectedItem(null);
+        fechaInicio.setToolTipText("");
+        fechaFin.setToolTipText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;
