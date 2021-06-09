@@ -260,7 +260,7 @@ public class Ciudades extends javax.swing.JFrame {
         Ciu = DAO.consultaidCiudad(idCiudad);
 
         jTextFieldCiudad.setText(Ciu.getNombre());
-        jComboBoxEstado.setSelectedItem(Ciu.getidEstado());
+        jComboBoxEstado.setSelectedIndex(Ciu.getidEstado() -1);
         jComboBoxEstatus.setSelectedItem(Ciu.getEstatus());
     }//GEN-LAST:event_jTableMouseClicked
 
