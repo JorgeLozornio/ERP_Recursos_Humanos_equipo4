@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class Modelo_AusenciasJustificadas {
     private Integer idAusencia;
+    private Integer dias;
     private Date fechaSolicitud;
     private Date fechaInicio;
     private Date fechaFin;
@@ -25,6 +26,7 @@ public class Modelo_AusenciasJustificadas {
         AusenciasJustificadasDAO dao = new AusenciasJustificadasDAO(conexion);
         Modelo_AusenciasJustificadas ausencia = dao.consultaId(idAusencia);
         this.idAusencia = ausencia.idAusencia;
+        this.dias = ausencia.dias;
         this.fechaSolicitud = ausencia.fechaSolicitud;
         this.fechaInicio = ausencia.fechaInicio;
         this.fechaFin = ausencia.fechaFin;
@@ -46,6 +48,14 @@ public class Modelo_AusenciasJustificadas {
 
     public void setId(int idAusencia) {
         this.idAusencia = idAusencia;
+    }
+    
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
     }
 
     public Date getFechaSolicitud() {
