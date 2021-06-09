@@ -284,10 +284,12 @@ public class Deducciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelAgregarMouseClicked
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
-        // Manda llamar al metodo: actalizar();
+        float por = Float.parseFloat(jTextFieldPorcentaje.getText());
         if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty() || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: Debes llenar todos los campos");
-        } else {
+        } else if (por <= 0 || por > 100) {
+            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
+        } else {            
             int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
             int fila = jTableD.getSelectedRow();
             String m = (String) jTableD.getValueAt(fila, 0);
