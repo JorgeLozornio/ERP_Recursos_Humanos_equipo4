@@ -411,6 +411,8 @@ public class Ciudades extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextField jTextFieldCiudad;
+    private javax.swing.JLabel lblBarra;
+    private javax.swing.JLabel lblBarra1;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JLabel txtAgregar;
