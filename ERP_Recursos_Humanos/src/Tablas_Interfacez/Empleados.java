@@ -58,6 +58,7 @@ public class Empleados extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
@@ -77,10 +78,7 @@ public class Empleados extends javax.swing.JFrame {
         fechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         txtCurp = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbEmpleados = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblSesion = new javax.swing.JLabel();
@@ -104,6 +102,7 @@ public class Empleados extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         txtColonia = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtCP = new javax.swing.JTextField();
@@ -132,6 +131,8 @@ public class Empleados extends javax.swing.JFrame {
         txtRuta = new javax.swing.JTextField();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbEmpleados = new javax.swing.JTable();
 
         jLabel2.setText("jLabel2");
 
@@ -140,6 +141,10 @@ public class Empleados extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1080, 600));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        jLabel14.setText("Salario diario:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel4.setText("Empleados");
@@ -210,61 +215,7 @@ public class Empleados extends javax.swing.JFrame {
         jLabel13.setText("Fecha de contratación:");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
         getContentPane().add(txtCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 180, -1));
-
-        jLabel14.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
-        jLabel14.setText("Salario diario:");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 180, -1));
-
-        tbEmpleados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "idEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Sexo", "FchNacimiento", "CURP", "EstadoCivil", "fchContratacion", "SalarioDiario", "NSS", "DiasVacaciones", "DiasPermiso", "Fotografia", "Direccion", "Colonia", "CP", "Escolaridad", "Especialidad", "Email", "Contraseña", "Tipo", "Estatus", "Departamento", "Puesto", "Ciudad", "Sucursal", "Turno"
-            }
-        ));
-        tbEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbEmpleadosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tbEmpleados);
-        if (tbEmpleados.getColumnModel().getColumnCount() > 0) {
-            tbEmpleados.getColumnModel().getColumn(0).setHeaderValue("idEmpleado");
-            tbEmpleados.getColumnModel().getColumn(1).setHeaderValue("Nombre");
-            tbEmpleados.getColumnModel().getColumn(2).setHeaderValue("ApellidoPaterno");
-            tbEmpleados.getColumnModel().getColumn(3).setHeaderValue("ApellidoMaterno");
-            tbEmpleados.getColumnModel().getColumn(4).setHeaderValue("Sexo");
-            tbEmpleados.getColumnModel().getColumn(5).setHeaderValue("FchNacimiento");
-            tbEmpleados.getColumnModel().getColumn(6).setHeaderValue("CURP");
-            tbEmpleados.getColumnModel().getColumn(7).setHeaderValue("EstadoCivil");
-            tbEmpleados.getColumnModel().getColumn(8).setHeaderValue("fchContratacion");
-            tbEmpleados.getColumnModel().getColumn(9).setHeaderValue("SalarioDiario");
-            tbEmpleados.getColumnModel().getColumn(10).setHeaderValue("NSS");
-            tbEmpleados.getColumnModel().getColumn(11).setHeaderValue("DiasVacaciones");
-            tbEmpleados.getColumnModel().getColumn(12).setHeaderValue("DiasPermiso");
-            tbEmpleados.getColumnModel().getColumn(13).setHeaderValue("Fotografia");
-            tbEmpleados.getColumnModel().getColumn(14).setHeaderValue("Direccion");
-            tbEmpleados.getColumnModel().getColumn(15).setHeaderValue("Colonia");
-            tbEmpleados.getColumnModel().getColumn(16).setHeaderValue("CP");
-            tbEmpleados.getColumnModel().getColumn(17).setHeaderValue("Escolaridad");
-            tbEmpleados.getColumnModel().getColumn(18).setHeaderValue("Especialidad");
-            tbEmpleados.getColumnModel().getColumn(19).setHeaderValue("Email");
-            tbEmpleados.getColumnModel().getColumn(20).setHeaderValue("Contraseña");
-            tbEmpleados.getColumnModel().getColumn(21).setHeaderValue("Tipo");
-            tbEmpleados.getColumnModel().getColumn(22).setHeaderValue("Estatus");
-            tbEmpleados.getColumnModel().getColumn(23).setHeaderValue("Departamento");
-            tbEmpleados.getColumnModel().getColumn(24).setHeaderValue("Puesto");
-            tbEmpleados.getColumnModel().getColumn(25).setHeaderValue("Ciudad");
-            tbEmpleados.getColumnModel().getColumn(26).setHeaderValue("Sucursal");
-            tbEmpleados.getColumnModel().getColumn(27).setHeaderValue("Turno");
-        }
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 1770, 140));
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 153));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -407,6 +358,10 @@ public class Empleados extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         jLabel20.setText("Colonia:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
+        jLabel18.setText("Buscar:");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
         jPanel1.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 160, -1));
 
         jLabel21.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
@@ -487,7 +442,7 @@ public class Empleados extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, -1, -1));
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, -1, -1));
 
         btnSiguiente.setText(">");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -495,7 +450,57 @@ public class Empleados extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, -1, -1));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, -1, -1));
+
+        tbEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "idEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Sexo", "FchNacimiento", "CURP", "EstadoCivil", "fchContratacion", "SalarioDiario", "NSS", "DiasVacaciones", "DiasPermiso", "Fotografia", "Direccion", "Colonia", "CP", "Escolaridad", "Especialidad", "Email", "Contraseña", "Tipo", "Estatus", "Departamento", "Puesto", "Ciudad", "Sucursal", "Turno"
+            }
+        ));
+        tbEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEmpleadosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbEmpleados);
+        if (tbEmpleados.getColumnModel().getColumnCount() > 0) {
+            tbEmpleados.getColumnModel().getColumn(0).setHeaderValue("idEmpleado");
+            tbEmpleados.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            tbEmpleados.getColumnModel().getColumn(2).setHeaderValue("ApellidoPaterno");
+            tbEmpleados.getColumnModel().getColumn(3).setHeaderValue("ApellidoMaterno");
+            tbEmpleados.getColumnModel().getColumn(4).setHeaderValue("Sexo");
+            tbEmpleados.getColumnModel().getColumn(5).setHeaderValue("FchNacimiento");
+            tbEmpleados.getColumnModel().getColumn(6).setHeaderValue("CURP");
+            tbEmpleados.getColumnModel().getColumn(7).setHeaderValue("EstadoCivil");
+            tbEmpleados.getColumnModel().getColumn(8).setHeaderValue("fchContratacion");
+            tbEmpleados.getColumnModel().getColumn(9).setHeaderValue("SalarioDiario");
+            tbEmpleados.getColumnModel().getColumn(10).setHeaderValue("NSS");
+            tbEmpleados.getColumnModel().getColumn(11).setHeaderValue("DiasVacaciones");
+            tbEmpleados.getColumnModel().getColumn(12).setHeaderValue("DiasPermiso");
+            tbEmpleados.getColumnModel().getColumn(13).setHeaderValue("Fotografia");
+            tbEmpleados.getColumnModel().getColumn(14).setHeaderValue("Direccion");
+            tbEmpleados.getColumnModel().getColumn(15).setHeaderValue("Colonia");
+            tbEmpleados.getColumnModel().getColumn(16).setHeaderValue("CP");
+            tbEmpleados.getColumnModel().getColumn(17).setHeaderValue("Escolaridad");
+            tbEmpleados.getColumnModel().getColumn(18).setHeaderValue("Especialidad");
+            tbEmpleados.getColumnModel().getColumn(19).setHeaderValue("Email");
+            tbEmpleados.getColumnModel().getColumn(20).setHeaderValue("Contraseña");
+            tbEmpleados.getColumnModel().getColumn(21).setHeaderValue("Tipo");
+            tbEmpleados.getColumnModel().getColumn(22).setHeaderValue("Estatus");
+            tbEmpleados.getColumnModel().getColumn(23).setHeaderValue("Departamento");
+            tbEmpleados.getColumnModel().getColumn(24).setHeaderValue("Puesto");
+            tbEmpleados.getColumnModel().getColumn(25).setHeaderValue("Ciudad");
+            tbEmpleados.getColumnModel().getColumn(26).setHeaderValue("Sucursal");
+            tbEmpleados.getColumnModel().getColumn(27).setHeaderValue("Turno");
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 1770, 140));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1800, 570));
 
@@ -847,6 +852,7 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
