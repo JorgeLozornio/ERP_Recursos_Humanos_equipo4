@@ -62,10 +62,10 @@ public class AusenciasJustificadasDAO {
         }
     }
     
-    public DefaultTableModel diasDisponibles(int dias, int id)
-    {
+    //public DefaultTableModel diasDisponibles(int dias, int id)
+    //{
         
-    }
+    //}
     
     
     public DefaultTableModel consultaDatos(int inicio, int fin) {
