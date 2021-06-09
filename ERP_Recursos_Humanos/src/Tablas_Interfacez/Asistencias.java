@@ -114,6 +114,8 @@ public class Asistencias extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         lblDia = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1080, 600));
@@ -167,8 +169,8 @@ public class Asistencias extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
-        jLabel3.setText("Fecha:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        jLabel3.setText("Buscar:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
         jLabel4.setText("Hora entrada:");
@@ -279,7 +281,7 @@ public class Asistencias extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbAsistencias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 640, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 640, 130));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
@@ -322,6 +324,17 @@ public class Asistencias extends javax.swing.JFrame {
 
         lblDia.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 12)); // NOI18N
         getContentPane().add(lblDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Humanst521 Lt BT", 1, 14)); // NOI18N
+        jLabel6.setText("Fecha:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 580, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -494,6 +507,12 @@ public class Asistencias extends javax.swing.JFrame {
     private void fechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechaMouseClicked
         
     }//GEN-LAST:event_fechaMouseClicked
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        
+        tbAsistencias.setModel(t.busqueda(inicio, fin,txtBuscar.getText()));
+        
+    }//GEN-LAST:event_txtBuscarKeyReleased
     int xx, xy;
     
     
@@ -574,6 +593,7 @@ public class Asistencias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -589,5 +609,6 @@ public class Asistencias extends javax.swing.JFrame {
     private javax.swing.JSpinner spM1;
     private javax.swing.JSpinner spM2;
     private javax.swing.JTable tbAsistencias;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -159,6 +159,41 @@ public class AsistenciasDAO {
         return registros;
     }
      
+     public DefaultTableModel busqueda(int inicio, int fin,String ca){
+        String [] titulos = {"idAsistencia","fecha", "horaEntrada", "horaSalida", "dia", "nombre", "apellidoPaterno", "apellidoMaterno", "estatus"};
+        String [] registros = new String [9];
+        
+        DefaultTableModel modelo = new DefaultTableModel (null,titulos);
+        String sql = "select a.idAsistencia, a.fecha, a.horaEntrada, a.horaSalida, a.dia, e.nombre, e.apellidoPaterno, e.apellidoMaterno, a.estatus"
+                    + " from Asistencias as a join Empleados as e on a.idempleado = e.idEmpleado where a.fecha like  '"+ca+"%' limit "+inicio+", "+fin;
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){
+                registros[0] = rs.getString("idAsistencia");
+                registros[1] = rs.getString("fecha");
+                registros[2] = rs.getString("horaEntrada");
+                registros[3] = rs.getString("horaSalida");
+                registros[4] = rs.getString("dia");
+                registros[5] = rs.getString("nombre");
+                registros[6] = rs.getString("apellidoPaterno");
+                registros[7] = rs.getString("apellidoMaterno");
+                registros[8] = rs.getString("estatus");
+                
+                modelo.addRow(registros);
+                
+            }
+            
+            return modelo;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return modelo;
+    }
+     
     public ArrayList<String> verificarFecha(String id){
         String [] registros = new String [1];
         ArrayList<String> r = new ArrayList<String>();
