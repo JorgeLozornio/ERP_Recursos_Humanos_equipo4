@@ -41,18 +41,18 @@ public class CiudadesDAO {
     }
 
     public DefaultTableModel consultaDatos(int inicio, int fin) {
-        String[] titulos = {"idCiudad", "nombre", "idEstado", "estatus"};
+        String[] titulos = {"idCiudad", "Ciudad", "Estado", "Estatus"};
         String[] registros = new String[5];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Ciudades WHERE estatus = 'A' limit " + inicio + ", " + fin;
+        String SQL = "SELECT Ciudades.idCiudad, Ciudades.nombre AS Ciudad, Estados.nombre AS Estado, Ciudades.estatus FROM Ciudades JOIN Estados ON Ciudades.idEstado = Estados.idEstado WHERE Ciudades.estatus = 'A' limit " + inicio + ", " + fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
                 registros[0] = rs.getString("idCiudad");
-                registros[1] = rs.getString("nombre");
-                registros[2] = rs.getString("idEstado");
+                registros[1] = rs.getString("Ciudad");
+                registros[2] = rs.getString("Estado");
                 registros[3] = rs.getString("estatus");
                 model.addRow(registros);
             }

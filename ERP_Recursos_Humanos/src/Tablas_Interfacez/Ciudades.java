@@ -24,6 +24,8 @@ public class Ciudades extends javax.swing.JFrame {
     int inicio = 0;
     int fin = 5;
     int limit;
+    int xx;
+    int xy;
 
     public Ciudades(Connection c, String u) throws SQLException {
         con = c;
@@ -66,12 +68,14 @@ public class Ciudades extends javax.swing.JFrame {
         txtEliminar = new javax.swing.JLabel();
         jLabelEliminar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
-        jLabelSombra = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
+        jLabelBarra = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ciudades");
         setMinimumSize(new java.awt.Dimension(800, 450));
         setPreferredSize(new java.awt.Dimension(800, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,7 +97,7 @@ public class Ciudades extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Ciudades");
-        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 205, 45));
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 205, 45));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,11 +201,23 @@ public class Ciudades extends javax.swing.JFrame {
         });
         getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 80, 30));
 
-        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
-        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -50, -1, -1));
-
+        lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("lorem");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, -1));
 
         btnAtras.setText("<");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -223,6 +239,9 @@ public class Ciudades extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, -1, -1));
+
+        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Sombra2.png"))); // NOI18N
+        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -325,6 +344,18 @@ public class Ciudades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jLabelBarraMousePressed
+
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x-xx, y-xy);
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
     public void limpiar() {
         jTextFieldCiudad.setText("");
         jComboBoxEstado.setSelectedItem(null);
@@ -367,6 +398,7 @@ public class Ciudades extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabelAgregar;
+    private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
     private javax.swing.JLabel jLabelCiudad;
     private javax.swing.JLabel jLabelEliminar;
@@ -379,6 +411,8 @@ public class Ciudades extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextField jTextFieldCiudad;
+    private javax.swing.JLabel lblBarra;
+    private javax.swing.JLabel lblBarra1;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JLabel txtAgregar;

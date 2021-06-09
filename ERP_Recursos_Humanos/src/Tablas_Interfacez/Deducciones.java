@@ -24,6 +24,8 @@ public class Deducciones extends javax.swing.JFrame {
     int inicio = 0;
     int fin = 5;
     int limit;
+    int xx;
+    int xy;
 
     public Deducciones(Connection c, String u) throws SQLException {
         con = c;
@@ -63,20 +65,22 @@ public class Deducciones extends javax.swing.JFrame {
         jLabelEliminar = new javax.swing.JLabel();
         btnSiguiente = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        jLabelSombra = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableD = new javax.swing.JTable();
         jTextFieldBuscar = new javax.swing.JTextField();
+        jLabelBarra = new javax.swing.JLabel();
+        jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1020, 580));
-        setPreferredSize(new java.awt.Dimension(1020, 580));
+        setTitle("Deducciones");
+        setMinimumSize(new java.awt.Dimension(1020, 600));
+        setPreferredSize(new java.awt.Dimension(1020, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Deducciones");
-        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 240, 45));
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 45));
 
         jLabelNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelNombre.setText("Nombre");
@@ -116,8 +120,10 @@ public class Deducciones extends javax.swing.JFrame {
         jLabelBuscar.setText("Buscar:");
         getContentPane().add(jLabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
+        lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("lorem");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         lblRegresar.setBackground(new java.awt.Color(255, 255, 255));
         lblRegresar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -200,9 +206,6 @@ public class Deducciones extends javax.swing.JFrame {
         });
         getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, -1, -1));
 
-        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
-        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 580));
-
         jTableD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -229,6 +232,22 @@ public class Deducciones extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 500, 30));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
+
+        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
+        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -339,6 +358,18 @@ public class Deducciones extends javax.swing.JFrame {
         consultaIndividual(jTextFieldBuscar.getText());
     }//GEN-LAST:event_jTextFieldBuscarKeyReleased
 
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x-xx, y-xy);
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jLabelBarraMousePressed
+
     public void limpiar() {
         jTextFieldNombre.setText("");
         jTextFieldDescripcion.setText("");
@@ -383,6 +414,7 @@ public class Deducciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabeDescripción;
     private javax.swing.JLabel jLabeEstatus;
     private javax.swing.JLabel jLabelAgregar;
+    private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
     private javax.swing.JLabel jLabelEliminar;
     private javax.swing.JLabel jLabelModificar;

@@ -20,6 +20,8 @@ public class FormasPago extends javax.swing.JFrame {
     int inicio = 0;
     int fin = 5;
     int limit;
+    int xx;
+    int xy;
 
     public FormasPago(Connection c, String u) throws SQLException {
         con = c;
@@ -55,19 +57,21 @@ public class FormasPago extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableFP = new javax.swing.JTable();
         jLabelBuscar = new javax.swing.JLabel();
-        jLabelSombra = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         lblReloj = new javax.swing.JLabel();
         jTextFieldBuscar = new javax.swing.JTextField();
+        jLabelBarra = new javax.swing.JLabel();
+        jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Formas de pago");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Formas de pago");
-        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 45));
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 290, 45));
 
         jLabeEstatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabeEstatus.setText("Estatus");
@@ -157,9 +161,6 @@ public class FormasPago extends javax.swing.JFrame {
         jLabelBuscar.setText("Buscar:");
         getContentPane().add(jLabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
 
-        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
-        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 370));
-
         btnAtras.setText("<");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,8 +182,10 @@ public class FormasPago extends javax.swing.JFrame {
         });
         getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
 
+        lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("lorem");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -190,6 +193,22 @@ public class FormasPago extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 380, 30));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
+
+        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
+        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -284,6 +303,18 @@ public class FormasPago extends javax.swing.JFrame {
         jTextFieldNombre.setText(De.getNombre());
         jComboBoxEstatus.setSelectedItem(De.getEstatus());
     }//GEN-LAST:event_jTableFPMouseClicked
+
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x-xx, y-xy);
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jLabelBarraMousePressed
     
     public void consultaIndividual(String valor) {
         String[] titulos = {"idFormaPago", "nombre, estatus"};
@@ -325,6 +356,7 @@ public class FormasPago extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBAgregar;
     private javax.swing.JLabel jLabelBEliminar;
     private javax.swing.JLabel jLabelBRegresar;
+    private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelSombra;
