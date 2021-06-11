@@ -75,10 +75,10 @@ public class Percepciones extends javax.swing.JFrame {
         jeli = new javax.swing.JLabel();
         jregre = new javax.swing.JLabel();
         jAgre = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabelBotonActualizar = new javax.swing.JLabel();
+        jLabelBotonRegresar = new javax.swing.JLabel();
+        jLabelBotonEliminar = new javax.swing.JLabel();
+        jLabelBotonVerde = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -196,53 +196,59 @@ public class Percepciones extends javax.swing.JFrame {
         });
         getContentPane().add(barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 0, 1080, -1));
 
-        jactu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jactu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jactu.setForeground(new java.awt.Color(255, 255, 255));
         jactu.setText("Actualizar");
         jactu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jactuMouseClicked(evt);
             }
         });
-        getContentPane().add(jactu, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 60, 30));
+        getContentPane().add(jactu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 80, 30));
 
-        jeli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jeli.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jeli.setForeground(new java.awt.Color(255, 255, 255));
         jeli.setText("Eliminar");
         jeli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jeliMouseClicked(evt);
             }
         });
-        getContentPane().add(jeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, 30));
+        getContentPane().add(jeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 130, 30));
 
-        jregre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jregre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jregre.setForeground(new java.awt.Color(255, 255, 255));
         jregre.setText("Regresar");
         jregre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jregreMouseClicked(evt);
             }
         });
-        getContentPane().add(jregre, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 400, 60, 30));
+        getContentPane().add(jregre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 110, 30));
 
-        jAgre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jAgre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jAgre.setForeground(new java.awt.Color(255, 255, 255));
         jAgre.setText("Agregar");
         jAgre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jAgreMouseClicked(evt);
             }
         });
-        getContentPane().add(jAgre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, -1, 30));
+        getContentPane().add(jAgre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, 30));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonAzul.png")); // NOI18N
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, -1));
+        jLabelBotonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
+        getContentPane().add(jLabelBotonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, -1));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonRosa.png")); // NOI18N
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 400, -1, -1));
+        jLabelBotonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
+        getContentPane().add(jLabelBotonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, -1));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonRojo.png")); // NOI18N
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+        jLabelBotonEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelBotonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelBotonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRojo.png"))); // NOI18N
+        getContentPane().add(jLabelBotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon("C:\\Users\\napoleon\\Documents\\GitHub\\ERP_Recursos_Humanos_equipo4\\ERP_Recursos_Humanos\\src\\assets\\fondoBotonV.png")); // NOI18N
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
+        jLabelBotonVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
+        getContentPane().add(jLabelBotonVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
         getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 470, 580));
@@ -451,15 +457,15 @@ int xx, xy;
     private javax.swing.JComboBox<String> jEstatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelBotonActualizar;
+    private javax.swing.JLabel jLabelBotonEliminar;
+    private javax.swing.JLabel jLabelBotonRegresar;
+    private javax.swing.JLabel jLabelBotonVerde;
     private javax.swing.JLabel jLabelSombra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jactu;
