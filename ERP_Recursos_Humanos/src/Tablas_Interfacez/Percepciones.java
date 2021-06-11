@@ -138,6 +138,12 @@ public class Percepciones extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
         getContentPane().add(txNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 240, -1));
         getContentPane().add(txDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 240, 155));
+
+        txDiaspagar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txDiaspagarKeyTyped(evt);
+            }
+        });
         getContentPane().add(txDiaspagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 240, -1));
 
         jEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
@@ -325,11 +331,9 @@ int xx, xy;
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jAgreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgreMouseClicked
-                int num = Integer.parseInt(txDiaspagar.getText()) ;   
+   
         if (txNombre.getText().isEmpty() || txDescripcion.getText().isEmpty() || txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
-        } else if (num <= 0||num > 30){
-            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
         }else {
             int seleccionEstatus = jEstatus.getSelectedIndex();
              modelo_percepcion per = new modelo_percepcion();
@@ -382,6 +386,16 @@ int xx, xy;
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jregreMouseClicked
+
+    private void txDiaspagarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDiaspagarKeyTyped
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresar un numero");
+        }
+    }//GEN-LAST:event_txDiaspagarKeyTyped
 
     public void limpiar() {
         txNombre.setText("");
