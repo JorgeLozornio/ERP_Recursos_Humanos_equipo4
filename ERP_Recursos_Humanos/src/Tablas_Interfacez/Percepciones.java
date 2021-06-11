@@ -331,9 +331,13 @@ int xx, xy;
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jAgreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgreMouseClicked
-   
+       
         if (txNombre.getText().isEmpty() || txDescripcion.getText().isEmpty() || txDiaspagar.getText().isEmpty() || jEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
+        } else {         
+        int num = Integer.parseInt(txDiaspagar.getText()) ;   
+            if (num <= 0||num > 30){
+            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
         }else {
             int seleccionEstatus = jEstatus.getSelectedIndex();
              modelo_percepcion per = new modelo_percepcion();
@@ -346,6 +350,7 @@ int xx, xy;
             // Manda a llamar el metodo: consultaDatos()
             tableP.setModel(t.mostrarDat(inicio, fin));
         } 
+        }
         
     }//GEN-LAST:event_jAgreMouseClicked
 
