@@ -1,6 +1,8 @@
 package Tablas_Interfacez;
 
 
+import Paginacion.Paginacion;
+import Reloj.Reloj;
 import TablasDAO.PuestosDAO;
 import erp_recursos_humanos.Conexion;
 import java.sql.Connection;
@@ -22,15 +24,23 @@ public class Puestos extends javax.swing.JFrame {
     PuestosDAO p ;
     Connection con;
     String us;
+    int aE[];
+    int i = 0;
+    int inicio = 0;
+    int fin = 5;
+    int limit;
     public Puestos(Connection c, String u) throws SQLException {
         con = c;
         us = u;
         PuestosDAO tu = new PuestosDAO(con);
         p = tu;
         initComponents();
-        
+        Reloj h = new Reloj(lblReloj, u);
+        h.start();
         this.setLocationRelativeTo(null);
-        jTable.setModel(p.consultaDatos());
+        jTable.setModel(p.consultaDatos(inicio,fin));
+        Paginacion p = new Paginacion(con);
+        limit = getLimit(Integer.parseInt(p.count("Puestos")), fin);
     }
     
     
@@ -63,6 +73,10 @@ public class Puestos extends javax.swing.JFrame {
         jLabelSombra = new javax.swing.JLabel();
         txtEliminar2 = new javax.swing.JLabel();
         jButtonLimpiar = new javax.swing.JLabel();
+        lblReloj = new javax.swing.JLabel();
+        lblReloj1 = new javax.swing.JLabel();
+        btnAtras2 = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,7 +100,7 @@ public class Puestos extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Puestos");
-        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, 45));
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 205, 45));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,6 +243,28 @@ public class Puestos extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
 
+        lblReloj.setText("lorem");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+
+        lblReloj1.setText("lorem");
+        getContentPane().add(lblReloj1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, -90, -1, -1));
+
+        btnAtras2.setText("<");
+        btnAtras2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtras2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, -1, -1));
+
+        btnSiguiente.setText(">");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -263,7 +299,7 @@ public class Puestos extends javax.swing.JFrame {
                 // Manda a llamar el metodo: limpiar()
                 limpiar();
                 // Manda a llamar el metodo: consultaDatos()
-                jTable.setModel(p.consultaDatos());
+                jTable.setModel(p.consultaDatos(inicio,fin));
         }else{
               JOptionPane.showMessageDialog(null, "Ingresa catidades validas");
             }
@@ -281,7 +317,7 @@ public class Puestos extends javax.swing.JFrame {
                 String m = (String) jTable.getValueAt(fila, 0);
                 p.actualizar(jTextFieldNombre.getText(), Float.parseFloat(jTextFieldSalarioMinimo.getText()), Float.parseFloat(jTextFieldSalarioMaximo.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus),m);
                 // Manda a llamar el metodo: consultaDatos()
-                jTable.setModel(p.consultaDatos());
+                jTable.setModel(p.consultaDatos(inicio,fin));
                 // Manda a llamar el metodo: limpiar()
                 limpiar();
         }else{
@@ -310,7 +346,7 @@ public class Puestos extends javax.swing.JFrame {
         String id = "" + jTable.getValueAt(filaSeleccionada, 0);
         p.eliminar(id);
         // Manda a llamar el metodo: consultaDatos()        
-        jTable.setModel(p.consultaDatos());
+        jTable.setModel(p.consultaDatos(inicio,fin));
         // Manda a llamar el metodo: limpiar()
         limpiar();
     }//GEN-LAST:event_jButtonEliminarMouseClicked
@@ -319,11 +355,38 @@ public class Puestos extends javax.swing.JFrame {
         limpiar();
     }//GEN-LAST:event_jButtonLimpiarMouseClicked
 
+    private void btnAtras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtras2ActionPerformed
+        if (inicio == 0) {
+            btnAtras2.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+            inicio = inicio - 5;
+            jTable.setModel(p.consultaDatos(inicio,fin));
+            jTable.setModel(p.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnAtras2ActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if (inicio == limit * 5) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnAtras2.setEnabled(true);
+            inicio = inicio + 5;
+            jTable.setModel(p.consultaDatos(inicio, fin));
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
     public void limpiar(){
         jTextFieldNombre.setText("");
         jTextFieldSalarioMinimo.setText("");
         jTextFieldSalarioMaximo.setText("");
         jComboBoxEstatus.setSelectedItem(null);
+    }
+    
+    public int getLimit(int n, int lim) {
+        limit = (int) Math.ceil(n / lim);
+        System.out.println(n + " " + limit);
+        return limit;
     }
     
         public void consultaIndividual(String valor) {
@@ -353,6 +416,8 @@ public class Puestos extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras2;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jButton1;
     private javax.swing.JLabel jButtonAgregar;
     private javax.swing.JLabel jButtonEliminar;
@@ -375,6 +440,8 @@ public class Puestos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldSalarioMaximo;
     private javax.swing.JTextField jTextFieldSalarioMinimo;
+    private javax.swing.JLabel lblReloj;
+    private javax.swing.JLabel lblReloj1;
     private javax.swing.JLabel txtEliminar;
     private javax.swing.JLabel txtEliminar1;
     private javax.swing.JLabel txtEliminar2;
