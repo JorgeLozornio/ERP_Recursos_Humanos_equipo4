@@ -108,6 +108,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         jLabelSombra = new javax.swing.JLabel();
         jButtonLimpiar = new javax.swing.JLabel();
         cbEmpleado2 = new javax.swing.JComboBox();
+        jLabelBarra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,7 +132,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Ausencias Justificadas");
-        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 540, 45));
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 520, 110));
 
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V", "P", "I" }));
         getContentPane().add(jComboBoxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 160, -1));
@@ -229,7 +230,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         txtEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtEliminar.setText("Regresar");
         txtEliminar.setAlignmentY(1.0F);
-        getContentPane().add(txtEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 30));
+        getContentPane().add(txtEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 70, 30));
 
         txtEliminar2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtEliminar2.setForeground(new java.awt.Color(255, 255, 255));
@@ -262,7 +263,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
                 RegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
+        getContentPane().add(Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 90, -1));
 
         jLabelTipo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelTipo.setText("Tipo:");
@@ -328,6 +329,19 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         getContentPane().add(jButtonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, -1, -1));
 
         getContentPane().add(cbEmpleado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 180, -1));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 840, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -487,6 +501,14 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBuscarActionPerformed
 
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        
+    }//GEN-LAST:event_jLabelBarraMousePressed
+
     public void limpiar() {
         fechaInicio.setDate(null);
         fechaFin.setDate(null);
@@ -553,6 +575,7 @@ public class AusenciasJustificadas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabelAgregar;
     private javax.swing.JLabel jLabelAutorizo;
+    private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
     private javax.swing.JLabel jLabelEmpleado;
     private javax.swing.JLabel jLabelEstatus;

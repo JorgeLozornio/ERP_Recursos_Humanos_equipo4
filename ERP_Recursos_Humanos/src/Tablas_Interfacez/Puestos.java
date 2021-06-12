@@ -77,6 +77,7 @@ public class Puestos extends javax.swing.JFrame {
         lblReloj1 = new javax.swing.JLabel();
         btnAtras2 = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jLabelBarra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,7 +101,7 @@ public class Puestos extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Puestos");
-        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 205, 45));
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 205, 45));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,7 +179,7 @@ public class Puestos extends javax.swing.JFrame {
         txtEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtEliminar.setText("Regresar");
         txtEliminar.setAlignmentY(1.0F);
-        getContentPane().add(txtEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 30));
+        getContentPane().add(txtEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 70, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
@@ -188,7 +189,7 @@ public class Puestos extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 90, -1));
 
         jLabelCiudad1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCiudad1.setText("Nombre:");
@@ -264,6 +265,19 @@ public class Puestos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, -1, -1));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -376,6 +390,14 @@ public class Puestos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        
+    }//GEN-LAST:event_jLabelBarraMousePressed
+
     public void limpiar(){
         jTextFieldNombre.setText("");
         jTextFieldSalarioMinimo.setText("");
@@ -425,6 +447,7 @@ public class Puestos extends javax.swing.JFrame {
     private javax.swing.JLabel jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabelAgregar;
+    private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
     private javax.swing.JLabel jLabelCiudad;
     private javax.swing.JLabel jLabelCiudad1;
