@@ -5,6 +5,8 @@
  */
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Reloj.Reloj;
 import TablasDAO.DepartamentosDAO;
 import erp_recursos_humanos.Conexion;
@@ -77,6 +79,10 @@ public class Departamentos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txfBuscar = new javax.swing.JTextField();
         lblReloj = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelCerrar = new javax.swing.JLabel();
+        jLabelBarra = new javax.swing.JLabel();
+        jLabelSombra = new javax.swing.JLabel();
 
         jLabel9.setText("jLabel9");
 
@@ -96,11 +102,11 @@ public class Departamentos extends javax.swing.JFrame {
                 lblRegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 80, 30));
+        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 80, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Departamentos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 193, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 193, 30));
 
         tblDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,12 +137,12 @@ public class Departamentos extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-        getContentPane().add(txfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 244, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        getContentPane().add(txfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 244, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Estatus:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         lblInsertar.setBackground(new java.awt.Color(255, 255, 255));
         lblInsertar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -151,7 +157,7 @@ public class Departamentos extends javax.swing.JFrame {
                 lblInsertarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 80, 30));
+        getContentPane().add(lblInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 80, 30));
 
         lblActualizar.setBackground(new java.awt.Color(255, 255, 255));
         lblActualizar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -166,7 +172,7 @@ public class Departamentos extends javax.swing.JFrame {
                 lblActualizarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 80, 30));
+        getContentPane().add(lblActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 80, 30));
 
         lblEliminar.setBackground(new java.awt.Color(255, 255, 255));
         lblEliminar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -181,10 +187,10 @@ public class Departamentos extends javax.swing.JFrame {
                 lblEliminarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 80, 30));
+        getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 80, 30));
 
         cbEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
-        getContentPane().add(cbEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 61, -1));
+        getContentPane().add(cbEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 70, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Buscar:");
@@ -197,8 +203,44 @@ public class Departamentos extends javax.swing.JFrame {
         });
         getContentPane().add(txfBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 230, -1));
 
+        lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Cerrar Sesion");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+
+        jLabelCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        jLabelCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabelCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 40, -1));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, -1));
+
+        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
+        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 0, 470, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -212,6 +254,9 @@ public class Departamentos extends javax.swing.JFrame {
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
         // TODO add your handling code here:
+         if (txfNombre.getText().isEmpty() || cbEst.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
+         }else{
         int fila = tblDepartamentos.getSelectedRow();
         String [] op = {"Si","No"};
         String id = ""+tblDepartamentos.getValueAt(fila, 0);
@@ -223,6 +268,7 @@ public class Departamentos extends javax.swing.JFrame {
         }
         limpiar();
         tblDepartamentos.setModel(dep.mostrarTodo());
+         }
     }//GEN-LAST:event_lblEliminarMouseClicked
 
     private void lblActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActualizarMouseClicked
@@ -275,6 +321,34 @@ public class Departamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
         Buscar(txfBuscar.getText());
     }//GEN-LAST:event_txfBuscarKeyReleased
+
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jLabelBarraMousePressed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+                Sesion s = new Sesion(con);
+        if (s.cerrarSesion()) {
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCerrarMouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jLabelCerrarMouseClicked
 int xx, xy;
  public void Buscar(String valor) {
         String[] titulos = {"Id", "Nombre", "Estatus"};
@@ -310,7 +384,11 @@ int xx, xy;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBarra;
+    private javax.swing.JLabel jLabelCerrar;
+    private javax.swing.JLabel jLabelSombra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblActualizar;
     private javax.swing.JLabel lblEliminar;

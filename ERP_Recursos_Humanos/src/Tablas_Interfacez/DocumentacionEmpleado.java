@@ -5,6 +5,7 @@
  */
 package Tablas_Interfacez;
 
+
 import Herramientas.Sesion;
 import Interfaz.Login;
 import Paginacion.Paginacion;
@@ -37,6 +38,8 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
     int inicio = 0;
     int fin = 5;
     int limit;
+    int xx;
+    int xy;
 
     /**
      * Creates new form DocumentacionEmpleado
@@ -96,6 +99,9 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jLabelCerrar = new javax.swing.JLabel();
+        jLabelBarra = new javax.swing.JLabel();
+        jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,21 +119,24 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 lblBuscarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 80, 30));
+        getContentPane().add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 80, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Documentacion Empleado");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 44, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre de documento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 117, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 112, -1, 20));
         getContentPane().add(txfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 135, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Fecha de entrega:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Documento:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 214, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
 
         txfDocumento.setEditable(false);
         getContentPane().add(txfDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 135, -1));
@@ -145,7 +154,7 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 lblInsertarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 80, 30));
+        getContentPane().add(lblInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 80, 30));
 
         lblActualizar.setBackground(new java.awt.Color(255, 255, 255));
         lblActualizar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -160,7 +169,7 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 lblActualizarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 80, 30));
+        getContentPane().add(lblActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 80, 30));
 
         lblEliminar.setBackground(new java.awt.Color(255, 255, 255));
         lblEliminar.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
@@ -175,14 +184,17 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 lblEliminarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 80, 30));
+        getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 80, 30));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Estatus:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 265, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
 
         cbEstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "I" }));
         getContentPane().add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 135, -1));
 
+        lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(255, 255, 255));
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
@@ -199,7 +211,7 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 lblRegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 460, 80, 30));
+        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 80, 30));
 
         tbDoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -216,7 +228,7 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbDoc);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 400, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 480, 280));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Buscar:");
@@ -230,18 +242,21 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
         getContentPane().add(txfBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 230, -1));
         getContentPane().add(dcEntrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 130, -1));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Empleado:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, -1, -1));
 
         getContentPane().add(cbEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 130, -1));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cerrar Sesion");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         btnAtras.setText("<");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +264,7 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 60, -1));
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 60, -1));
 
         btnSiguiente.setText(">");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +272,31 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 400, 60, -1));
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, 60, -1));
+
+        jLabelCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        jLabelCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabelCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 40, -1));
+
+        jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
+        jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraMouseDragged(evt);
+            }
+        });
+        jLabelBarra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, -1));
+
+        jLabelSombra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/SombraLogin.png"))); // NOI18N
+        getContentPane().add(jLabelSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 0, 470, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -396,6 +435,24 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
             tbDoc.setModel(t.consultaDatos(inicio, fin));
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void jLabelBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_jLabelBarraMouseDragged
+
+    private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jLabelBarraMousePressed
+
+    private void jLabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCerrarMouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jLabelCerrarMouseClicked
     
 
     public void limpiar() {
@@ -486,6 +543,9 @@ public class DocumentacionEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelBarra;
+    private javax.swing.JLabel jLabelCerrar;
+    private javax.swing.JLabel jLabelSombra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblActualizar;
     private javax.swing.JLabel lblBuscar;
