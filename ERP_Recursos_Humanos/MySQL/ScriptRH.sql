@@ -619,3 +619,6 @@ ADD CHECK (porcentaje > 0 AND porcentaje < 100);
 
 ALTER TABLE FormasPago
 ADD CHECK (estatus = 'A' or estatus = 'I');
+
+ALTER TABLE HistorialPuestos
+ADD CHECK (estatus = 'A' or estatus = 'I');
