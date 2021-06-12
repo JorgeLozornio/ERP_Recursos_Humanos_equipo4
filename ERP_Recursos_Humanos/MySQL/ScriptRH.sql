@@ -102,8 +102,9 @@ idEmpleado int NOT NULL,
 idPuesto int NOT NULL,
 idDepartamento int NOT NULL,
 fechaInicio date NOT NULL,
-fechaFin date NOT NULL);
-ALTER TABLE HistorialPuestos ADD PRIMARY KEY (idEmpleado, idPuesto, idDepartamento);
+fechaFin date NOT NULL,
+estatus char NOT NULL);
+ALTER TABLE HistorialPuestos ADD PRIMARY KEY (idEmpleado, idPuesto, idDepartamento, fechaInicio);
 
 /*Tabla FormasPago*/
 Create Table FormasPago(
@@ -618,24 +619,3 @@ ADD CHECK (porcentaje > 0 AND porcentaje < 100);
 
 ALTER TABLE FormasPago
 ADD CHECK (estatus = 'A' or estatus = 'I');
-
-/* Creación de usuarios */
-CREATE USER Victor IDENTIFIED BY 'ERP123';
-GRANT ALL PRIVILEGES ON Turnos TO 'Victor';
-GRANT ALL PRIVILEGES ON Ciudades TO 'Victor';
-GRANT ALL PRIVILEGES ON Departamentos TO 'Victor';
-GRANT ALL PRIVILEGES ON Estados TO 'Victor';
-GRANT ALL PRIVILEGES ON Puestos TO 'Victor';
-GRANT ALL PRIVILEGES ON Empleados TO 'Victor';
-GRANT ALL PRIVILEGES ON DocumentacionEmpleado TO 'Victor';
-GRANT ALL PRIVILEGES ON Percepciones TO 'Victor';
-GRANT ALL PRIVILEGES ON Deducciones TO 'Victor';
-GRANT ALL PRIVILEGES ON Periodos TO 'Victor';
-GRANT ALL PRIVILEGES ON Sucursales TO 'Victor';
-GRANT ALL PRIVILEGES ON Nominas TO 'Victor';
-GRANT ALL PRIVILEGES ON FormasPago TO 'Victor';
-GRANT ALL PRIVILEGES ON NominasPercepciones TO 'Victor';
-GRANT ALL PRIVILEGES ON NominasDeducciones TO 'Victor';
-GRANT ALL PRIVILEGES ON Asistencias TO 'Victor';
-GRANT ALL PRIVILEGES ON HistorialPuestos TO 'Victor';
-FLUSH PRIVILEGES;
