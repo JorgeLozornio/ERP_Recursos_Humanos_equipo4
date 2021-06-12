@@ -43,11 +43,11 @@ public class PuestosDAO {
         }
     }
     
-    public DefaultTableModel consultaDatos() {
+    public DefaultTableModel consultaDatos(int inicio, int fin) {
         String[] titulos = {"idPuesto", "nombre", "salarioMinimo", "salarioMaximo", "estatus"};
         String[] registros = new String[6];
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String SQL = "SELECT * FROM Puestos WHERE estatus = 'A'";
+        String SQL = "SELECT * FROM Puestos WHERE estatus = 'A' limit " + inicio + ", " + fin;
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
