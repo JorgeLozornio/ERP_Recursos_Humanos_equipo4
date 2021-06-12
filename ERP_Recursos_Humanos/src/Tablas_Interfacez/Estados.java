@@ -131,7 +131,7 @@ public class Estados extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 520, 170));
 
         jLabelagre.setBackground(new java.awt.Color(102, 255, 102));
-        jLabelagre.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
+        jLabelagre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelagre.setForeground(new java.awt.Color(255, 255, 255));
         jLabelagre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelagre.setText("Agregar");
@@ -143,7 +143,7 @@ public class Estados extends javax.swing.JFrame {
         getContentPane().add(jLabelagre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 80, 30));
 
         jLabelelimi.setBackground(new java.awt.Color(255, 51, 51));
-        jLabelelimi.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
+        jLabelelimi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelelimi.setForeground(new java.awt.Color(255, 255, 255));
         jLabelelimi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelelimi.setText("Eliminar");
@@ -155,7 +155,7 @@ public class Estados extends javax.swing.JFrame {
         getContentPane().add(jLabelelimi, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 81, 30));
 
         jLabelactu.setBackground(new java.awt.Color(102, 255, 255));
-        jLabelactu.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
+        jLabelactu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelactu.setForeground(new java.awt.Color(255, 255, 255));
         jLabelactu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelactu.setText("Actualizar");
@@ -198,7 +198,8 @@ public class Estados extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonAzul.png"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
 
-        regle.setFont(new java.awt.Font("Book Antiqua", 1, 12)); // NOI18N
+        regle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        regle.setForeground(new java.awt.Color(255, 255, 255));
         regle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         regle.setText("Regresar");
         regle.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,10 +207,10 @@ public class Estados extends javax.swing.JFrame {
                 regleMouseClicked(evt);
             }
         });
-        getContentPane().add(regle, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 296, 60, 40));
+        getContentPane().add(regle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 80, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 80, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 80, -1));
 
         lblReloj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblReloj.setForeground(new java.awt.Color(255, 255, 255));
