@@ -1,5 +1,7 @@
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.CiudadesDAO;
@@ -69,6 +71,8 @@ public class Ciudades extends javax.swing.JFrame {
         jLabelEliminar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
+        jLabelCerrar = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
         jLabelBarra = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
@@ -206,6 +210,25 @@ public class Ciudades extends javax.swing.JFrame {
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        jLabelCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        jLabelCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabelCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 40, -1));
+
+        cerrarSesion.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 100, -1));
+
         jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
         jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -217,7 +240,7 @@ public class Ciudades extends javax.swing.JFrame {
                 jLabelBarraMousePressed(evt);
             }
         });
-        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, -1));
+        getContentPane().add(jLabelBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, -1));
 
         btnAtras.setText("<");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -356,6 +379,21 @@ public class Ciudades extends javax.swing.JFrame {
         this.setLocation(x-xx, y-xy);
     }//GEN-LAST:event_jLabelBarraMouseDragged
 
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_cerrarSesionMouseClicked
+
+    private void jLabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCerrarMouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jLabelCerrarMouseClicked
+
     public void limpiar() {
         jTextFieldCiudad.setText("");
         jComboBoxEstado.setSelectedItem(null);
@@ -395,11 +433,13 @@ public class Ciudades extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabelAgregar;
     private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
+    private javax.swing.JLabel jLabelCerrar;
     private javax.swing.JLabel jLabelCiudad;
     private javax.swing.JLabel jLabelEliminar;
     private javax.swing.JLabel jLabelEstado;
@@ -411,8 +451,6 @@ public class Ciudades extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JTextField jTextFieldCiudad;
-    private javax.swing.JLabel lblBarra;
-    private javax.swing.JLabel lblBarra1;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JLabel txtAgregar;

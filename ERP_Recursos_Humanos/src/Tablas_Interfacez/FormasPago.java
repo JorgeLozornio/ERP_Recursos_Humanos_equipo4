@@ -1,5 +1,7 @@
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import javax.swing.JOptionPane;
@@ -61,6 +63,8 @@ public class FormasPago extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
         lblReloj = new javax.swing.JLabel();
         jTextFieldBuscar = new javax.swing.JTextField();
+        jLabelCerrar = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
         jLabelBarra = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
 
@@ -194,6 +198,25 @@ public class FormasPago extends javax.swing.JFrame {
         });
         getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 380, 30));
 
+        jLabelCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        jLabelCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabelCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 40, -1));
+
+        cerrarSesion.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 100, -1));
+
         jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
         jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -308,14 +331,29 @@ public class FormasPago extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
-        this.setLocation(x-xx, y-xy);
+        this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_jLabelBarraMouseDragged
 
     private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
         xx = evt.getX();
         xy = evt.getY();
     }//GEN-LAST:event_jLabelBarraMousePressed
-    
+
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if (s.cerrarSesion()) {
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_cerrarSesionMouseClicked
+
+    private void jLabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCerrarMouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jLabelCerrarMouseClicked
+
     public void consultaIndividual(String valor) {
         String[] titulos = {"idFormaPago", "nombre, estatus"};
         String[] registros = new String[4];
@@ -337,6 +375,7 @@ public class FormasPago extends javax.swing.JFrame {
         }
 
     }
+
     public void limpiar() {
         jTextFieldNombre.setText("");
         jComboBoxEstatus.setSelectedItem(null);
@@ -350,6 +389,7 @@ public class FormasPago extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabeEstatus;
     private javax.swing.JLabel jLabelBActualizar;
@@ -358,6 +398,7 @@ public class FormasPago extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBRegresar;
     private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
+    private javax.swing.JLabel jLabelCerrar;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelSombra;
     private javax.swing.JLabel jLabelTitulo;

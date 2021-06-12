@@ -1,5 +1,7 @@
 package Tablas_Interfacez;
 
+import Herramientas.Sesion;
+import Interfaz.Login;
 import Paginacion.Paginacion;
 import Reloj.Reloj;
 import TablasDAO.DeduccionesDAO;
@@ -68,13 +70,15 @@ public class Deducciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableD = new javax.swing.JTable();
         jTextFieldBuscar = new javax.swing.JTextField();
+        jLabelCerrar = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
         jLabelBarra = new javax.swing.JLabel();
         jLabelSombra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Deducciones");
-        setMinimumSize(new java.awt.Dimension(1020, 600));
-        setPreferredSize(new java.awt.Dimension(1020, 600));
+        setMinimumSize(new java.awt.Dimension(1020, 535));
+        setPreferredSize(new java.awt.Dimension(1020, 535));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -114,6 +118,11 @@ public class Deducciones extends javax.swing.JFrame {
                 jTextFieldPorcentajeActionPerformed(evt);
             }
         });
+        jTextFieldPorcentaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPorcentajeKeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextFieldPorcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 210, -1));
 
         jLabelBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -138,7 +147,7 @@ public class Deducciones extends javax.swing.JFrame {
                 lblRegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 80, 30));
+        getContentPane().add(lblRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 80, 30));
 
         txtAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtAgregar.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,7 +205,7 @@ public class Deducciones extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, -1, -1));
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, -1, -1));
 
         btnAtras.setText("<");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +213,7 @@ public class Deducciones extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, -1, -1));
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 410, -1, -1));
 
         jTableD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -224,7 +233,7 @@ public class Deducciones extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableD);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 570, 370));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 570, 270));
 
         jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -232,6 +241,25 @@ public class Deducciones extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 500, 30));
+
+        jLabelCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
+        jLabelCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabelCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 40, -1));
+
+        cerrarSesion.setFont(new java.awt.Font("Humanst521 BT", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 100, -1));
 
         jLabelBarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Barra.png"))); // NOI18N
         jLabelBarra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -268,36 +296,40 @@ public class Deducciones extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRegresarMouseClicked
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
-        float por = Float.parseFloat(jTextFieldPorcentaje.getText());
         if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty() || jComboBoxEstatus.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
-        } else if (por <= 0 || por > 100){
-            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
         } else {
-            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-            t.insertarDatos(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus));
-            // Manda a llamar el metodo: limpiar()
-            limpiar();
-            // Manda a llamar el metodo: consultaDatos()
-            jTableD.setModel(t.consultaDatos(inicio, fin));
+            float por = Float.parseFloat(jTextFieldPorcentaje.getText());
+            if (por <= 0 || por > 100) {
+                JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
+            } else {
+                int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+                t.insertarDatos(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus));
+                // Manda a llamar el metodo: limpiar()
+                limpiar();
+                // Manda a llamar el metodo: consultaDatos()
+                jTableD.setModel(t.consultaDatos(inicio, fin));
+            }
         }
     }//GEN-LAST:event_jLabelAgregarMouseClicked
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
-        float por = Float.parseFloat(jTextFieldPorcentaje.getText());
         if (jTextFieldNombre.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty() || jTextFieldPorcentaje.getText().isEmpty() || jComboBoxEstatus.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(null, "Error: Debes llenar todos los campos");
-        } else if (por <= 0 || por > 100) {
-            JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
-        } else {            
-            int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
-            int fila = jTableD.getSelectedRow();
-            String m = (String) jTableD.getValueAt(fila, 0);
-            t.actualizar(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
-            // Manda a llamar el metodo: consultaDatos()
-            jTableD.setModel(t.consultaDatos(inicio, fin));
-            // Manda a llamar el metodo: limpiar()
-            limpiar();
+            JOptionPane.showMessageDialog(null, "Error: No dejes campos vacios");
+        } else {
+            float por = Float.parseFloat(jTextFieldPorcentaje.getText());
+            if (por <= 0 || por > 100) {
+                JOptionPane.showMessageDialog(null, "Debes de introducir un valor dentro del rango permitido");
+            } else {
+                int seleccionEstatus = jComboBoxEstatus.getSelectedIndex();
+                int fila = jTableD.getSelectedRow();
+                String m = (String) jTableD.getValueAt(fila, 0);
+                t.actualizar(jTextFieldNombre.getText(), jTextFieldDescripcion.getText(), Float.parseFloat(jTextFieldPorcentaje.getText()), jComboBoxEstatus.getItemAt(seleccionEstatus), m);
+                // Manda a llamar el metodo: consultaDatos()
+                jTableD.setModel(t.consultaDatos(inicio, fin));
+                // Manda a llamar el metodo: limpiar()
+                limpiar();
+            }
         }
     }//GEN-LAST:event_jLabelModificarMouseClicked
 
@@ -364,13 +396,37 @@ public class Deducciones extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
-        this.setLocation(x-xx, y-xy);
+        this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_jLabelBarraMouseDragged
 
     private void jLabelBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraMousePressed
         xx = evt.getX();
         xy = evt.getY();
     }//GEN-LAST:event_jLabelBarraMousePressed
+
+    private void jTextFieldPorcentajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPorcentajeKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Debes de ingresar un numero");
+        }
+    }//GEN-LAST:event_jTextFieldPorcentajeKeyTyped
+
+    private void jLabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCerrarMouseClicked
+        this.setVisible(false);
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jLabelCerrarMouseClicked
+
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        Sesion s = new Sesion(con);
+        if(s.cerrarSesion()){
+            Login l = new Login();
+            l.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_cerrarSesionMouseClicked
 
     public void limpiar() {
         jTextFieldNombre.setText("");
@@ -412,12 +468,14 @@ public class Deducciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JComboBox<String> jComboBoxEstatus;
     private javax.swing.JLabel jLabeDescripción;
     private javax.swing.JLabel jLabeEstatus;
     private javax.swing.JLabel jLabelAgregar;
     private javax.swing.JLabel jLabelBarra;
     private javax.swing.JLabel jLabelBuscar;
+    private javax.swing.JLabel jLabelCerrar;
     private javax.swing.JLabel jLabelEliminar;
     private javax.swing.JLabel jLabelModificar;
     private javax.swing.JLabel jLabelNombre;
