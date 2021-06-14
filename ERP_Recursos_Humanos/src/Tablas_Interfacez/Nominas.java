@@ -66,7 +66,12 @@ public class Nominas extends javax.swing.JFrame {
         llenarComboEmpleado();
         llenarComboPeriodo();
         llenarComboFormaPago();
+        llenarComboPDF();
 
+    }
+
+    public void llenarComboPDF() {
+        d.llenarCombo(jComboBoxPDF, 1);
     }
 
     public void llenarComboPercepciones() {
@@ -120,12 +125,12 @@ public class Nominas extends javax.swing.JFrame {
         jDialogFormulario = new javax.swing.JDialog();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelEstatus = new javax.swing.JLabel();
-        cbEstatus = new javax.swing.JComboBox<String>();
-        cbPeriodo = new javax.swing.JComboBox<String>();
+        cbEstatus = new javax.swing.JComboBox<>();
+        cbPeriodo = new javax.swing.JComboBox<>();
         jLabelPeriodo = new javax.swing.JLabel();
         jLabelFormaDePago = new javax.swing.JLabel();
-        cbFormaPago = new javax.swing.JComboBox<String>();
-        cbEmpleados = new javax.swing.JComboBox<String>();
+        cbFormaPago = new javax.swing.JComboBox<>();
+        cbEmpleados = new javax.swing.JComboBox<>();
         jLabelEmpleados = new javax.swing.JLabel();
         jLabelFechaDePago = new javax.swing.JLabel();
         dcFechaPago = new com.toedter.calendar.JDateChooser();
@@ -168,7 +173,7 @@ public class Nominas extends javax.swing.JFrame {
         txfNominaP = new javax.swing.JTextField();
         txfEmpleadoP = new javax.swing.JTextField();
         txfSalarioP = new javax.swing.JTextField();
-        cbPercepcion = new javax.swing.JComboBox<String>();
+        cbPercepcion = new javax.swing.JComboBox<>();
         txfDiasAPagar = new javax.swing.JTextField();
         txfImporteP = new javax.swing.JTextField();
         jTxtAceptarP = new javax.swing.JLabel();
@@ -185,7 +190,7 @@ public class Nominas extends javax.swing.JFrame {
         txfNominaD = new javax.swing.JTextField();
         txfEmpleadoD = new javax.swing.JTextField();
         txfSalarioD = new javax.swing.JTextField();
-        cbDeduccion = new javax.swing.JComboBox<String>();
+        cbDeduccion = new javax.swing.JComboBox<>();
         txfImporteD = new javax.swing.JTextField();
         jTxtAceptarD = new javax.swing.JLabel();
         jLabelBAceptarD = new javax.swing.JLabel();
@@ -211,6 +216,8 @@ public class Nominas extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
         TxtExcel = new javax.swing.JLabel();
         jLabelExportar = new javax.swing.JLabel();
+        jLabelPDF = new javax.swing.JLabel();
+        jComboBoxPDF = new javax.swing.JComboBox<>();
 
         jDialogFormulario.setTitle("Formulario nominas");
         jDialogFormulario.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -224,7 +231,7 @@ public class Nominas extends javax.swing.JFrame {
         jLabelEstatus.setText("Estatus");
         jDialogFormulario.getContentPane().add(jLabelEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 130, -1));
 
-        cbEstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "E", "P" }));
+        cbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "P" }));
         cbEstatus.setSelectedIndex(-1);
         jDialogFormulario.getContentPane().add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 120, -1));
 
@@ -599,6 +606,8 @@ public class Nominas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nominas");
+        setMinimumSize(new java.awt.Dimension(750, 380));
+        setPreferredSize(new java.awt.Dimension(750, 380));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelNominas.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -675,10 +684,10 @@ public class Nominas extends javax.swing.JFrame {
                 jTxtRegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(jTxtRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, -1, 30));
+        getContentPane().add(jTxtRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, -1, 30));
 
         jLabelBRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
-        getContentPane().add(jLabelBRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
+        getContentPane().add(jLabelBRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, -1, -1));
 
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, -1));
@@ -711,6 +720,12 @@ public class Nominas extends javax.swing.JFrame {
 
         jLabelExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
         getContentPane().add(jLabelExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, -1, -1));
+
+        jLabelPDF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelPDF.setText("Selecciona la nomina");
+        getContentPane().add(jLabelPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+
+        getContentPane().add(jComboBoxPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 160, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -824,10 +839,10 @@ public class Nominas extends javax.swing.JFrame {
 
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
         // TODO add your handling code here:
-        
+
         int fila = tbNominas.getSelectedRow();
         String id = "" + tbNominas.getValueAt(fila, 0);
-            String esta=d.obtenerEstadoNomina(id);
+        String esta = d.obtenerEstadoNomina(id);
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Error: Selecciona una fila");
         } else {
@@ -836,46 +851,46 @@ public class Nominas extends javax.swing.JFrame {
             } else {
                 if ("P".equals(esta)) {
                     cbEmpleados.setEnabled(false);
-                inicio = 0;
-                fin = 5;
-                tbPercepciones.setModel(d.consultaDatosPercepciones(inicio, fin, idNomina));
-                Paginacion p = new Paginacion(con);
-                limit = getLimit(Integer.parseInt(p.count("NominasPercepciones")), fin);
-                inicio = 0;
-                fin = 5;
-                tbDeducciones.setModel(d.consultaDatosDeducciones(inicio, fin, idNomina));
-                Paginacion p2 = new Paginacion(con);
-                limit = getLimit(Integer.parseInt(p2.count("NominasDeducciones")), fin);
-                jTxtAgregarP.setEnabled(false);
-                jLabelBAzulP.setEnabled(false);
-                jTxtEliminarP.setEnabled(false);
-                jLabelEliminarPercepcion.setEnabled(false);
-                jTxtAgregarD.setEnabled(false);
-                jLabelBAzulD.setEnabled(false);
-                jTxtEliminarD.setEnabled(false);
-                jLabelEliminarDeduccion.setEnabled(false);
-                jTxtModificar.setEnabled(false);
-                jLabelBAzulP1.setEnabled(false);
-                jTxtNueva1.setEnabled(false);
-                jLabelGuardar.setEnabled(false);
-                jDialogFormulario.setVisible(true);
-                }else{
-                cbEmpleados.setEnabled(false);
-                inicio = 0;
-                fin = 5;
-                tbPercepciones.setModel(d.consultaDatosPercepciones(inicio, fin, idNomina));
-                Paginacion p = new Paginacion(con);
-                limit = getLimit(Integer.parseInt(p.count("NominasPercepciones")), fin);
-                inicio = 0;
-                fin = 5;
-                tbDeducciones.setModel(d.consultaDatosDeducciones(inicio, fin, idNomina));
-                Paginacion p2 = new Paginacion(con);
-                limit = getLimit(Integer.parseInt(p2.count("NominasDeducciones")), fin);
-                jTxtModificar.setEnabled(true);
-                jLabelBAzulP1.setEnabled(true);
-                jTxtNueva1.setEnabled(false);
-                jLabelGuardar.setEnabled(false);
-                jDialogFormulario.setVisible(true);
+                    inicio = 0;
+                    fin = 5;
+                    tbPercepciones.setModel(d.consultaDatosPercepciones(inicio, fin, idNomina));
+                    Paginacion p = new Paginacion(con);
+                    limit = getLimit(Integer.parseInt(p.count("NominasPercepciones")), fin);
+                    inicio = 0;
+                    fin = 5;
+                    tbDeducciones.setModel(d.consultaDatosDeducciones(inicio, fin, idNomina));
+                    Paginacion p2 = new Paginacion(con);
+                    limit = getLimit(Integer.parseInt(p2.count("NominasDeducciones")), fin);
+                    jTxtAgregarP.setEnabled(false);
+                    jLabelBAzulP.setEnabled(false);
+                    jTxtEliminarP.setEnabled(false);
+                    jLabelEliminarPercepcion.setEnabled(false);
+                    jTxtAgregarD.setEnabled(false);
+                    jLabelBAzulD.setEnabled(false);
+                    jTxtEliminarD.setEnabled(false);
+                    jLabelEliminarDeduccion.setEnabled(false);
+                    jTxtModificar.setEnabled(false);
+                    jLabelBAzulP1.setEnabled(false);
+                    jTxtNueva1.setEnabled(false);
+                    jLabelGuardar.setEnabled(false);
+                    jDialogFormulario.setVisible(true);
+                } else {
+                    cbEmpleados.setEnabled(false);
+                    inicio = 0;
+                    fin = 5;
+                    tbPercepciones.setModel(d.consultaDatosPercepciones(inicio, fin, idNomina));
+                    Paginacion p = new Paginacion(con);
+                    limit = getLimit(Integer.parseInt(p.count("NominasPercepciones")), fin);
+                    inicio = 0;
+                    fin = 5;
+                    tbDeducciones.setModel(d.consultaDatosDeducciones(inicio, fin, idNomina));
+                    Paginacion p2 = new Paginacion(con);
+                    limit = getLimit(Integer.parseInt(p2.count("NominasDeducciones")), fin);
+                    jTxtModificar.setEnabled(true);
+                    jLabelBAzulP1.setEnabled(true);
+                    jTxtNueva1.setEnabled(false);
+                    jLabelGuardar.setEnabled(false);
+                    jDialogFormulario.setVisible(true);
                 }
             }
         }
@@ -883,31 +898,31 @@ public class Nominas extends javax.swing.JFrame {
 
     private void jLabelBEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBEliminarMouseClicked
         // TODO add your handling code here:
-        
+
         int fila = tbNominas.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Error: Selecciona una fila");
         } else {
-            
+
             String[] op = {"Si", "No"};
             String id = "" + tbNominas.getValueAt(fila, 0);
-            String esta=d.obtenerEstadoNomina(id);
+            String esta = d.obtenerEstadoNomina(id);
             if ("P".equals(esta)) {
-                 JOptionPane.showMessageDialog(null, "Error: Esta nomina no se puede eliminar porque ya esta pagada");
-            }else{
-            int b = JOptionPane.showOptionDialog(null, "¿Deseas eliminar este registro?",
-                    "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, op, op[0]);
-            if (b == 0) {
-                d.eliminar(id);
-                d.eliminarTodo("" + idNomina);
-            }
-            // Manda a llamar el metodo: consultaDatos()
-            inicio = 0;
-            fin = 5;
-            tbNominas.setModel(d.consultaDatos(inicio, fin));
-            Paginacion p = new Paginacion(con);
-            limit = getLimit(Integer.parseInt(p.count("Nominas")), fin);
+                JOptionPane.showMessageDialog(null, "Error: Esta nomina no se puede eliminar porque ya esta pagada");
+            } else {
+                int b = JOptionPane.showOptionDialog(null, "¿Deseas eliminar este registro?",
+                        "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, op, op[0]);
+                if (b == 0) {
+                    d.eliminar(id);
+                    d.eliminarTodo("" + idNomina);
+                }
+                // Manda a llamar el metodo: consultaDatos()
+                inicio = 0;
+                fin = 5;
+                tbNominas.setModel(d.consultaDatos(inicio, fin));
+                Paginacion p = new Paginacion(con);
+                limit = getLimit(Integer.parseInt(p.count("Nominas")), fin);
             }
         }
     }//GEN-LAST:event_jLabelBEliminarMouseClicked
@@ -1237,7 +1252,7 @@ public class Nominas extends javax.swing.JFrame {
                 wb.close();
                 out.close();
                 System.err.println("Archivo creado");
-            } else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al generar el archivo");
             }
         } catch (FileNotFoundException e) {
@@ -1290,6 +1305,7 @@ public class Nominas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbPeriodo;
     private com.toedter.calendar.JDateChooser dcFechaElaboracion;
     private com.toedter.calendar.JDateChooser dcFechaPago;
+    private javax.swing.JComboBox<String> jComboBoxPDF;
     private javax.swing.JDialog jDialogFormulario;
     private javax.swing.JDialog jDialogNominasDeducciones;
     private javax.swing.JDialog jDialogNominasPercepciones;
@@ -1327,6 +1343,7 @@ public class Nominas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNomina;
     private javax.swing.JLabel jLabelNominaD;
     private javax.swing.JLabel jLabelNominas;
+    private javax.swing.JLabel jLabelPDF;
     private javax.swing.JLabel jLabelPercepcion;
     private javax.swing.JLabel jLabelPercepciones;
     private javax.swing.JLabel jLabelPeriodo;
