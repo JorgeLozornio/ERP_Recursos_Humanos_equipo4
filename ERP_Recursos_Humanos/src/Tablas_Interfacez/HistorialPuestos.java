@@ -336,7 +336,7 @@ public class HistorialPuestos extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
         String fi = dFormat.format(fechaInicio.getDate());
         String ff = dFormat.format(fechaFin.getDate());
-        if(cbEmpleado.getSelectedIndex() == -1 || cbPuesto.getSelectedIndex() == -1 || cbDepartamento.getSelectedIndex() == -1 || fechaInicio.getDate() == null || fechaFin.getDate() == null || verificar() == false){
+        if(fechaInicio.getDate() == null || fechaFin.getDate() == null || verificar() == false){
            JOptionPane.showMessageDialog(null, "Error: Debes de rellenar todos los campos"); 
         } else {
         t.actualizar(fi, ff, cbEstatus.getSelectedItem().toString(), ca[0], cb[0], cc[0]);
