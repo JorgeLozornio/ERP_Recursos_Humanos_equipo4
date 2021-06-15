@@ -218,10 +218,16 @@ LEFT JOIN Deducciones ON NominasDeducciones.idDeduccion = Deducciones.idDeduccio
 	</background>
 	<title>
 		<band height="82" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="140" height="80" uuid="479c7fe0-4aba-4610-ad79-afa8f48c3303"/>
-				<imageExpression><![CDATA["C:/Users/napoleon/Documents/GitHub/ERP_Recursos_Humanos_equipo4/ERP_Recursos_Humanos/src/assets/logo6 (2).jpg"]]></imageExpression>
-			</image>
+			<rectangle>
+				<reportElement mode="Opaque" x="-20" y="0" width="595" height="70" backcolor="#917070" uuid="27afe0a8-c100-4977-82d7-839bfe9b8e37"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="230" y="10" width="100" height="60" uuid="e88de2ab-dfd5-4754-b3f8-3120be8b351b"/>
+				<textElement textAlignment="Center">
+					<font size="42" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.H]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
