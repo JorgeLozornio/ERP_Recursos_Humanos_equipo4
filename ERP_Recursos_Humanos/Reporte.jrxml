@@ -324,6 +324,10 @@ LEFT JOIN Deducciones ON NominasDeducciones.idDeduccion = Deducciones.idDeduccio
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Fecha de pago}]]></textFieldExpression>
 			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="0" width="100" height="20" uuid="d4994993-1f70-4e51-b504-7caa5cdea07a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
