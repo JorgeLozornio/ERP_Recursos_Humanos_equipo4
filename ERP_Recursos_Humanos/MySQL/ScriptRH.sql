@@ -630,3 +630,14 @@ on empleados
 for each row
 insert into historialpuestos(idempleado, idpuesto, iddepartamento, fechainicio, estatus)
 values(new.idempleado, new.idpuesto, new.iddepartamento, new.fechacontratacion, 'A');
+
+/*Vista*/
+CREATE VIEW pdfView AS
+SELECT Empleados.nombre AS Nombre, Empleados.apellidoPaterno AS "Apellido paterno", Empleados.apellidoMaterno AS "Apellido materno", Nominas.idNomina AS Nomina, Nominas.fechaElaboracion AS "Fecha de elaboración", Nominas.fechaPago AS "Fecha de pago", Nominas.subtotal AS Subtotal, Nominas.retenciones AS Retenciones, Nominas.total AS Total, Nominas.diasTrabajados AS "Días trabajados", Percepciones.nombre AS "Percepción", NominasPercepciones.importe AS "Importe de percepciones", Deducciones.nombre AS "Deducción", NominasDeducciones.importe AS "Importe por deducciones"
+FROM Empleados
+LEFT JOIN Nominas ON Empleados.idEmpleado = Nominas.idEmpleado
+LEFT JOIN NominasPercepciones ON Nominas.idNomina = NominasPercepciones.idNomina
+LEFT JOIN Percepciones ON NominasPercepciones.idPercepcion = Percepciones.idPercepcion
+LEFT JOIN NominasDeducciones ON Nominas.idNomina = NominasDeducciones.idNomina
+LEFT JOIN Deducciones ON NominasDeducciones.idDeduccion = Deducciones.idDeduccion;
+SELECT *
