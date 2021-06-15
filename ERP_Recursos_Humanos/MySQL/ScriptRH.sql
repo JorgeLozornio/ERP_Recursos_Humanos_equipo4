@@ -102,8 +102,8 @@ idEmpleado int NOT NULL,
 idPuesto int NOT NULL,
 idDepartamento int NOT NULL,
 fechaInicio date NOT NULL,
-fechaFin date NOT NULL,
-estatus char NOT NULL);
+fechaFin date,
+estatus char );
 ALTER TABLE HistorialPuestos ADD PRIMARY KEY (idEmpleado, idPuesto, idDepartamento, fechaInicio);
 
 /*Tabla FormasPago*/
@@ -622,3 +622,11 @@ ADD CHECK (estatus = 'A' or estatus = 'I');
 
 ALTER TABLE HistorialPuestos
 ADD CHECK (estatus = 'A' or estatus = 'I');
+
+
+/* TRIGGERS */
+create trigger insertarHistorialPuestos after insert
+on empleados
+for each row
+insert into historialpuestos(idempleado, idpuesto, iddepartamento, fechainicio, estatus)
+values(new.idempleado, new.idpuesto, new.iddepartamento, new.fechacontratacion, 'A');
