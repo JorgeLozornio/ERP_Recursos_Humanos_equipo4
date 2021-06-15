@@ -232,4 +232,28 @@ public class HistorialPuestosDAO {
             e.printStackTrace();
         }
     }
+    
+    public String[] departamento(String id){
+        String [] registros = new String [7];
+        
+        String sql = "select d.idDepartamento from departamentos as d join puestos as p on d.iddepartamento = p.iddepartamento where p.idpuesto = "+id;
+        
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while( rs.next()){                
+                
+                registros[0] = rs.getString("iddepartamento");
+                
+            }
+            
+            return registros;
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return registros;
+    }
+    
 }

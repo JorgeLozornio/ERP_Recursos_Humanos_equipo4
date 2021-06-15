@@ -93,7 +93,6 @@ public class HistorialPuestos extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1080, 600));
         setMinimumSize(new java.awt.Dimension(1080, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1080, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cruz.png"))); // NOI18N
@@ -156,6 +155,21 @@ public class HistorialPuestos extends javax.swing.JFrame {
         jLabelPuesto.setText("Puesto");
         getContentPane().add(jLabelPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 80, -1));
 
+        cbPuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPuestoItemStateChanged(evt);
+            }
+        });
+        cbPuesto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbPuestoMouseClicked(evt);
+            }
+        });
+        cbPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPuestoActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, -1));
 
         jLabelDepartamento.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -509,6 +523,19 @@ public class HistorialPuestos extends javax.swing.JFrame {
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         tbHistorial.setModel(t.busqueda(inicio, fin, txtBuscar.getText()));
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void cbPuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPuestoItemStateChanged
+        
+        
+    }//GEN-LAST:event_cbPuestoItemStateChanged
+
+    private void cbPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPuestoActionPerformed
+        
+    }//GEN-LAST:event_cbPuestoActionPerformed
+
+    private void cbPuestoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbPuestoMouseClicked
+        
+    }//GEN-LAST:event_cbPuestoMouseClicked
 
     public boolean verificar(){
         if (fechaInicio.getDate().after(fechaFin.getDate())){
