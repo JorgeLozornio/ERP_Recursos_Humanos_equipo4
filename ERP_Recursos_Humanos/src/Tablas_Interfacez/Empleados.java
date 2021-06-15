@@ -559,7 +559,7 @@ public class Empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_rbFMouseClicked
 
     private void lblInsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInsertarMouseClicked
-        //System.out.println(fechaNacimiento.getDate().toString());
+        
         if(verificar()){
             t.insertar(txtNombre.getText(),txtPaterno.getText(), txtMaterno.getText(), rb(), ((JTextField)fechaNacimiento.getDateEditor().getUiComponent()).getText(),
                     txtCurp.getText(), cbEstadoCiv.getSelectedItem().toString(), ((JTextField)fechaContratacion.getDateEditor().getUiComponent()).getText(),
@@ -570,7 +570,6 @@ public class Empleados extends javax.swing.JFrame {
                     cbPuesto.getSelectedItem().toString(), cbCiudad.getSelectedItem().toString(), cbSucursal.getSelectedItem().toString(),
                     cbTurno.getSelectedItem().toString());
             tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
-            limpiar();
         }else{
             JOptionPane.showMessageDialog(null, "Los campos han sido rellenados de forma incorrecta");
         }

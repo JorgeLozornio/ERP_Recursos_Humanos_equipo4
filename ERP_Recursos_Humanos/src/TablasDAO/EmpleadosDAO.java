@@ -8,9 +8,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Blob;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -83,13 +85,23 @@ public class EmpleadosDAO {
             pst.setString(26, idS);
             pst.setString(27, idT);
             pst.execute();
-            
             JOptionPane.showMessageDialog(null, "Registro exitoso");
             //mostrarDatos(i, f);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al registrar: "+e.getMessage());
         }
     }
+    
+    /*public void crearUsuarios(String email, String pass) throws SQLException{
+        String sql = "call crearUsuarios(?,?)";
+        CallableStatement stmt = null;
+        stmt = con.prepareCall(sql);
+        stmt.setString(1,email);
+        stmt.setString(2, pass);
+        stmt.execute();
+        System.out.println("Si se ejecuto");
+        stmt.close();
+    }*/
     
     public DefaultTableModel mostrarDatos(int inicio, int fin){
         String [] titulos = {"idEmpleado","nombre", "apellidoPaterno", "apellidoMAterno", "sexo", "fechaNacimiento",
