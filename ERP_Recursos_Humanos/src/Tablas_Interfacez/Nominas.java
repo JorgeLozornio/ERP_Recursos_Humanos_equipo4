@@ -77,12 +77,7 @@ public class Nominas extends javax.swing.JFrame {
         llenarComboEmpleado();
         llenarComboPeriodo();
         llenarComboFormaPago();
-        llenarComboPDF();
 
-    }
-
-    public void llenarComboPDF() {
-        d.llenarCombo(jComboBoxPDF, 1);
     }
 
     public void llenarComboPercepciones() {
@@ -144,6 +139,7 @@ public class Nominas extends javax.swing.JFrame {
         cbEmpleados = new javax.swing.JComboBox<>();
         jLabelEmpleados = new javax.swing.JLabel();
         PDF = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabelFechaDePago = new javax.swing.JLabel();
         dcFechaPago = new com.toedter.calendar.JDateChooser();
         dcFechaElaboracion = new com.toedter.calendar.JDateChooser();
@@ -228,8 +224,6 @@ public class Nominas extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
         TxtExcel = new javax.swing.JLabel();
         jLabelExportar = new javax.swing.JLabel();
-        jLabelPDF = new javax.swing.JLabel();
-        jComboBoxPDF = new javax.swing.JComboBox<>();
 
         jDialogFormulario.setTitle("Formulario nominas");
         jDialogFormulario.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -265,13 +259,18 @@ public class Nominas extends javax.swing.JFrame {
         jLabelEmpleados.setText("Empleado");
         jDialogFormulario.getContentPane().add(jLabelEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 130, -1));
 
+        PDF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PDF.setForeground(new java.awt.Color(255, 255, 255));
         PDF.setText("PDF");
         PDF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PDFMouseClicked(evt);
             }
         });
-        jDialogFormulario.getContentPane().add(PDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, -1, -1));
+        jDialogFormulario.getContentPane().add(PDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 60, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRojo.png"))); // NOI18N
+        jDialogFormulario.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, -1, -1));
 
         jLabelFechaDePago.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelFechaDePago.setText("Fecha de pago");
@@ -654,7 +653,7 @@ public class Nominas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbNominas);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 570, 130));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 200, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, 200, 10));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 200, 10));
 
         jTxtNueva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -704,10 +703,10 @@ public class Nominas extends javax.swing.JFrame {
                 jTxtRegresarMouseClicked(evt);
             }
         });
-        getContentPane().add(jTxtRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, -1, 30));
+        getContentPane().add(jTxtRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, -1, 30));
 
         jLabelBRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonRosa.png"))); // NOI18N
-        getContentPane().add(jLabelBRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, -1, -1));
+        getContentPane().add(jLabelBRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, -1, -1));
 
         lblReloj.setText("lorem");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, -1));
@@ -740,12 +739,6 @@ public class Nominas extends javax.swing.JFrame {
 
         jLabelExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/fondoBotonV.png"))); // NOI18N
         getContentPane().add(jLabelExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, -1, -1));
-
-        jLabelPDF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelPDF.setText("Selecciona la nomina");
-        getContentPane().add(jLabelPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
-
-        getContentPane().add(jComboBoxPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 160, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1285,14 +1278,18 @@ public class Nominas extends javax.swing.JFrame {
     private void PDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PDFMouseClicked
 
         try {
+            
             JasperReport archivo;
             archivo = JasperCompileManager.compileReport("Reporte.jrxml");
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("Par", idNomina);
             JasperPrint prin = JasperFillManager.fillReport(archivo, map, con);
-            JasperExportManager.exportReportToPdfFile(prin, idNomina + " Nomina.pdf");
+           // JasperExportManager.exportReportToPdfFile(prin, idNomina + " Nomina.pdf");
+           JasperViewer jv =new JasperViewer(prin);
+           jv.show();
             System.out.println(idNomina);
             JOptionPane.showMessageDialog(null, "Se genero el reporte con exito");
+
         } catch (JRException ex) {
             Logger.getLogger(Nominas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1344,12 +1341,12 @@ public class Nominas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbPeriodo;
     private com.toedter.calendar.JDateChooser dcFechaElaboracion;
     private com.toedter.calendar.JDateChooser dcFechaPago;
-    private javax.swing.JComboBox<String> jComboBoxPDF;
     private javax.swing.JDialog jDialogFormulario;
     private javax.swing.JDialog jDialogNominasDeducciones;
     private javax.swing.JDialog jDialogNominasPercepciones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelBAceptarD;
     private javax.swing.JLabel jLabelBAceptarP;
     private javax.swing.JLabel jLabelBAzulD;
@@ -1382,7 +1379,6 @@ public class Nominas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNomina;
     private javax.swing.JLabel jLabelNominaD;
     private javax.swing.JLabel jLabelNominas;
-    private javax.swing.JLabel jLabelPDF;
     private javax.swing.JLabel jLabelPercepcion;
     private javax.swing.JLabel jLabelPercepciones;
     private javax.swing.JLabel jLabelPeriodo;
