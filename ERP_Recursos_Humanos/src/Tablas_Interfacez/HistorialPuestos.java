@@ -148,7 +148,7 @@ public class HistorialPuestos extends javax.swing.JFrame {
         getContentPane().add(cbEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 160, -1));
 
         jLabelFechaFin2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelFechaFin2.setText("Fecha de fin");
+        jLabelFechaFin2.setText("Estatus");
         getContentPane().add(jLabelFechaFin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 130, -1));
 
         jLabelPuesto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -456,7 +456,7 @@ public class HistorialPuestos extends javax.swing.JFrame {
         String ca[] = cbEmpleado.getSelectedItem().toString().split("\\.");
         String cb[] = cbPuesto.getSelectedItem().toString().split("\\.");
         String cc[] = cbDepartamento.getSelectedItem().toString().split("\\.");
-        if(verificar()){ 
+        if(true){ 
             
             int b = JOptionPane.showOptionDialog(null,"¿Deseas eliminar este registro?",
                     "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,

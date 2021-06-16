@@ -479,6 +479,8 @@ public class Empleados extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, -1));
 
         jPanel1.add(cbTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 170, -1));
+
+        txtRuta.setEnabled(false);
         jPanel1.add(txtRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 250, 340, -1));
 
         btnAtras.setText("<");
@@ -577,9 +579,7 @@ public class Empleados extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         if(inicio == 0){
-            btnAtras.setEnabled(false);
         }else{
-            btnSiguiente.setEnabled(true);
             inicio = inicio - 5;
             tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
         }
@@ -587,9 +587,7 @@ public class Empleados extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if(inicio == limit*5){
-           btnSiguiente.setEnabled(false);
        }else{
-           btnAtras.setEnabled(true);
            inicio = inicio+5;
            tbEmpleados.setModel(t.mostrarDatos(inicio, fin));
        }      
@@ -672,7 +670,7 @@ public class Empleados extends javax.swing.JFrame {
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
         
-        if(verificar()){ 
+        if(true){ 
             int fila = tbEmpleados.getSelectedRow();
             String [] op = {"Si","No"};
             String id = ""+tbEmpleados.getValueAt(fila, 0);

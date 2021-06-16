@@ -1147,6 +1147,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRuta">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1070" y="250" width="340" height="-1"/>
